@@ -34,4 +34,10 @@ FLASK_APP=run.py flask run
 Source: <https://codeburst.io/full-stack-single-page-application-with-vue-js-and-flask-b1e036315532>
 
 
+## Notes
+Le frontend run sur localhost/8080 tandis que le backend run sur localhost/5000. 
+
+Peu importe sur lequel vous allez, vous allez voir la même chose. La seule chose différente, c'est l'icon de l'app dans le browser. Si vous voyez l'icon de Vue.js, c'est que vous êtes dans le frontend. Vous pouvez consulter la source link plus haut pour lire là-dessus
+
+
 
