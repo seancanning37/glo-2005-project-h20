@@ -7,6 +7,9 @@ USER = 'root'
 PASSWORD = 'glo2005xD'
 DATABASE = 'glo2005'
 
+def createDatabaseScript(filename):
+    sqlCommands = getSqlCommands(filename)
+    executeCreateCommands(sqlCommands)
 
 def executeSqlScriptFromFile(filename):
     sqlCommands = getSqlCommands(filename)
@@ -19,13 +22,21 @@ def getSqlCommands(filename):
     file.close()
     return sqlFile.split(';')
 
-
-def executeCommands(sqlCommands):
-    for command in sqlCommands:
+def executeCreateCommands(sqlCommands):
+    for command in sqlCommands[:-1]:
         try:
             conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD)
             cur = conn.cursor()
-            print(command)
+            cur.execute(command)
+        except Exception as e:
+            print(e)
+
+
+def executeCommands(sqlCommands):
+    for command in sqlCommands[:-1]:
+        try:
+            conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD, db=DATABASE)
+            cur = conn.cursor()
             cur.execute(command)
         except Exception as e:
             print(e)
@@ -43,5 +54,6 @@ def catch_all(path):
 
 
 if __name__ == "__main__":
+    createDatabaseScript('database/create_database.sql')
     executeSqlScriptFromFile('database/bd_init.sql')
     app.run()
