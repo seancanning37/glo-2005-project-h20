@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS glo2005 SET utf8;
+CREATE DATABASE IF NOT EXISTS glo2005;
 
 USE glo2005;
 
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Customers
 	city VARCHAR(100),
 	country VARCHAR(100),
 	PRIMARY KEY (id)
-}
+};
 
 CREATE TABLE IF NOT EXISTS Orders
 {
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS Orders
 	FOREIGN KEY (customer_id) REFERENCES Customers (id) 
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
-}
+};
 
 CREATE IF NOT EXISTS OrderItems
 {
@@ -46,7 +46,7 @@ CREATE IF NOT EXISTS OrderItems
 		ON DELETE CASCADE,
 	FOREIGN KEY (beer_price) REFERENCES Beers (beer_id)
 		ON DELETE CASCADE
-}
+};
 
 CREATE IF NOT EXISTS Beers
 {
@@ -64,7 +64,7 @@ CREATE IF NOT EXISTS Beers
 	FOREIGN KEY (brand_id) REFERENCES Brands (brand_id)
 		ON DELETE CASCADE,
 	FOREIGN KEY (beer_type) REFERENCES BeerTypes (type_id)
-}
+};
 
 CREATE IF NOT EXISTS Brands
 {
@@ -73,10 +73,12 @@ CREATE IF NOT EXISTS Brands
 	brand_phone VARCHAR(100),
 	brand_address VARCHAR(100),
 	brand_country VARCHAR(100)
-}
+};
 
 CREATE IF NOT EXISTS BeerTypes
 {
 	type_id INTEGER NOT NULL AUTO_INCREMENT,
 	type_name VARCHAR(100)
-}
+};
+
+SHOW DATABASES;

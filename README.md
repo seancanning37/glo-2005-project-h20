@@ -28,7 +28,7 @@ source venv/bin/activate
 cd ..
 
 # serve back-end at localhost:5000
-FLASK_APP=run.py flask run
+python3 run.py
 ```
 
 Source: <https://codeburst.io/full-stack-single-page-application-with-vue-js-and-flask-b1e036315532>
