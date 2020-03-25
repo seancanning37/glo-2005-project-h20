@@ -7,9 +7,29 @@ USER = 'root'
 PASSWORD = 'glo2005xD'
 DATABASE = 'glo2005'
 
+initScriptFilenames = [
+    'database/db_init_scripts/init_tables.sql',
+    'database/db_init_scripts/init_types.sql',
+    'database/db_init_scripts/init_styles.sql',
+    'database/db_init_scripts/init_brands.sql',
+    'database/db_init_scripts/init_customers.sql',
+    'database/db_init_scripts/init_beers.sql',
+    'database/db_init_scripts/init_beerStyles.sql',
+    'database/db_init_scripts/init_beerTypes.sql',
+    'database/db_init_scripts/init_order_items.sql',
+    'database/db_init_scripts/init_orders.sql',
+]
+
+
 def createDatabaseScript(filename):
     sqlCommands = getSqlCommands(filename)
     executeCreateCommands(sqlCommands)
+
+
+def runAllInitScript():
+    for filename in initScriptFilenames:
+        executeSqlScriptFromFile(filename)
+
 
 def executeSqlScriptFromFile(filename):
     sqlCommands = getSqlCommands(filename)
@@ -21,6 +41,7 @@ def getSqlCommands(filename):
     sqlFile = file.read()
     file.close()
     return sqlFile.split(';')
+
 
 def executeCreateCommands(sqlCommands):
     for command in sqlCommands[:-1]:
@@ -54,6 +75,6 @@ def catch_all(path):
 
 
 if __name__ == "__main__":
-    createDatabaseScript('database/create_database.sql')
-    executeSqlScriptFromFile('database/bd_init.sql')
+    createDatabaseScript('database/db_init_scripts/create_database.sql')
+    runAllInitScript()
     app.run()

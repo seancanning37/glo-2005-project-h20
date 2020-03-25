@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS Orders
 	total_price DECIMAL(10, 2),
 	comment VARCHAR(100),
 	PRIMARY KEY (order_id),
-	FOREIGN KEY (customer_id) REFERENCES Customers (id) 
+	FOREIGN KEY (customer_id) REFERENCES Customers (id)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );
@@ -39,20 +39,27 @@ CREATE TABLE IF NOT EXISTS Brands
 	PRIMARY KEY (brand_id)
 );
 
-CREATE TABLE IF NOT EXISTS BeerTypes
+CREATE TABLE IF NOT EXISTS Types
 (
     type_id INTEGER NOT NULL AUTO_INCREMENT UNIQUE KEY,
 	type_name VARCHAR(100),
 	PRIMARY KEY (type_id)
 );
 
+CREATE TABLE IF NOT EXISTS Styles
+(
+    style_id INTEGER NOT NULL AUTO_INCREMENT UNIQUE KEY,
+    style_name VARCHAR(100),
+    PRIMARY KEY (style_id)
+);
+
+
 CREATE TABLE IF NOT EXISTS Beers
 (
 	beer_id INTEGER NOT NULL AUTO_INCREMENT UNIQUE KEY,
 	brand_id INTEGER NOT NULL,
 	beer_name VARCHAR(100) NOT NULL,
-	beer_type INTEGER,
-	alcohol_percentage DECIMAL(3, 2) NOT NULL,
+	abv DECIMAL(3, 2) NOT NULL,
 	ibu INTEGER,
 	volume INTEGER,
 	country VARCHAR(100),
@@ -60,8 +67,25 @@ CREATE TABLE IF NOT EXISTS Beers
 	description VARCHAR(250),
 	PRIMARY KEY (beer_id),
 	FOREIGN KEY (brand_id) REFERENCES Brands (brand_id)
-		ON DELETE CASCADE,
-	FOREIGN KEY (beer_type) REFERENCES BeerTypes (type_id)
+		ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS BeerTypes
+(
+  beer_id INTEGER NOT NULL,
+  type_id INTEGER NOT NULL,
+  PRIMARY KEY (beer_id, type_id),
+  FOREIGN KEY (beer_id) REFERENCES Beers (beer_id) ON DELETE CASCADE,
+  FOREIGN KEY (type_id) REFERENCES Types (type_id)
+);
+
+CREATE TABLE IF NOT EXISTS BeerStyles
+(
+    beer_id INTEGER NOT NULL,
+    style_id INTEGER NOT NULL,
+    primary key (beer_id, style_id),
+    FOREIGN KEY (beer_id) REFERENCES Beers (beer_id) ON DELETE CASCADE,
+    FOREIGN KEY (style_id) REFERENCES Styles (style_id)
 );
 
 CREATE TABLE IF NOT EXISTS OrderItems
