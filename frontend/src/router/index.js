@@ -1,20 +1,26 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomePage from "../components/HomePage";
-import NotFound from "../components/NotFound";
+import Home from "../views/Home";
+import NotFound from "../views/NotFound";
+import Beer from "../views/Beer";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "HomePage",
-    component: HomePage
+    name: "Home",
+    component: Home
   },
   {
     path: "*",
     name: "NotFound",
     component: NotFound
+  },
+  {
+    path: "/beers/:beer_id",
+    name: "BeerPage",
+    component: Beer
   }
 ];
 
