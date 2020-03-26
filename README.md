@@ -5,6 +5,9 @@
 - [Getting Started](#getting-started)
 
 	- [To run the app](#to-run-the-app)
+	- [Main feature](#main-feature)
+
+- [Notes](#notes)
 
 ## Getting Started
 
@@ -30,10 +33,14 @@ cd ..
 
 # serve back-end at localhost:5000
 python3 run.py
+
+Pour la main feature pour le moment, go to localhost:8080/beers/1
 ```
 
 Source: <https://codeburst.io/full-stack-single-page-application-with-vue-js-and-flask-b1e036315532>
 
+### Main feature
+Pour la main feature pour le moment, go to localhost:8080/beers/1
 
 ## Notes
 Le frontend run sur localhost/8080 tandis que le backend run sur localhost/5000. 
