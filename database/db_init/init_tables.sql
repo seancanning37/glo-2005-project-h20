@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS Brands
 	brand_name VARCHAR(100) NOT NULL,
 	brand_phone VARCHAR(100),
 	brand_address VARCHAR(100),
+	brand_city VARCHAR(100),
 	brand_country VARCHAR(100),
 	PRIMARY KEY (brand_id)
 );

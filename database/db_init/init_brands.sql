@@ -1,0 +1,25 @@
+USE glo2005;
+
+INSERT INTO Brands (brand_id, brand_name, brand_phone, brand_address, brand_city, brand_country) VALUES
+(1, 'Labatt Brewing Company', '1-800-268-BEER', '207 Queens Quay West Suite 299', 'Toronto', 'Canada'),
+(2, 'Guiness', NULL, NULL, NULL, 'Irlande'),
+(3, 'Heineken', NULL, NULL, 'Amsterdam',  'Netherlands'),
+(4, 'MillerCoors', '1-800-665-7661', NULL, 'Chicago', 'United States'),
+(5, 'Boston Beer Company', '617-368-5000', 'One Design Center Place, Suite 850', 'Boston', 'United States'),
+(6, 'Stella Artois', NULL, '21 Boulevard Industriel', 'Leuven', 'Belgium'),
+(7, 'Budweiser', NULL, NULL, 'St. Louis', 'United States'),
+(8, 'Yuengling', NULL, NULL, 'Pottsville', 'United States'),
+(9, 'Becks', NULL, NULL, 'St. Louis', 'United States'),
+(10, 'Fat Tire', '1-866-24-0-BEER', 'The Roundhouse 255 Bremner Blvd', 'Ontario', 'Canada'),
+(11, 'Dogfish Head', '1-888-8DOGFISH', '6 Cannery Village Center', 'Milton', 'United States'),
+(12, 'Brasserie Hoegaarden', NULL, NULL, 'Hoegaarden', 'Belgium'),
+(13, 'Sierra Nevada Brewing Co.', '1-530-893-3520', '1075 East 20th Street', 'Chico', 'United States'),
+(14, 'Michelob Brewing Co.', NULL, NULL, 'St. Louis', 'United States'),
+(15, 'Coors Brewing Company', NULL, NULL, 'Golden', 'United States'),
+(16, 'New Castle Brewing', NULL, NULL, 'Amsterdam', 'Netherlands'),
+(17, 'Miller Brewing Company', NULL, NULL, 'Milwaukee', 'United States'),
+(18, 'Asahi Breweries', NULL, NULL, 'Tokyo', 'Japan'),
+(19, 'Pilsner Urquell', NULL, NULL, 'Pilsen', 'Czech republic'),
+(20, 'Shocktop', '1-800-566-6424', NULL, 'St. Louis', 'United States'),
+(21, 'Birra Peroni', NULL, NULL, 'Vigevano', 'Italie'),
+(22, 'Desoes & Geddes', NULL, NULL, 'Kingston', 'Jamaica');
