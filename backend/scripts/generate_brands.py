@@ -44,3 +44,4 @@ def getRandomCountry():
 
 def getRandomCity():
     return choice(cities)['name']
+
