@@ -1,0 +1,18 @@
+[
+    {
+        "type_id": 1,
+        "type_name": "Ale"
+    },
+    {
+        "type_id": 2,
+        "type_name": "Lager"
+    },
+    {
+        "type_id": 3,
+        "type_name": "Malt"
+    },
+    {
+        "type_id": 4,
+        "type_name": "Stout"
+    }
+]
