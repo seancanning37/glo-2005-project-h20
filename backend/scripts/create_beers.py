@@ -51,12 +51,9 @@ def create_beers():
 
 
 def getNumberOfBrands():
-    counter = 0
     with open("backend/json_files/beer_brands.json") as jsonfile:
         data = json.load(jsonfile)
-        for brand in data:
-            counter += 1
-    return counter - 1
+    return len(data) - 1
 
 
 def generateRandomBeerName():
@@ -86,3 +83,6 @@ def getRandomDescription():
         if "\n" in word:
             myList[i] = " ".join(word.split("\n"))
     return " ".join(myList[:-1])
+
+if __name__ == '__main__':
+    print(getNumberOfBrands())

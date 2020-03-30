@@ -1,7 +1,8 @@
 import pymysql
 import pymysql.cursors
-from .scripts.generate_brands import create_brands
+from .scripts.create_brands import create_brands
 from .scripts.create_beers import create_beers
+from .scripts.create_beerStyles import create_beerStyles
 
 HOST = 'localhost'
 USER = 'root'
@@ -25,6 +26,7 @@ def runAllInitScript():
         executeSqlScriptFromFile(filename)
     populateBrands()
     populateBeers()
+    populateBeerStyles()
 
 
 def executeSqlScriptFromFile(filename):
@@ -86,10 +88,25 @@ def populateBeers():
             add_beer = "INSERT INTO Beers" \
                        "(beer_id, brand_id, beer_name, abv, ibu, volume, beer_price, description)" \
                        "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-            brand_data = (
+            beer_data = (
             beer['beer_id'], beer['brand_id'], beer['beer_name'], beer['abv'], beer['ibu'], beer['volume'],
             beer['beer_price'], beer['description'])
-            cur.execute(add_beer, brand_data)
+            cur.execute(add_beer, beer_data)
+            conn.commit()
+    except Exception as e:
+        print(e)
+
+def populateBeerStyles():
+    beerStyles = create_beerStyles()
+    try:
+        for beerStyle in beerStyles:
+            conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD, db=DATABASE)
+            cur = conn.cursor()
+            add_beer = "INSERT INTO BeerStyles" \
+                       "(beer_id, style_id)" \
+                       "VALUES (%s, %s)"
+            beerStyle_data = ( beerStyle['beer_id'], beerStyle['style_id'])
+            cur.execute(add_beer, beerStyle_data)
             conn.commit()
     except Exception as e:
         print(e)

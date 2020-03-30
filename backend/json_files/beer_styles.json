@@ -1,0 +1,58 @@
+[
+    {
+        "style_id": 1,
+        "style_name": "Amber"
+    },
+    {
+        "style_id": 2,
+        "style_name": "Blonde"
+    },
+    {
+        "style_id": 3,
+        "style_name": "Brown"
+    },
+    {
+        "style_id": 4,
+        "style_name": "Cream"
+    },
+    {
+        "style_id": 5,
+        "style_name": "Dark"
+    },
+    {
+        "style_id": 6,
+        "style_name": "Pale"
+    },
+    {
+        "style_id": 7,
+        "style_name": "Strong"
+    },
+    {
+        "style_id": 8,
+        "style_name": "Wheat"
+    },
+    {
+        "style_id": 9,
+        "style_name": "Red"
+    },
+    {
+        "style_id": 10,
+        "style_name": "Lime"
+    },
+    {
+        "style_id": 11,
+        "style_name": "Pilsner"
+    },
+    {
+        "style_id": 12,
+        "style_name": "Golden"
+    },
+    {
+        "style_id": 13,
+        "style_name": "Fruit"
+    },
+    {
+        "style_id": 14,
+        "style_name": "Honey"
+    }
+]
