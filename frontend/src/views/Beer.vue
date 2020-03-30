@@ -9,7 +9,6 @@
     <p>abv: {{ this.beer.abv }}</p>
     <p>ibu: {{ this.beer.ibu }}</p>
     <p>volume: {{ this.beer.volume }}</p>
-    <p>country: {{ this.beer.country }}</p>
     <p>price: {{ this.beer.price }}</p>
     <p>Description: {{ this.beer.description }}</p>
   </div>
@@ -28,7 +27,6 @@ export default {
       abv: 0.0,
       ibu: 0,
       volume: 0,
-      country: "",
       price: 0.0,
       description: ""
     }
