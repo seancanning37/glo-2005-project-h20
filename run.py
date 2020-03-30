@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_cors import CORS
 from backend.initialisation_script import createDatabaseScript, runAllInitScript
 from backend.routes.beers import beers
@@ -17,12 +17,12 @@ def registerRoutes():
     app.register_blueprint(beers)
 
 
-"""
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
     return render_template("index.html")
-"""
+
+
 if __name__ == "__main__":
     createDatabaseScript('database/db_init/create_database.sql')
     runAllInitScript()
