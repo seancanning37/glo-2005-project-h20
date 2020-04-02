@@ -5,7 +5,6 @@ USER = 'root'
 PASSWORD = 'glo2005xD'
 DATABASE = 'glo2005'
 
-conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD, db=DATABASE)
 
 
 class BeerRepository:
