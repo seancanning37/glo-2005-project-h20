@@ -1,6 +1,5 @@
 from .Beer import Beer
-from ..persistence import BeerRepository
-
+from persistence import BeerRepository
 
 def createBeerFromCursorInfos(beerInfos):
     beer = Beer()

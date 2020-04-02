@@ -8,9 +8,9 @@ PASSWORD = 'glo2005xD'
 DATABASE = 'glo2005'
 
 initScriptFilenames = [
-    'database/db_init/init_tables.sql',
-    'database/db_init/init_types.sql',
-    'database/db_init/init_styles.sql'
+    '../database/db_init/init_tables.sql',
+    '../database/db_init/init_types.sql',
+    '../database/db_init/init_styles.sql'
 ]
 
 
@@ -66,7 +66,7 @@ def loadJsonFromFilePath(filepath):
 
 
 def populateBrands():
-    brands = loadJsonFromFilePath("backend/json_files/brands.json")
+    brands = loadJsonFromFilePath("json_files/brands.json")
     try:
         for brand in brands:
             conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD, db=DATABASE)
@@ -86,7 +86,7 @@ beersIdWithTypeId = {}
 
 
 def populateBeers():
-    beers = loadJsonFromFilePath("backend/json_files/beers.json")
+    beers = loadJsonFromFilePath("json_files/beers.json")
     try:
         for beer in beers:
             beersIdWithStyleId[beer['beer_id']] = beer['style_id']
