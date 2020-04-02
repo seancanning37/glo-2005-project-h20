@@ -1,5 +1,4 @@
 from flask import Blueprint, jsonify
-import requests
 
 from ..domain.BeerService import BeerService
 
