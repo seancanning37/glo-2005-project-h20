@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS Beers
 	ibu INTEGER,
 	volume INTEGER,
 	beer_price DECIMAL(10, 2) NOT NULL,
+	disponibility INTEGER NOT NULL,
 	description VARCHAR(250),
 	PRIMARY KEY (beer_id)
 );

@@ -1,9 +1,6 @@
 from random import randint, choice, uniform
 import json
-from random_word import RandomWords
 from faker import Faker
-
-# url = "https://sandbox-api.brewerydb.com/v2/beers/?key=97891df5bfd71321fdf64fba603da425"
 
 fake = Faker()
 
@@ -44,6 +41,7 @@ def create_beers():
             "ibu": getRandomIBU(),
             "volume": getRandomVolume(),
             "beer_price": getRandomPrice(),
+            "disponibility": getRandomDisponibility(),
             "description": getRandomDescription()
         }
         beers.append(beer)
@@ -75,6 +73,9 @@ def getRandomVolume():
 def getRandomPrice():
     return round(uniform(0.99, 1000.00), 2)
 
+def getRandomDisponibility():
+    return randint(0, 2000)
+
 
 def getRandomDescription():
     randomSize = randint(50, 150)
@@ -85,4 +86,4 @@ def getRandomDescription():
     return " ".join(myList[:-1])
 
 if __name__ == '__main__':
-    print(getNumberOfBrands())
+    print(create_beers())

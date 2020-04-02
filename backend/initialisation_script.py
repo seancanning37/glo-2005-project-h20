@@ -4,6 +4,7 @@ from .scripts.create_brands import create_brands
 from .scripts.create_beers import create_beers
 from .scripts.create_beerStyles import create_beerStyles
 from .scripts.create_beerTypes import create_beerTypes
+import json
 
 HOST = 'localhost'
 USER = 'root'
@@ -65,8 +66,14 @@ def executeCommands(sqlCommands):
             print(e)
 
 
+def loadJsonFromFilePath(filepath):
+    with open(filepath, "r") as jsonFile:
+        return json.load(jsonFile)
+
+
 def populateBrands():
-    brands = create_brands()
+    brands = loadJsonFromFilePath("backend/json_files/brands.json")
+    print(brands)
     try:
         for brand in brands:
             conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD, db=DATABASE)
@@ -82,17 +89,17 @@ def populateBrands():
 
 
 def populateBeers():
-    beers = create_beers()
+    beers = loadJsonFromFilePath("backend/json_files/beers.json")
     try:
         for beer in beers:
             conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD, db=DATABASE)
             cur = conn.cursor()
             add_beer = "INSERT INTO Beers" \
-                       "(beer_id, brand_id, beer_name, abv, ibu, volume, beer_price, description)" \
-                       "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+                       "(beer_id, brand_id, beer_name, abv, ibu, volume, beer_price, disponibility, description)" \
+                       "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
             beer_data = (
                 beer['beer_id'], beer['brand_id'], beer['beer_name'], beer['abv'], beer['ibu'], beer['volume'],
-                beer['beer_price'], beer['description'])
+                beer['beer_price'], beer['disponibility'], beer['description'])
             cur.execute(add_beer, beer_data)
             conn.commit()
     except Exception as e:
