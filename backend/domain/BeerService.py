@@ -10,8 +10,11 @@ def createBeerFromCursorInfos(beerInfos):
     beer.abv = str(beerInfos[3])
     beer.ibu = beerInfos[4]
     beer.volume = beerInfos[5]
-    beer.price = str(beerInfos[6])
-    beer.description = beerInfos[7]
+    beer.style_id = beerInfos[6]
+    beer.type_id = beerInfos[7]
+    beer.price = str(beerInfos[8])
+    beer.disponibility = beerInfos[9]
+    beer.description = beerInfos[10]
     return beer
 
 
