@@ -29,6 +29,8 @@ CREATE TABLE IF NOT EXISTS Orders
 		ON UPDATE CASCADE
 );
 
+CREATE INDEX customerID ON Orders (customer_id);
+
 CREATE TABLE IF NOT EXISTS Brands
 (
 	brand_id INTEGER NOT NULL UNIQUE KEY,
@@ -73,6 +75,13 @@ CREATE TABLE IF NOT EXISTS Beers
 	FOREIGN KEY (type_id) REFERENCES Types (type_id)
 );
 
+CREATE INDEX beerStyle ON Beers (style_id) USING HASH;
+
+CREATE INDEX beerType ON Beers (type_id) USING HASH;
+
+CREATE INDEX BeerPrice ON Beers (beer_price) USING BTREE;
+
+CREATE INDEX beerBrand ON Beers (brand_id) USING HASH;
 
 CREATE TABLE IF NOT EXISTS OrderItems
 (
