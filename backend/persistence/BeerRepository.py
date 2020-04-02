@@ -1,5 +1,4 @@
 import pymysql
-from ..domain.Beer import Beer
 
 HOST = 'localhost'
 USER = 'root'

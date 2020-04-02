@@ -1,8 +1,8 @@
 from flask import Flask, render_template
 from flask_cors import CORS
-from backend.initialisation_script import createDatabaseScript, runAllInitScript
-from backend.routes.beers import beers
-from backend.routes.home import home
+from routes import beers
+from routes import home
+from initialisation_script import createDatabaseScript, runAllInitScript
 
 
 app = Flask(__name__,
@@ -13,8 +13,8 @@ cors = CORS(app, resources={r"/*": {"origin": "*"}})
 
 
 def registerRoutes():
-    app.register_blueprint(home)
-    app.register_blueprint(beers)
+    app.register_blueprint(home.home)
+    app.register_blueprint(beers.beers)
 
 
 @app.route('/', defaults={'path': ''})
@@ -24,7 +24,7 @@ def catch_all(path):
 
 
 if __name__ == "__main__":
-    createDatabaseScript('database/db_init/create_database.sql')
+    createDatabaseScript('../database/db_init/create_database.sql')
     runAllInitScript()
     registerRoutes()
     app.run()
