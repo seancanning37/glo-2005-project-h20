@@ -1,9 +1,5 @@
 import pymysql
 import pymysql.cursors
-from .scripts.create_brands import create_brands
-from .scripts.create_beers import create_beers
-from .scripts.create_beerStyles import create_beerStyles
-from .scripts.create_beerTypes import create_beerTypes
 import json
 
 HOST = 'localhost'
@@ -28,8 +24,6 @@ def runAllInitScript():
         executeSqlScriptFromFile(filename)
     populateBrands()
     populateBeers()
-    populateBeerStyles()
-    populateBeerTypes()
 
 
 def executeSqlScriptFromFile(filename):
@@ -73,7 +67,6 @@ def loadJsonFromFilePath(filepath):
 
 def populateBrands():
     brands = loadJsonFromFilePath("backend/json_files/brands.json")
-    print(brands)
     try:
         for brand in brands:
             conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD, db=DATABASE)
@@ -88,51 +81,26 @@ def populateBrands():
         print(e)
 
 
+beersIdWithStyleId = {}
+beersIdWithTypeId = {}
+
+
 def populateBeers():
     beers = loadJsonFromFilePath("backend/json_files/beers.json")
     try:
         for beer in beers:
+            beersIdWithStyleId[beer['beer_id']] = beer['style_id']
+            beersIdWithTypeId[beer['beer_id']] = beer['type_id']
             conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD, db=DATABASE)
             cur = conn.cursor()
             add_beer = "INSERT INTO Beers" \
-                       "(beer_id, brand_id, beer_name, abv, ibu, volume, beer_price, disponibility, description)" \
-                       "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                       "(beer_id, brand_id, beer_name, abv, ibu, volume, style_id, type_id, beer_price, disponibility, description)" \
+                       "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
             beer_data = (
                 beer['beer_id'], beer['brand_id'], beer['beer_name'], beer['abv'], beer['ibu'], beer['volume'],
+                beer["style_id"], beer["type_id"],
                 beer['beer_price'], beer['disponibility'], beer['description'])
             cur.execute(add_beer, beer_data)
-            conn.commit()
-    except Exception as e:
-        print(e)
-
-
-def populateBeerStyles():
-    beerStyles = create_beerStyles()
-    try:
-        for beerStyle in beerStyles:
-            conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD, db=DATABASE)
-            cur = conn.cursor()
-            add_beer = "INSERT INTO BeerStyles" \
-                       "(beer_id, style_id)" \
-                       "VALUES (%s, %s)"
-            beerStyle_data = (beerStyle['beer_id'], beerStyle['style_id'])
-            cur.execute(add_beer, beerStyle_data)
-            conn.commit()
-    except Exception as e:
-        print(e)
-
-
-def populateBeerTypes():
-    beerTypes = create_beerTypes()
-    try:
-        for beerType in beerTypes:
-            conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD, db=DATABASE)
-            cur = conn.cursor()
-            add_beer = "INSERT INTO BeerTypes" \
-                       "(beer_id, type_id)" \
-                       "VALUES (%s, %s)"
-            beerType_data = (beerType['beer_id'], beerType['type_id'])
-            cur.execute(add_beer, beerType_data)
             conn.commit()
     except Exception as e:
         print(e)

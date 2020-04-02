@@ -63,29 +63,16 @@ CREATE TABLE IF NOT EXISTS Beers
 	abv DECIMAL(4, 2) NOT NULL,
 	ibu INTEGER,
 	volume INTEGER,
+	style_id INTEGER,
+	type_id INTEGER,
 	beer_price DECIMAL(10, 2) NOT NULL,
 	disponibility INTEGER NOT NULL,
 	description VARCHAR(250),
-	PRIMARY KEY (beer_id)
+	PRIMARY KEY (beer_id),
+	FOREIGN KEY (style_id) REFERENCES Styles (style_id),
+	FOREIGN KEY (type_id) REFERENCES Types (type_id)
 );
 
-CREATE TABLE IF NOT EXISTS BeerTypes
-(
-  beer_id INTEGER NOT NULL,
-  type_id INTEGER NOT NULL,
-  PRIMARY KEY (beer_id, type_id),
-  FOREIGN KEY (beer_id) REFERENCES Beers (beer_id) ON DELETE CASCADE,
-  FOREIGN KEY (type_id) REFERENCES Types (type_id)
-);
-
-CREATE TABLE IF NOT EXISTS BeerStyles
-(
-    beer_id INTEGER NOT NULL,
-    style_id INTEGER NOT NULL,
-    primary key (beer_id, style_id),
-    FOREIGN KEY (beer_id) REFERENCES Beers (beer_id) ON DELETE CASCADE,
-    FOREIGN KEY (style_id) REFERENCES Styles (style_id)
-);
 
 CREATE TABLE IF NOT EXISTS OrderItems
 (

@@ -40,6 +40,8 @@ def create_beers():
             "abv": getRandomABV(),
             "ibu": getRandomIBU(),
             "volume": getRandomVolume(),
+            "style_id": getRandomStyleID(),
+            "type_id": getRandomTypeID(),
             "beer_price": getRandomPrice(),
             "disponibility": getRandomDisponibility(),
             "description": getRandomDescription()
@@ -73,6 +75,19 @@ def getRandomVolume():
 def getRandomPrice():
     return round(uniform(0.99, 1000.00), 2)
 
+
+def getRandomStyleID():
+    with open("backend/json_files/beer_styles.json") as jsonFile:
+        data = json.load(jsonFile)
+    return randint(1, len(data))
+
+
+def getRandomTypeID():
+    with open("backend/json_files/beer_types.json") as jsonFile:
+        data = json.load(jsonFile)
+    return randint(1, len(data))
+
+
 def getRandomDisponibility():
     return randint(0, 2000)
 
@@ -84,6 +99,7 @@ def getRandomDescription():
         if "\n" in word:
             myList[i] = " ".join(word.split("\n"))
     return " ".join(myList[:-1])
+
 
 if __name__ == '__main__':
     print(create_beers())
