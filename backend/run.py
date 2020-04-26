@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask_cors import CORS
 from routes import beers
 from routes import home
+from routes import signup
 from initialisation_script import createDatabaseScript, runAllInitScript
 
 
@@ -15,6 +16,7 @@ cors = CORS(app, resources={r"/*": {"origin": "*"}})
 def registerRoutes():
     app.register_blueprint(home.home)
     app.register_blueprint(beers.beers)
+    app.register_blueprint(signup.signup_blueprint)
 
 
 @app.route('/', defaults={'path': ''})
