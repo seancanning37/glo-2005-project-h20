@@ -20,11 +20,22 @@ class CustomerRepository:
             return cur.fetchone()
         return ERROR_CODE
 
-    def addCustomer(self, name, email, username, password):
-        cmd = "INSERT INTO Customers (name, email, username, password) VALUES (%s, %s, %s, %s)"
+    def isUsernameAlreadyUsed(self, username):
+        cmd = 'SELECT * FROM Customers C WHERE C.username = ' + '%s' + ';'
         cur = self.conn.cursor()
-        customerInformations = (name, email, username, password)
-        cur.execute(cmd, customerInformations)
-        self.conn.commit()
-        return SUCCESS_CODE
+        rows_count = cur.execute(cmd, username)
+        if rows_count > 0:
+            return True
+        return False
+
+    def addCustomer(self, name, email, username, password):
+        try:
+            cmd = "INSERT INTO Customers (name, email, username, password) VALUES (%s, %s, %s, %s)"
+            cur = self.conn.cursor()
+            customerInformations = (name, email, username, password)
+            cur.execute(cmd, customerInformations)
+            self.conn.commit()
+            return SUCCESS_CODE
+        except pymysql.IntegrityError as error:
+            return ERROR_CODE
 

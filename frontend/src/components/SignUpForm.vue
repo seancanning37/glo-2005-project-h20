@@ -133,7 +133,7 @@ export default {
           Router.push("/signup");
         })
         .catch(error => {
-          console.log(error);
+          console.log(error.response.data);
         });
 
       /*
