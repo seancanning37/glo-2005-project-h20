@@ -2,12 +2,11 @@
 CREATE TABLE IF NOT EXISTS Customers
 (
 	id INTEGER NOT NULL AUTO_INCREMENT,
-	first_name varchar(100) NOT NULL,
-	last_name VARCHAR(100) NOT NULL,
+	name varchar(100) NOT NULL,
 	phone VARCHAR(100),
 	email VARCHAR(100) NOT NULL UNIQUE,
-	login_username VARCHAR(100) NOT NULL UNIQUE,
-	login_password VARCHAR(100) NOT NULL,
+	username VARCHAR(100) UNIQUE,
+	password VARCHAR(100) NOT NULL,
 	address_line_1 VARCHAR(100),
 	address_line_2 VARCHAR(100),
 	city VARCHAR(100),

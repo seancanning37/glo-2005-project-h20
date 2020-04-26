@@ -9,3 +9,6 @@ class CustomerService:
         if result == -1:
             return False
         return True
+
+    def addCustomer(self, name, email, username, login):
+        self.customerRepository.addCustomer(name, email, username, login)

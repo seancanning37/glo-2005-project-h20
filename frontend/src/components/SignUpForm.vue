@@ -3,20 +3,24 @@
     <p class="title">Sign up using email</p>
 
     <v-container>
-      <v-row class="py-0">
-        <v-col class="py-0">
-          <v-text-field
-            v-model="name"
-            label="Name"
-            :error="invalidName"
-          ></v-text-field>
-        </v-col>
-      </v-row>
+      <v-text-field
+        class="py-0"
+        v-model="name"
+        label="Name"
+        :error="invalidName"
+      ></v-text-field>
 
       <v-text-field
         class="py-0"
         v-model="email"
         label="Email"
+        :error="invalidEmail"
+      ></v-text-field>
+
+      <v-text-field
+        class="py-0"
+        v-model="username"
+        label="Username"
         :error="invalidEmail"
       ></v-text-field>
 
@@ -75,6 +79,7 @@ export default {
     return {
       name: "",
       email: "",
+      username: "",
       password: "",
       confirmedPassword: "",
       invalidName: false,
@@ -120,11 +125,12 @@ export default {
         .post(path, {
           email: this.email,
           name: this.name,
+          username: this.username,
           password: this.password
         })
         .then(response => {
           console.log(response.data);
-          Router.push("/");
+          Router.push("/signup");
         })
         .catch(error => {
           console.log(error);
