@@ -1,10 +1,12 @@
 <template>
   <div id="app">
-    <router-view />
+   <v-app id="inspire">
+     <router-view />
+   </v-app>
   </div>
 </template>
 
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

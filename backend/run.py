@@ -3,6 +3,7 @@ from flask_cors import CORS
 from routes import beers
 from routes import home
 from routes import signup
+from routes import login
 from initialisation_script import createDatabaseScript, runAllInitScript
 
 
@@ -17,6 +18,7 @@ def registerRoutes():
     app.register_blueprint(home.home)
     app.register_blueprint(beers.beers)
     app.register_blueprint(signup.signup_blueprint)
+    app.register_blueprint(login.login_blueprint)
 
 
 @app.route('/', defaults={'path': ''})

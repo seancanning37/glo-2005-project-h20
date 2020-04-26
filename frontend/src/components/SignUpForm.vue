@@ -1,6 +1,6 @@
-<template>
+<template class="mt-5">
   <v-container class="main-container text-center">
-    <p class="title">Sign up using email</p>
+    <p class="display-4">Sign up using email</p>
 
     <v-container>
       <v-text-field
@@ -58,14 +58,11 @@
     <v-container>
       <p>
         Already have an account ?
-        <a class="link white--text text-center text-md-start" href="/#/login"
+        <a class="link white--text text-center text-md-start" href="/login"
           >Log in</a
         >
       </p>
     </v-container>
-    <v-btn v-on:click="signUpFunction">
-      click me
-    </v-btn>
   </v-container>
 </template>
 
@@ -135,25 +132,6 @@ export default {
         .catch(error => {
           console.log(error.response.data);
         });
-
-      /*
-      if (this.isEmailValid() && this.isNameValid() && this.isPasswordValid()) {
-        axios
-          .post(path, {
-            email: this.email,
-            name: this.name,
-            password: this.password
-          })
-          .then(response => {
-            console.log(response.data);
-            Router.push("/");
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      }
-
-       */
     }
   }
 };
