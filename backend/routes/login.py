@@ -9,6 +9,7 @@ customerService = CustomerService()
 def login():
     email, password = request.json["email"], request.json["password"]
     if customerService.areLoginInformationsValid(email, password):
-        return Response(status=201)
+        response = jsonify({'Message': 'succes'})
+        return response, 201
     response = jsonify({'Error': 'Email or password invalid'})
     return response, 400

@@ -1,68 +1,69 @@
 <template class="mt-5">
-  <v-container class="main-container text-center">
-    <p class="display-4">Sign up using email</p>
-
-    <v-container>
-      <v-text-field
-        class="py-0"
-        v-model="name"
-        label="Name"
-        :error="invalidName"
-      ></v-text-field>
-
-      <v-text-field
-        class="py-0"
-        v-model="email"
-        label="Email"
-        :error="invalidEmail"
-      ></v-text-field>
-
-      <v-text-field
-        class="py-0"
-        v-model="username"
-        label="Username"
-        :error="invalidEmail"
-      ></v-text-field>
-
-      <v-row class="py-0">
-        <v-col class="py-0">
-          <v-text-field
-            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="showPassword ? 'text' : 'password'"
-            v-model="password"
-            label="Password"
-            @click:append="showPassword = !showPassword"
-            :error="invalidPassword"
-          ></v-text-field>
-        </v-col>
-        <v-col class="py-0">
-          <v-text-field
-            :append-icon="showConfirmed ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="showConfirmed ? 'text' : 'password'"
-            v-model="confirmedPassword"
-            label="Confirm"
-            @click:append="showConfirmed = !showConfirmed"
-            :error="invalidPassword"
-          >
-          </v-text-field>
-        </v-col>
-      </v-row>
-
+  <v-container class="text-center">
+    <v-card>
+      <v-card-title class="justify-center">
+        Sign up using email
+      </v-card-title>
       <v-container>
-        <v-btn @click="signUpFunction">
-          Sign up
-        </v-btn>
-      </v-container>
-    </v-container>
+        <v-text-field
+          class="py-0"
+          v-model="name"
+          label="Name"
+          :error="invalidName"
+        ></v-text-field>
 
-    <v-container>
-      <p>
-        Already have an account ?
-        <a class="link white--text text-center text-md-start" href="/login"
-          >Log in</a
-        >
-      </p>
-    </v-container>
+        <v-text-field
+          class="py-0"
+          v-model="email"
+          label="Email"
+          :error="invalidEmail"
+        ></v-text-field>
+
+        <v-text-field
+          class="py-0"
+          v-model="username"
+          label="Username"
+          :error="invalidEmail"
+        ></v-text-field>
+
+        <v-row class="py-0">
+          <v-col class="py-0">
+            <v-text-field
+              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="showPassword ? 'text' : 'password'"
+              v-model="password"
+              label="Password"
+              @click:append="showPassword = !showPassword"
+              :error="invalidPassword"
+            ></v-text-field>
+          </v-col>
+          <v-col class="py-0">
+            <v-text-field
+              :append-icon="showConfirmed ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="showConfirmed ? 'text' : 'password'"
+              v-model="confirmedPassword"
+              label="Confirm"
+              @click:append="showConfirmed = !showConfirmed"
+              :error="invalidPassword"
+            >
+            </v-text-field>
+          </v-col>
+        </v-row>
+
+        <v-container>
+          <v-btn @click="signUpFunction">
+            Sign up
+          </v-btn>
+        </v-container>
+      </v-container>
+
+      <v-container class="text-center">
+        <p>
+          Already have an account ?
+          <a class="link" href="/login">Log in</a>
+        </p>
+      </v-container>
+    </v-card>
   </v-container>
 </template>
 
