@@ -12,21 +12,18 @@ class CustomerRepository:
     def __init__(self):
         self.conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD, db=DATABASE)
 
-    def getCustomerFromEmail(self, customerEmail):
+    def isEmailAlreadyUsed(self, customerEmail):
         cmd = 'SELECT C.email FROM Customers C WHERE C.email = ' + '%s' + ';'
         cur = self.conn.cursor()
         rows_count = cur.execute(cmd, customerEmail)
-        if rows_count > 0:
-            return cur.fetchone()
-        return ERROR_CODE
+        return rows_count > 0
 
     def isUsernameAlreadyUsed(self, username):
         cmd = 'SELECT * FROM Customers C WHERE C.username = ' + '%s' + ';'
         cur = self.conn.cursor()
         rows_count = cur.execute(cmd, username)
-        if rows_count > 0:
-            return True
-        return False
+        return rows_count > 0
+
 
     def addCustomer(self, name, email, username, password):
         try:

@@ -5,10 +5,7 @@ class CustomerService:
         self.customerRepository = CustomerRepository.CustomerRepository()
 
     def isEmailAlreadyUsed(self, email):
-        result = self.customerRepository.getCustomerFromEmail(email)
-        if result == -1:
-            return False
-        return True
+        return self.customerRepository.isEmailAlreadyUsed(email)
 
     def isUsernameAlreadyUsed(self, username):
         return self.customerRepository.isUsernameAlreadyUsed(username)
