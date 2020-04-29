@@ -1,6 +1,6 @@
-from flask import Blueprint, jsonify, request, Response
+from flask import Blueprint, jsonify, request
 
-from domain.CustomerService import CustomerService
+from service.CustomerService import CustomerService
 
 customers_blueprint = Blueprint("customers", __name__, url_prefix="/")
 

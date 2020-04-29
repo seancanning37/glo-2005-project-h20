@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request, Response
-from domain.CustomerService import CustomerService
+from service.CustomerService import CustomerService
 
 signup_blueprint = Blueprint("signup", __name__, url_prefix="/")
 customerService = CustomerService()

@@ -1,5 +1,5 @@
 from persistence import CustomerRepository
-from .Customer import Customer
+from domain.Customer import Customer
 
 def createCustomerFromCursorInfo(customerInfos):
     customer = Customer()

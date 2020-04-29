@@ -1,4 +1,4 @@
-from .Beer import Beer
+from domain.Beer import Beer
 from persistence import BeerRepository
 
 def createBeerFromCursorInfos(beerInfos):

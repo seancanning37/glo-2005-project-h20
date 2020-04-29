@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 
-from domain.BeerService import BeerService
+from service.BeerService import BeerService
 
 beers = Blueprint("beers", __name__, url_prefix="/")
 
