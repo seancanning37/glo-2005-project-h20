@@ -95,3 +95,9 @@ CREATE TABLE IF NOT EXISTS OrderItems
 		ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS passwords
+(
+    customer_id INTEGER NOT NULL,
+    password 
+)
+
