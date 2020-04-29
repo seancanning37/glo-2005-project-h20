@@ -5,6 +5,7 @@ import NotFound from "../views/NotFound";
 import Beer from "../views/Beer";
 import SignUp from "../views/SignUp";
 import Login from "../views/Login";
+import Customer from "../views/Customer";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,11 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login
+  },
+  {
+    path: "/customers/:customer_id",
+    name: "CustomerPage",
+    component: Customer
   }
 ];
 

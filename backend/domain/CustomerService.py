@@ -31,7 +31,6 @@ class CustomerService:
     def areLoginInformationsValid(self, email, password):
         return self.customerRepository.areLoginInformationsValid(email, password)
 
-
     def addCustomer(self, name, email, username, login):
         self.customerRepository.addCustomer(name, email, username, login)
 

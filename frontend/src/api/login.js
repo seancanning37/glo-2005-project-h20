@@ -2,11 +2,11 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import Router from "../router";
 
-const API_URL = "http://localhost:5000/login";
+const API_LOGIN_URL = "http://localhost:5000/login";
 
 export const login = function(email, password) {
   axios
-    .post(API_URL, {
+    .post(API_LOGIN_URL, {
       email: email,
       password: password
     })
