@@ -31,6 +31,7 @@ export default {
         })
         .then(response => {
           console.log(response.data);
+          this.$router.push({ name: "CustomerPage" });
         })
         .catch(error => {
           console.log(error.response.data);

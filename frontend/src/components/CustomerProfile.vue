@@ -5,7 +5,7 @@
     </h1>
     <h2>Name: {{ customer.name }}</h2>
     <p>Customer id: {{ customer.id }}</p>
-    <p>pPhone: {{ customer.phone }}</p>
+    <p>Phone: {{ customer.phone }}</p>
     <p>Email: {{ customer.email }}</p>
     <p>Username: {{ customer.username }}</p>
     <p>Address: {{ customer.address }}</p>
