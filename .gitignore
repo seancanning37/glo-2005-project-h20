@@ -136,3 +136,4 @@ node_modules/
 public/
 .deploy*/
 src/_drafts
+.idea/
