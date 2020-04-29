@@ -56,4 +56,15 @@ class CustomerRepository:
         customerInfo = cur.fetchone()
         return customerInfo
 
+    def updateCustomerName(self, customerId, newName):
+        try:
+            cmd = 'UPDATE CUSTOMERS C SET C.name = (%s) where C.id = (%s)'
+            customerInfos = (newName, customerId)
+            cur = self.conn.cursor()
+            cur.execute(cmd, customerInfos)
+            self.conn.commit()
+            return SUCCESS_CODE
+        except pymysql.IntegrityError as error:
+            return ERROR_CODE
+
 

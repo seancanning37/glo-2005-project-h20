@@ -37,3 +37,6 @@ class CustomerService:
     def getCustomerIdFromEmail(self, email):
         return self.customerRepository.getCustomerIdFromEmail(email)
 
+    def updateCustomerName(self, customerId, newName):
+        return self.customerRepository.updateCustomerName(customerId, newName)
+

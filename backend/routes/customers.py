@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request, Response
 
 from domain.CustomerService import CustomerService
 
@@ -10,3 +10,11 @@ def getCustomer(customer_id):
     customerService = CustomerService()
     customer = customerService.getCustomerFromId(customer_id)
     return jsonify(customer.__dict__)
+
+
+@customers_blueprint.route("customers/<customer_id>/name", methods=['PUT'])
+def updateCustomerName(customer_id):
+    customerService = CustomerService()
+    newName = request.json["newName"]
+    customerService.updateCustomerName(customer_id, newName)
+    return Response(status=200)

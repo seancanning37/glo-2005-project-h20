@@ -5,6 +5,7 @@ from domain.CustomerService import CustomerService
 login_blueprint = Blueprint("login", __name__, url_prefix="/")
 customerService = CustomerService()
 
+
 @login_blueprint.route("login", methods=['POST'])
 def login():
     email, password = request.json["email"], request.json["password"]
