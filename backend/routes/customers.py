@@ -17,4 +17,5 @@ def updateCustomerName(customer_id):
     customerService = CustomerService()
     newName = request.json["newName"]
     customerService.updateCustomerName(customer_id, newName)
-    return Response(status=200)
+    response = jsonify({'message': 'update successful'})
+    return response, 200

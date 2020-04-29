@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import CustomerHeader from "../components/CustomerHeader";
+import CustomerHeader from "../components/CustomerProfile";
 import axios from "axios";
 
 export default {

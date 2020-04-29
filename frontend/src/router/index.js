@@ -6,6 +6,7 @@ import Beer from "../views/Beer";
 import SignUp from "../views/SignUp";
 import Login from "../views/Login";
 import Customer from "../views/Customer";
+import CustomerSettings from "../views/CustomerSettings";
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,11 @@ const routes = [
     path: "/customers/:customer_id",
     name: "CustomerPage",
     component: Customer
+  },
+  {
+    path: "/customers/:customer_id/settings",
+    name: "CustomerSettings",
+    component: CustomerSettings
   }
 ];
 
