@@ -4,6 +4,7 @@ from routes import beers
 from routes import home
 from routes import signup
 from routes import login
+from routes import customers
 from initialisation_script import createDatabaseScript, runAllInitScript
 
 
@@ -21,6 +22,7 @@ def registerRoutes():
     app.register_blueprint(beers.beers)
     app.register_blueprint(signup.signup_blueprint)
     app.register_blueprint(login.login_blueprint)
+    app.register_blueprint(customers.customers_blueprint)
 
 
 @app.route('/', defaults={'path': ''})

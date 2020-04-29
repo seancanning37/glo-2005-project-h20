@@ -49,4 +49,11 @@ class CustomerRepository:
         customerId = cur.fetchone()[0]
         return customerId
 
+    def getCustomerFromId(self, customerId):
+        cmd = 'SELECT * FROM CUSTOMERS C WHERE C.id = (%s)'
+        cur = self.conn.cursor()
+        cur.execute(cmd, customerId)
+        customerInfo = cur.fetchone()
+        return customerInfo
+
 
