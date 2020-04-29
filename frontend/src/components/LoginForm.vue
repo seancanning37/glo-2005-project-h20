@@ -31,8 +31,7 @@
 </template>
 
 <script>
-import axios from "axios";
-import Router from "../router";
+import { login } from "../api/login";
 
 export default {
   name: "LoginForm",
@@ -46,20 +45,8 @@ export default {
   },
   methods: {
     login: function() {
-      const path = "http://localhost:5000/login";
       if (this.email !== "" && this.password !== "") {
-        axios
-          .post(path, {
-            email: this.email,
-            password: this.password
-          })
-          .then(response => {
-            console.log(response.data);
-            Router.push("/");
-          })
-          .catch(error => {
-            console.log(error.response.data);
-          });
+        login(this.email, this.password);
       }
       this.invalidEmail = true;
       this.invalidPassword = true;

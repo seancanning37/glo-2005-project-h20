@@ -40,8 +40,13 @@ class CustomerRepository:
         cur = self.conn.cursor()
         loginInfo = (email, password)
         rows_count = cur.execute(cmd, loginInfo)
-        print(cur.fetchone())
         return rows_count > 0
 
+    def getCustomerIdFromEmail(self, email):
+        cmd = 'SELECT C.id FROM CUSTOMERS C WHERE C.email = (%s)'
+        cur = self.conn.cursor()
+        cur.execute(cmd, email)
+        customerId = cur.fetchone()[0]
+        return customerId
 
 

@@ -16,3 +16,6 @@ class CustomerService:
 
     def addCustomer(self, name, email, username, login):
         self.customerRepository.addCustomer(name, email, username, login)
+
+    def getCustomerIdFromEmail(self, email):
+        return self.customerRepository.getCustomerIdFromEmail(email)

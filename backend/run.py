@@ -11,6 +11,8 @@ app = Flask(__name__,
             static_folder="./dist/static",
             template_folder="./dist")
 
+app.secret_key = "complete_random_secret_key"
+
 cors = CORS(app, resources={r"/*": {"origin": "*"}})
 
 
