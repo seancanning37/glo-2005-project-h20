@@ -11,13 +11,10 @@ export const login = function(email, password) {
       password: password
     })
     .then(response => {
-      console.log(response.data);
       let date = new Date();
       const minutes = 180;
       date.setTime(date.getTime() + minutes * 60 * 1000);
-      console.log(response.data.token);
       Cookies.set("beerbender-token", response.data.token, { expires: date });
-      console.log(Cookies.get("beerbender-token"));
       Router.push("/");
     })
     .catch(error => {
