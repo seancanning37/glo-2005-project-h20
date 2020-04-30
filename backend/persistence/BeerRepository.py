@@ -6,7 +6,6 @@ PASSWORD = 'glo2005xD'
 DATABASE = 'glo2005'
 
 
-
 class BeerRepository:
     def __init__(self):
         self.conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD, db=DATABASE)

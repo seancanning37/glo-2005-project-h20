@@ -1,9 +1,10 @@
 from flask import Blueprint, jsonify, request, session
 from uuid import uuid4
-from domain.CustomerService import CustomerService
+from service.CustomerService import CustomerService
 
 login_blueprint = Blueprint("login", __name__, url_prefix="/")
 customerService = CustomerService()
+
 
 @login_blueprint.route("login", methods=['POST'])
 def login():
