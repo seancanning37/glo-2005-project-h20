@@ -95,3 +95,10 @@ CREATE TABLE IF NOT EXISTS OrderItems
 		ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS Passwords
+(
+    customer_id INTEGER NOT NULL UNIQUE,
+    password VARCHAR(72),
+    FOREIGN KEY (customer_id) REFERENCES Customers (id)
+);
+
