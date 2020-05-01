@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS Customers
 
 CREATE TABLE IF NOT EXISTS Orders
 (
-	order_id INTEGER NOT NULL AUTO_INCREMENT,
+	order_id VARCHAR(100),
 	customer_id INTEGER NOT NULL,
 	order_date Date,
 	status VARCHAR(100),
@@ -90,7 +90,7 @@ CREATE INDEX beerBrand ON Beers (brand_id) USING HASH;
 CREATE TABLE IF NOT EXISTS OrderItems
 (
 	item_id INTEGER NOT NULL AUTO_INCREMENT,
-	order_id INTEGER NOT NULL,
+	order_id VARCHAR(100),
 	beer_id INTEGER NOT NULL,
 	quantity INTEGER NOT NULL,
 	PRIMARY KEY (item_id),
