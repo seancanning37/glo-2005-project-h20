@@ -3,7 +3,7 @@
     <v-row class="py-0">
       <v-col cols="4" justify="start">
         <v-container>
-          <v-img height="700px" width="400px" :src="beer.pictureURL"></v-img>
+          <v-img height="500px" width="300px" :src="beer.pictureURL"></v-img>
         </v-container>
       </v-col>
 
