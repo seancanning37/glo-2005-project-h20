@@ -22,8 +22,9 @@
 </template>
 
 <script>
-import axios from "axios";
-import Cookie from "js-cookie";
+import Cookies from "js-cookie";
+import { getBeer } from "../api/beer_api.js";
+import { addBeerToCart } from "../api/cart";
 
 export default {
   name: "Beer",
@@ -38,39 +39,19 @@ export default {
       price: 0.0,
       description: ""
     },
-    beers: []
+    quantity: 0
   }),
   created() {
     this.getAllBeers();
   },
   methods: {
-    getBeer() {
-      const path = "http://localhost:5000/beers/1";
-      axios
-        .get(path)
-        .then(response => {
-          console.log(response.data);
-          this.beer = response.data;
-        })
-        .catch(error => {
-          console.log(error);
-        });
+    getBeer: async function() {
+      const beer = await getBeer(this.$route.params.beer_id);
+      this.beer = beer.data;
     },
-    addBeerToCart: function() {
-      let cookie = Cookie.get("beerbender-token");
-      console.log(cookie);
-    },
-    getAllBeers(){
-      const path = "http://localhost:5000/beers";
-      axios
-        .get(path)
-        .then(response => {
-          console.log(response.data);
-          this.beers = response.data;
-        })
-        .catch(error => {
-          console.log(error);
-        });
+    addBeerToCart: async function() {
+      await addBeerToCart(this.beer.id, this.quantity);
+      console.log(JSON.parse(Cookies.get("beerbender-token")));
     }
   }
 };
