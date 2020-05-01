@@ -12,7 +12,7 @@ class BeerRepository:
             host=HOST, user=USER, password=PASSWORD, db=DATABASE)
 
     def get(self, beer_id):
-        cmd = 'SELECT * FROM Beers WHERE beer_id=' + str(beer_id) + ';'
+        cmd = 'SELECT * FROM Beers INNER JOIN BeerPictures ON Beers.style_id = BeerPictures.style_id WHERE beer_id=' + str(beer_id);
         cur = self.conn.cursor()
         cur.execute(cmd)
         beerInfos = cur.fetchone()
@@ -27,7 +27,7 @@ class BeerRepository:
         return pictureUrl
 
     def getAll(self):
-        cmd = 'SELECT * FROM Beers;'
+        cmd = 'SELECT * FROM Beers INNER JOIN BeerPictures ON Beers.style_id = BeerPictures.style_id;'
         cur = self.conn.cursor()
         cur.execute(cmd)
         return cur.fetchall()

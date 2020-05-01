@@ -4,6 +4,7 @@ from persistence import BeerRepository
 
 def createBeerFromCursorInfos(beerInfos):
     beer = Beer()
+    print(beerInfos)
     beer.id = beerInfos[0]
     beer.brand_id = beerInfos[1]
     beer.name = beerInfos[2]
@@ -15,6 +16,8 @@ def createBeerFromCursorInfos(beerInfos):
     beer.price = str(beerInfos[8])
     beer.disponibility = beerInfos[9]
     beer.description = beerInfos[10]
+    beer.pictureURL = beerInfos[12]
+
     return beer
 
 
