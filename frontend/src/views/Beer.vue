@@ -42,7 +42,7 @@ export default {
     quantity: 0
   }),
   created() {
-    this.getAllBeers();
+    this.getBeer();
   },
   methods: {
     getBeer: async function() {
