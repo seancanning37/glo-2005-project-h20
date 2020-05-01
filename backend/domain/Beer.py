@@ -11,3 +11,4 @@ class Beer:
         self.price = 0.0
         self.disponibility = 0
         self.description = ""
+        self.pictureURL = ""
