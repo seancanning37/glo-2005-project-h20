@@ -23,7 +23,7 @@
           </v-col>
 
           <v-col cols="6">
-            <p class="my-1">Color</p>
+            <p class="my-1">Type</p>
             <p class="font-weight-bold">{{ type.name }}</p>
           </v-col>
 

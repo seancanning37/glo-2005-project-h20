@@ -16,7 +16,7 @@
 <script>
 import BeerHeader from "../components/beer/BeerHeader.vue";
 import BeerInfo from "../components/beer/BeerInfo.vue";
-import { getBeer, getBrand } from "../api/beer_api.js";
+import { getBeer, getBrand, getStyle, getType } from "../api/beer_api.js";
 
 export default {
   name: "Beer",
@@ -49,8 +49,11 @@ export default {
     },
     quantity: 0,
   }),
-  created() {
-    this.getBeer();
+  async created() {
+    await this.getBeer();
+    await this.getBrand();
+    await this.getStyle();
+    await this.getType();
   },
   methods: {
     getBeer: async function() {
@@ -60,6 +63,14 @@ export default {
     getBrand: async function() {
       const brand = await getBrand(this.beer.brand_id);
       this.brand = brand.data;
+    },
+    getStyle: async function() {
+      const beerStyle = await getStyle(this.beer.style_id);
+      this.beerStyle = beerStyle.data;
+    },
+    getType: async function() {
+      const type = await getType(this.beer.type_id);
+      this.type = type.data;
     },
   },
 };
