@@ -23,4 +23,5 @@ class BeerService:
 
     def get(self, beer_id):
         beer = createBeerFromCursorInfos(self.beerRepository.get(beer_id))
+        
         return beer
