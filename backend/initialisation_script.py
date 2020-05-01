@@ -10,7 +10,8 @@ DATABASE = 'glo2005'
 initScriptFilenames = [
     '../database/db_init/init_tables.sql',
     '../database/db_init/init_types.sql',
-    '../database/db_init/init_styles.sql'
+    '../database/db_init/init_styles.sql',
+    '../database/db_init/init_beerPictures.sql'
 ]
 
 
@@ -52,7 +53,8 @@ def executeCreateCommands(sqlCommands):
 def executeCommands(sqlCommands):
     for command in sqlCommands[:-1]:
         try:
-            conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD, db=DATABASE)
+            conn = pymysql.connect(host=HOST, user=USER,
+                                   password=PASSWORD, db=DATABASE)
             cur = conn.cursor()
             cur.execute(command)
             conn.commit()
@@ -69,12 +71,14 @@ def populateBrands():
     brands = loadJsonFromFilePath("json_files/brands.json")
     try:
         for brand in brands:
-            conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD, db=DATABASE)
+            conn = pymysql.connect(host=HOST, user=USER,
+                                   password=PASSWORD, db=DATABASE)
             cur = conn.cursor()
             add_brand = "INSERT INTO Brands" \
                         "(brand_id, brand_name, brand_phone, brand_address, brand_city, brand_country)" \
                         "VALUES (%s, %s, %s, %s, %s, %s)"
-            brand_data = (brand['id'], brand['name'], brand['phone'], brand['address'], brand['city'], brand['country'])
+            brand_data = (brand['id'], brand['name'], brand['phone'],
+                          brand['address'], brand['city'], brand['country'])
             cur.execute(add_brand, brand_data)
             conn.commit()
     except Exception as e:
@@ -91,7 +95,8 @@ def populateBeers():
         for beer in beers:
             beersIdWithStyleId[beer['beer_id']] = beer['style_id']
             beersIdWithTypeId[beer['beer_id']] = beer['type_id']
-            conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD, db=DATABASE)
+            conn = pymysql.connect(host=HOST, user=USER,
+                                   password=PASSWORD, db=DATABASE)
             cur = conn.cursor()
             add_beer = "INSERT INTO Beers" \
                        "(beer_id, brand_id, beer_name, abv, ibu, volume, style_id, type_id, beer_price, disponibility, description)" \

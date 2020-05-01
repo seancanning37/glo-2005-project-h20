@@ -55,6 +55,11 @@ CREATE TABLE IF NOT EXISTS Styles
     PRIMARY KEY (style_id)
 );
 
+CREATE TABLE IF NOT EXISTS BeerPictures
+(
+	type_id INTEGER NOT NULL UNIQUE KEY,
+	picture_url VARCHAR(32)
+);
 
 CREATE TABLE IF NOT EXISTS Beers
 (
