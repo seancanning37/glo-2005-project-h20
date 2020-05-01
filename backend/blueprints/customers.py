@@ -13,7 +13,7 @@ def getCustomer(customer_id):
 
 
 @customers_blueprint.route("customers/<customer_id>/modify", methods=['PUT'])
-def updateCustomerName(customer_id):
+def updateCustomer(customer_id):
     customerService = CustomerService()
     newParameters = request.json
     customerService.updateCustomer(customer_id, newParameters)
