@@ -6,7 +6,11 @@ from blueprints import signup
 from blueprints import login
 from blueprints import customers
 from blueprints import brands
+<<<<<<< HEAD
 from blueprints import styles
+=======
+from blueprints import types
+>>>>>>> added get on /types/id (#28)
 from initialisation_script import createDatabaseScript, runAllInitScript
 
 
@@ -27,7 +31,11 @@ def registerRoutes():
     app.register_blueprint(login.login_blueprint)
     app.register_blueprint(customers.customers_blueprint)
     app.register_blueprint(brands.brands)
+<<<<<<< HEAD
     app.register_blueprint(styles.styles)
+=======
+    app.register_blueprint(types.types)
+>>>>>>> added get on /types/id (#28)
 
 
 @app.route('/', defaults={'path': ''})
