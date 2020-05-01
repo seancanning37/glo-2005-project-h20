@@ -41,8 +41,8 @@ class CustomerService:
     def getCustomerIdFromEmail(self, email):
         return self.customerRepository.getCustomerIdFromEmail(email)
 
-    def updateCustomerName(self, customerId, newName):
-        return self.customerRepository.updateCustomerName(customerId, newName)
+    def updateCustomer(self, customerId, parameters):
+        return self.customerRepository.updateCustomer(customerId, parameters)
 
     def getCustomerHashedPasswordFromId(self, customerId):
         return self.customerRepository.getCustomerHashedPasswordFromId(customerId)
