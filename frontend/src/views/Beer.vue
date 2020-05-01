@@ -17,6 +17,7 @@
 import BeerHeader from "../components/beer/BeerHeader.vue";
 import BeerInfo from "../components/beer/BeerInfo.vue";
 import { getBeer, getBrand, getStyle, getType } from "../api/beer_api.js";
+import { addBeerToCart } from "../api/cart";
 
 export default {
   name: "BeerPage",
@@ -72,7 +73,10 @@ export default {
       const type = await getType(this.beer.type_id);
       this.type = type.data;
     },
-  },
+    addBeerToCart: async function() {
+      await addBeerToCart(this.beer.id, this.quantity);
+    }
+  }
 };
 </script>
 
