@@ -8,28 +8,29 @@ beers = Blueprint("orders", __name__, url_prefix="/")
 @beers.route("orders/<order_id>", methods=['GET'])
 def getOrderByID(order_id):
     orderService = OrderService()
-    order = orderService.getOrderByID(order_id)
-    return jsonify(order.__dict__)
+    order = orderService.getOrderByID(order_id).__dict__
+    return jsonify(order)
 
 
 @beers.route("orders/<customer_id>", methods=['GET'])
 def getOrdersByCustomer(customer_id):
     orderService = OrderService()
-    orders = orderService.getOrdersByCustomer(customer_id)
+    orders = [ order.__dict__ for order in orderService.getOrdersByCustomer(customer_id) ]
     return jsonify(orders)
 
 
 @beers.route("orders/<order_id>/items", methods=['GET'])
 def getOrderItems(order_id):
     orderService = OrderService()
-    order = orderService.getOrderItems(order_id)
-    return jsonify(order.__dict__)
+    items = [ item.__dict__ for item in orderService.getOrderItems(order_id) ]
+    return jsonify(items)
 
 
 @beers.route("orders/buy", methods=['POST'])
 def buy():
     items = request.json['items']
+    order = request.json['order']
     customer_id = request.json['customer_id']
     orderService = OrderService()
-    return orderService.buy(items, customer_id)
+    return orderService.buy(items, order, customer_id)
 

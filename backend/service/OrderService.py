@@ -10,10 +10,10 @@ class OrderService:
         return [ Order(orderInfo) for orderInfo in self.OrderRepository.getOrdersByCustomer(customer_id) ]
 
     def getOrderItems(self, order_id):
-        return [ OrderItem(orderItemInfo) for orderItemInfo self.OrderRepository.getOrderItems(order_id) ]
+        return [ OrderItem(orderItemInfo) for orderItemInfo in self.OrderRepository.getOrderItems(order_id) ]
 
     def getOrderByID(self, order_id):
         return Order(self.OrderRepository.getOrderByID(order_id))
 
-    def buy(self, items, customer_id):
-        return
+    def buy(self, items, order, customer_id):
+        self.OrderRepository(items, order, customer_id)
