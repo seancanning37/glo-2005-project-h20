@@ -1,32 +1,29 @@
-<template>
+<template class="salut">
   <v-container>
-    <v-container>
-      <h1>
-        BEER PAGE
-      </h1>
-      <p>Beer id: {{ this.beer.id }}</p>
-      <p>Beer name: {{ this.beer.name }}</p>
-      <p>Brand id: {{ this.beer.brand_id }}</p>
-      <p>abv: {{ this.beer.abv }}</p>
-      <p>ibu: {{ this.beer.ibu }}</p>
-      <p>volume: {{ this.beer.volume }}</p>
-      <p>price: {{ this.beer.price }}</p>
-      <p>Description: {{ this.beer.description }}</p>
-    </v-container>
-    <v-container>
-      <v-btn v-on:click="addBeerToCart">
-        Add to cart
-      </v-btn>
-    </v-container>
+    <beer-header :beer="beer" :brand="brand" :type="type" />
+
+    <hr />
+
+    <beer-info
+      :beer="beer"
+      :brand="brand"
+      :type="type"
+      :beerStyle="beerStyle"
+    />
   </v-container>
 </template>
 
 <script>
-import Cookie from "js-cookie";
-import { getBeer } from "../api/beer_api.js";
+import BeerHeader from "../components/beer/BeerHeader.vue";
+import BeerInfo from "../components/beer/BeerInfo.vue";
+import { getBeer, getBrand } from "../api/beer_api.js";
 
 export default {
   name: "Beer",
+  components: {
+    BeerHeader,
+    BeerInfo,
+  },
   data: () => ({
     beer: {
       id: 0,
@@ -37,6 +34,18 @@ export default {
       volume: 0,
       price: 0.0,
       description: "",
+      pictureURL: "",
+    },
+    brand: {
+      name: "brand",
+      city: "city",
+      country: "country",
+    },
+    type: {
+      name: "type",
+    },
+    beerStyle: {
+      name: "style",
     },
   }),
   created() {
@@ -47,9 +56,9 @@ export default {
       const beer = await getBeer(this.$route.params.beer_id);
       this.beer = beer.data;
     },
-    addBeerToCart: function() {
-      let cookie = Cookie.get("beerbender-token");
-      console.log(cookie);
+    getBrand: async function() {
+      const brand = await getBrand(this.beer.brand_id);
+      this.brand = brand.data;
     },
   },
 };
