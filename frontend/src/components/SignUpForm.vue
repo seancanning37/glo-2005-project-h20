@@ -128,7 +128,7 @@ export default {
         })
         .then(response => {
           console.log(response.data);
-          Router.push("/signup");
+          Router.push("/login");
         })
         .catch(error => {
           console.log(error.response.data);
