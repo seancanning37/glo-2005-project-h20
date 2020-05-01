@@ -72,4 +72,15 @@ class CustomerRepository:
         hashedPassword = cur.fetchone()[0]
         return hashedPassword
 
+    def updateCustomer(self, customerId, parameters):
+        try:
+            for attribute in parameters:
+                cmd = f"UPDATE CUSTOMERS C SET C.{attribute} = {parameters[attribute]} where C.id = {customerId};"
+                cur = self.conn.cursor()
+                cur.execute(cmd)
+                self.conn.commit()
+                return SUCCESS_CODE
+        except pymysql.IntegrityError as error:
+            return ERROR_CODE
+
 
