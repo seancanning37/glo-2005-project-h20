@@ -1,6 +1,6 @@
 USE glo2005;
 
-INSERT INTO BeerPictures (type_id, picture_url) VALUES
+INSERT INTO BeerPictures (style_id, picture_url) VALUES
 (1, 'https://i.imgur.com/Gas7NQl.jpg'),
 (2, 'https://i.imgur.com/kRroaWv.jpg'),
 (3, 'https://i.imgur.com/k9diVUt.jpg'),
