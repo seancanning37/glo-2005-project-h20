@@ -22,8 +22,9 @@
 </template>
 
 <script>
-import Cookie from "js-cookie";
+import Cookies from "js-cookie";
 import { getBeer } from "../api/beer_api.js";
+import { addBeerToCart } from "../api/cart";
 
 export default {
   name: "Beer",
@@ -36,8 +37,9 @@ export default {
       ibu: 0,
       volume: 0,
       price: 0.0,
-      description: "",
+      description: ""
     },
+    quantity: 0
   }),
   created() {
     this.getBeer();
@@ -47,11 +49,11 @@ export default {
       const beer = await getBeer(this.$route.params.beer_id);
       this.beer = beer.data;
     },
-    addBeerToCart: function() {
-      let cookie = Cookie.get("beerbender-token");
-      console.log(cookie);
-    },
-  },
+    addBeerToCart: async function() {
+      await addBeerToCart(this.beer.id, this.quantity);
+      console.log(JSON.parse(Cookies.get("beerbender-token")));
+    }
+  }
 };
 </script>
 

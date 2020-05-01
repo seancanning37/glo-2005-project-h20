@@ -11,7 +11,7 @@ def login():
     email, password = request.json["email"], request.json["password"]
     if customerService.areLoginInformationsValid(email, password):
         token = uuid4()
-        session["email"] = {"token": token, "customer_id" : customerService.getCustomerIdFromEmail(email)}
+        session["email"] = {"token": token, "customer_id" : customerService.getCustomerIdFromEmail(email), "cart" : {}}
         response = jsonify(session["email"])
         return response, 201
     response = jsonify({'Error': 'Email or password invalid'})
