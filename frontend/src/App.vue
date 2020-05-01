@@ -1,7 +1,19 @@
 <template>
   <div id="app">
     <v-app id="inspire">
-      <router-view />
+      <v-app-bar app clipped-left dark>
+        <v-app-bar-nav-icon>
+
+        </v-app-bar-nav-icon>
+        <v-toolbar-title>
+          Beerbender
+        </v-toolbar-title>
+      </v-app-bar>
+      <v-content class="align-content-center">
+        <v-container class="d-flex justify-center align-baseline fill-height" fluid>
+          <router-view />
+        </v-container>
+      </v-content>
     </v-app>
   </div>
 </template>
