@@ -36,11 +36,12 @@ class OrderRepository:
         cur = self.conn.cursor()
 
         order_id = uuid.uuid4()
-        createOrderQuery = f"INSERT INTO Orders (order_id, customer_id, order_date, status, total_price, comment) VALUES ({order_id}, {customer_id}, {order['order_date']}, {order['status']}, {order['total_price']}, {order['comment']});"
+        print(order_id)
+        createOrderQuery = f"INSERT INTO Orders (order_id, customer_id, order_date, status, total_price, comment) VALUES ('{order_id}', '{customer_id}', '{order['order_date']}', '{order['status']}', '{order['total_price']}', '{order['comment']}');"
         cur.execute(createOrderQuery)
 
         for item in items:
-            createOrderItemQuery = f"INSERT INTO OrderItems (order_id, beer_id, quantity) VALUES ({order_id}, {item['beer_id']}, {item['quantity']});"
+            createOrderItemQuery = f"INSERT INTO OrderItems (order_id, beer_id, quantity) VALUES ('{order_id}', '{item['beer_id']}', '{item['quantity']}');"
             cur.execute(createOrderItemQuery)
 
         self.conn.commit()
