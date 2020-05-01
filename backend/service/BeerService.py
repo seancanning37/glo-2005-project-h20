@@ -31,8 +31,8 @@ class BeerService:
     def getAll(self):
         repoBeers = self.beerRepository.getAll()
         beers = [createBeerFromCursorInfos(beer) for beer in repoBeers]
-        print(beers)
         return beers
+
 
 if __name__ == '__main__':
     beerRepo = BeerService()
