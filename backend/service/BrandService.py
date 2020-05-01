@@ -1,5 +1,6 @@
 from domain.Brand import Brand
 from persistence import BrandRepository
+from service.BeerService import createBeerFromCursorInfos
 
 
 def createBrandFromCursorInfos(brandInfos):
@@ -20,3 +21,9 @@ class BrandService:
     def get(self, brand_id):
         brand = createBrandFromCursorInfos(self.brandRepository.get(brand_id))
         return brand
+
+    def getAllBeers(self, brand_id):
+        repoBeers = self.brandRepository.getAllBeers(brand_id)
+        beers = [createBeerFromCursorInfos(
+            beer) for beer in repoBeers]
+        return beers

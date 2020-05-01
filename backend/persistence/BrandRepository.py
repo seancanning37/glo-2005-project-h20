@@ -19,3 +19,9 @@ class BrandRepository:
         cur.execute(cmd)
         brandInfos = cur.fetchone()
         return brandInfos
+
+    def getAllBeers(self, brand_id):
+        cmd = 'SELECT * FROM Beers WHERE brand_id=' + str(brand_id) + ';'
+        cur = self.conn.cursor()
+        cur.execute(cmd)
+        return cur.fetchall()

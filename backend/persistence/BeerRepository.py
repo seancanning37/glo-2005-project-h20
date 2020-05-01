@@ -32,6 +32,7 @@ class BeerRepository:
         cur.execute(cmd)
         return cur.fetchall()
 
+
 if __name__ == '__main__':
     beerRepo = BeerRepository()
     beerRepo.getAll()
