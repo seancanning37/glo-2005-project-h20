@@ -37,10 +37,11 @@ export default {
       volume: 0,
       price: 0.0,
       description: ""
-    }
+    },
+    beers: []
   }),
   created() {
-    this.getBeer();
+    this.getAllBeers();
   },
   methods: {
     getBeer() {
@@ -58,6 +59,18 @@ export default {
     addBeerToCart: function() {
       let cookie = Cookie.get("beerbender-token");
       console.log(cookie);
+    },
+    getAllBeers(){
+      const path = "http://localhost:5000/beers";
+      axios
+        .get(path)
+        .then(response => {
+          console.log(response.data);
+          this.beers = response.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 };

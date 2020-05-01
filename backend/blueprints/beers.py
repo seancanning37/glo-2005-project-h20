@@ -10,3 +10,11 @@ def getBeer(beer_id):
     beerService = BeerService()
     beer = beerService.get(beer_id)
     return jsonify(beer.__dict__)
+
+
+@beers.route("beers", methods=['GET'])
+def getAllBeers():
+    beerService = BeerService()
+    beers = beerService.getAll()
+    allBeers = jsonify([beer.__dict__ for beer in beers])
+    return allBeers

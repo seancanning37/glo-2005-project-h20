@@ -27,3 +27,13 @@ class BeerService:
         beer.pictureURL = self.beerRepository.getBeerURLFromStyleId(
             beer.type_id)[0]
         return beer
+
+    def getAll(self):
+        repoBeers = self.beerRepository.getAll()
+        beers = [createBeerFromCursorInfos(beer) for beer in repoBeers]
+        print(beers)
+        return beers
+
+if __name__ == '__main__':
+    beerRepo = BeerService()
+    beerRepo.getAll()
