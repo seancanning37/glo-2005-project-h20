@@ -55,7 +55,7 @@
 <script>
 export default {
   name: "BeerInfo",
-  props: ["beer", "brand", "type", "beerStyle"],
+  props: ["beer", "brand", "type", "beerStyle"]
 };
 </script>
 

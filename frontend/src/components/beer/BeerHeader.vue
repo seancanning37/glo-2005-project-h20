@@ -72,8 +72,8 @@ export default {
     addBeerToCart: function() {
       let cookie = Cookie.get("beerbender-token");
       console.log(cookie);
-    },
-  },
+    }
+  }
 };
 </script>
 
