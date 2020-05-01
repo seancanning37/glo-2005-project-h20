@@ -32,5 +32,6 @@ def buy():
     order = request.json['order']
     customer_id = request.json['customer_id']
     orderService = OrderService()
-    return orderService.buy(items, order, customer_id)
+    orderService.buy(items, order, customer_id)
+    return Response(status=201)
 
