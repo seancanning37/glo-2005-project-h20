@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import axios from "axios";
-import Cookie from "js-cookie"
+import Cookie from "js-cookie";
+import { getBeer } from "../api/beer_api.js";
 
 export default {
   name: "Beer",
@@ -36,30 +36,22 @@ export default {
       ibu: 0,
       volume: 0,
       price: 0.0,
-      description: ""
-    }
+      description: "",
+    },
   }),
   created() {
     this.getBeer();
   },
   methods: {
-    getBeer() {
-      const path = "http://localhost:5000/beers/1";
-      axios
-        .get(path)
-        .then(response => {
-          console.log(response.data);
-          this.beer = response.data;
-        })
-        .catch(error => {
-          console.log(error);
-        });
+    getBeer: async function() {
+      const beer = await getBeer(this.$route.params.beer_id);
+      this.beer = beer.data;
     },
     addBeerToCart: function() {
       let cookie = Cookie.get("beerbender-token");
       console.log(cookie);
-    }
-  }
+    },
+  },
 };
 </script>
 
