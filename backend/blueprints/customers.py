@@ -12,10 +12,10 @@ def getCustomer(customer_id):
     return jsonify(customer.__dict__)
 
 
-@customers_blueprint.route("customers/<customer_id>/name", methods=['PUT'])
-def updateCustomerName(customer_id):
+@customers_blueprint.route("customers/<customer_id>/modify", methods=['PUT'])
+def updateCustomer(customer_id):
     customerService = CustomerService()
-    newName = request.json["newName"]
-    customerService.updateCustomerName(customer_id, newName)
+    newParameters = request.json
+    customerService.updateCustomer(customer_id, newParameters)
     response = jsonify({'message': 'update successful'})
     return response, 200

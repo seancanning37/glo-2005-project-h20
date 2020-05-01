@@ -14,22 +14,22 @@ class CustomerRepository:
         self.conn = pymysql.connect(host=HOST, user=USER, password=PASSWORD, db=DATABASE)
 
     def isEmailAlreadyUsed(self, customerEmail):
-        cmd = 'SELECT C.email FROM Customers C WHERE C.email = ' + '%s' + ';'
+        cmd = f"SELECT C.email FROM Customers C WHERE C.email = '{customerEmail}';"
         cur = self.conn.cursor()
-        rows_count = cur.execute(cmd, customerEmail)
+        rows_count = cur.execute(cmd)
         return rows_count > 0
 
     def isUsernameAlreadyUsed(self, username):
-        cmd = 'SELECT * FROM Customers C WHERE C.username = ' + '%s' + ';'
+        cmd = f"SELECT * FROM Customers C WHERE C.username = '{username}';"
         cur = self.conn.cursor()
-        rows_count = cur.execute(cmd, username)
+        rows_count = cur.execute(cmd)
         return rows_count > 0
 
     def addCustomer(self, name, email, username, password):
         try:
-            cmd = "INSERT INTO Customers (name, email, username, password) VALUES (%s, %s, %s, %s)"
-            cur = self.conn.cursor()
+            cmd = "INSERT INTO Customers (name, email, username, password) VALUES (%s, %s, %s, %s);"
             customerInformations = (name, email, username, password)
+            cur = self.conn.cursor()
             cur.execute(cmd, customerInformations)
             self.conn.commit()
             return SUCCESS_CODE
@@ -37,42 +37,52 @@ class CustomerRepository:
             return ERROR_CODE
 
     def areLoginInformationsValid(self, email, password):
-        cmd = 'SELECT * FROM Customers C WHERE C.email = (%s) AND C.password = (%s);'
+        cmd = f"SELECT * FROM Customers C WHERE C.email = '{email}' AND C.password = '{password}';"
         cur = self.conn.cursor()
-        loginInfo = (email, password)
-        rows_count = cur.execute(cmd, loginInfo)
+        rows_count = cur.execute(cmd)
         return rows_count > 0
 
     def getCustomerIdFromEmail(self, email):
-        cmd = 'SELECT C.id FROM CUSTOMERS C WHERE C.email = (%s)'
+        cmd = f"SELECT C.id FROM CUSTOMERS C WHERE C.email = '{email}';"
         cur = self.conn.cursor()
-        cur.execute(cmd, email)
+        cur.execute(cmd)
         customerId = cur.fetchone()[0]
         return customerId
 
     def getCustomerFromId(self, customerId):
-        cmd = 'SELECT * FROM CUSTOMERS C WHERE C.id = (%s)'
+        cmd = f"SELECT * FROM CUSTOMERS C WHERE C.id = '{customerId}';"
         cur = self.conn.cursor()
-        cur.execute(cmd, customerId)
+        cur.execute(cmd)
         customerInfo = cur.fetchone()
         return customerInfo
 
     def updateCustomerName(self, customerId, newName):
         try:
-            cmd = 'UPDATE CUSTOMERS C SET C.name = (%s) where C.id = (%s)'
-            customerInfos = (newName, customerId)
+            cmd = f"UPDATE CUSTOMERS C SET C.name = '{newName}' where C.id = '{customerId}';"
             cur = self.conn.cursor()
-            cur.execute(cmd, customerInfos)
+            cur.execute(cmd)
             self.conn.commit()
             return SUCCESS_CODE
         except pymysql.IntegrityError as error:
             return ERROR_CODE
 
     def getCustomerHashedPasswordFromId(self, customerId):
-        cmd = 'SELECT C.password FROM CUSTOMERS C WHERE C.id = (%s)'
+        cmd = f"SELECT C.password FROM CUSTOMERS C WHERE C.id = '{customerId}';"
         cur = self.conn.cursor()
-        cur.execute(cmd, customerId)
+        cur.execute(cmd)
         hashedPassword = cur.fetchone()[0]
         return hashedPassword
+
+    def updateCustomer(self, customerId, parameters):
+        try:
+            for attribute in parameters:
+                cmd = f"UPDATE CUSTOMERS C SET C.{attribute} = '{parameters[attribute]}' where C.id = '{customerId}';"
+                cur = self.conn.cursor()
+                cur.execute(cmd)
+        except pymysql.IntegrityError as error:
+            return ERROR_CODE
+
+        self.conn.commit()
+        return SUCCESS_CODE
 
 
