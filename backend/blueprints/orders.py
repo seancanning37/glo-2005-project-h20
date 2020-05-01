@@ -12,7 +12,7 @@ def getOrderByID(order_id):
     return jsonify(order)
 
 
-@beers.route("orders/<customer_id>", methods=['GET'])
+@beers.route("orders/customer/<customer_id>", methods=['GET'])
 def getOrdersByCustomer(customer_id):
     orderService = OrderService()
     orders = [ order.__dict__ for order in orderService.getOrdersByCustomer(customer_id) ]

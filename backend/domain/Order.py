@@ -1,6 +1,6 @@
 class Order:
     def __init__(self, orderInfo):
-		self.order_id = int(orderInfo[0])
+		self.order_id = str(orderInfo[0])
 		self.customer_id =int(orderInfo[1])
 		self.order_date = orderInfo[2]
 		self.status = orderInfo[3]
