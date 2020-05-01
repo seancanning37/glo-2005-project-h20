@@ -16,3 +16,9 @@ export const addBeerToCart = (beer_id, quantity) => {
   date.setTime(date.getTime() + minutes * 60 * 1000);
   Cookies.set("beerbender-token", cartCookie, { expires: date });
 };
+
+export const getCartItems = () => {
+  const cookie = JSON.parse(Cookies.get("beerbender-token"));
+  const cart = cookie["cart"];
+  console.log(cart);
+};

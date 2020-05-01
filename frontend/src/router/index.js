@@ -9,6 +9,7 @@ import SignUp from "../views/SignUp";
 import Login from "../views/Login";
 import Customer from "../views/Customer";
 import CustomerSettings from "../views/CustomerSettings";
+import ShoppingCart from "../views/ShoppingCart";
 
 Vue.use(VueRouter);
 
@@ -58,6 +59,11 @@ const routes = [
     name: "CustomerSettings",
     component: CustomerSettings,
   },
+  {
+    path: "/cart",
+    name: "Cart",
+    Component: ShoppingCart
+  }
 ];
 
 const router = new VueRouter({

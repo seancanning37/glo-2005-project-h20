@@ -2,13 +2,20 @@
   <div id="app">
     <v-app id="inspire">
       <v-navigation-drawer v-model="drawer" app clipped>
-        <nav-menu/>
+        <nav-menu />
       </v-navigation-drawer>
       <v-app-bar app clipped-left>
-        <v-app-bar-nav-icon v-on:click.stop="drawer = !drawer"> </v-app-bar-nav-icon>
+        <v-app-bar-nav-icon v-on:click.stop="drawer = !drawer">
+        </v-app-bar-nav-icon>
         <v-toolbar-title>
           Beerbender
         </v-toolbar-title>
+        <v-spacer />
+        <v-btn v-on:click="goToCart">
+          <v-icon>
+            mdi-cart
+          </v-icon>
+        </v-btn>
       </v-app-bar>
       <v-content class="align-content-center">
         <v-container
@@ -24,6 +31,7 @@
 
 <script>
 import Navigation from "./components/Navigation";
+import { getCartItems } from "./api/cart";
 
 export default {
   name: "app",
@@ -33,6 +41,11 @@ export default {
   data: function() {
     return {
       drawer: null
+    };
+  },
+  methods: {
+    goToCart: function() {
+      getCartItems();
     }
   }
 };
