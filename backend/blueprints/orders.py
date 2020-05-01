@@ -34,4 +34,3 @@ def buy():
     orderService = OrderService()
     orderService.buy(items, order, customer_id)
     return Response(status=201)
-

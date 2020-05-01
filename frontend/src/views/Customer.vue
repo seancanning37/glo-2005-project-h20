@@ -1,9 +1,9 @@
 <template>
-  <CustomerHeader v-if="!isLoading" v-bind:customer="customer"/>
+  <CustomerHeader v-if="!isLoading" v-bind:customer="customer" />
 </template>
 
 <script>
-import CustomerHeader from "../components/CustomerProfile";
+import CustomerHeader from "../components/CustomerHeader";
 import axios from "axios";
 
 export default {

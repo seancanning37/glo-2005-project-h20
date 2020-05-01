@@ -1,6 +1,7 @@
 import pymysql
 import uuid
 
+
 HOST = 'localhost'
 USER = 'root'
 PASSWORD = 'glo2005xD'

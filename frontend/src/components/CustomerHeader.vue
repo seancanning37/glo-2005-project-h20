@@ -12,7 +12,7 @@
     <p>City: {{ customer.city }}</p>
     <p>Country: {{ customer.country }}</p>
 
-    <v-btn :to=path>
+    <v-btn :to="path">
       update informations
     </v-btn>
   </v-container>

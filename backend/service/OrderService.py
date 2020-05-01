@@ -7,6 +7,7 @@ class OrderService:
     def __init__(self):
         self.OrderRepository = OrderRepository.OrderRepository()
 
+
     def getOrdersByCustomer(self, customer_id):
         return [ Order(orderInfo) for orderInfo in self.OrderRepository.getOrdersByCustomer(customer_id) ]
 
