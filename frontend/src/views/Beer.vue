@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import Cookie from "js-cookie";
 import { getBeer } from "../api/beer_api.js";
+import Cookies from "js-cookie"
 
 export default {
   name: "Beer",
@@ -48,7 +48,9 @@ export default {
       this.beer = beer.data;
     },
     addBeerToCart: function() {
-      let cookie = Cookie.get("beerbender-token");
+      let cookie = JSON.parse(Cookies.get("beerbender-token"));
+      let cart = cookie["cart"];
+      cart[this.beer.id] = "quantity";
       console.log(cookie);
     },
   },
