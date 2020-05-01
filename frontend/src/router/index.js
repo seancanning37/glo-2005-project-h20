@@ -4,6 +4,7 @@ import Home from "../views/Home";
 import NotFound from "../views/NotFound";
 import Beer from "../views/Beer";
 import BeersHomePage from "../views/BeersHomePage";
+import Brand from "../views/Brand";
 import SignUp from "../views/SignUp";
 import Login from "../views/Login";
 import Customer from "../views/Customer";
@@ -15,49 +16,54 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
   },
   {
     path: "*",
     name: "NotFound",
-    component: NotFound
+    component: NotFound,
   },
   {
     path: "/beers/:beer_id",
     name: "BeerPage",
-    component: Beer
+    component: Beer,
   },
   {
     path: "/beers",
     name: "Beers",
-    component: BeersHomePage
+    component: BeersHomePage,
+  },
+  {
+    path: "/brands/:brand_id",
+    name: "BrandPage",
+    component: Brand,
   },
   {
     path: "/signup",
     name: "SignUp",
-    component: SignUp
+    component: SignUp,
   },
   {
     path: "/login",
     name: "Login",
-    component: Login
+    component: Login,
   },
   {
     path: "/customers/:customer_id",
     name: "CustomerPage",
-    component: Customer
+    component: Customer,
   },
   {
     path: "/customers/:customer_id/settings",
     name: "CustomerSettings",
-    component: CustomerSettings
-  }
+    component: CustomerSettings,
+  },
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 export default router;
