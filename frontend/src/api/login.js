@@ -14,7 +14,8 @@ export const login = function(email, password) {
       let date = new Date();
       const minutes = 180;
       date.setTime(date.getTime() + minutes * 60 * 1000);
-      Cookies.set("beerbender-token", response.data.token, { expires: date });
+      console.log(response.data);
+      Cookies.set("beerbender-token", response.data, { expires: date });
       Router.push("/");
     })
     .catch(error => {
