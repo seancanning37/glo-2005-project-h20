@@ -9,6 +9,8 @@ import SignUp from "../views/SignUp";
 import Login from "../views/Login";
 import Customer from "../views/Customer";
 import CustomerSettings from "../views/CustomerSettings";
+import CustomerOrderHistory from "../views/CustomerOrderHistory";
+import CustomerDetailedOrder from "../views/CustomerDetailedOrder";
 
 Vue.use(VueRouter);
 
@@ -58,6 +60,16 @@ const routes = [
     name: "CustomerSettings",
     component: CustomerSettings,
   },
+  {
+    path: "/customers/:customer_id/order_history",
+    name: "CustomerOrderHistory",
+    component: CustomerOrderHistory,
+  },
+  {
+    path: "/customers/:customer_id/:order_id",
+    name: "CustomerDetailedOrder",
+    component: CustomerDetailedOrder,
+  }
 ];
 
 const router = new VueRouter({
