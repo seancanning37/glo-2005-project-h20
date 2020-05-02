@@ -1,6 +1,10 @@
 <template>
   <v-container>
-    <beer v-for="beer in beerList" :key="beer.id" :beer="beer" />
+    <v-row>
+      <v-col v-for="beer in beerList" :key="beer.id">
+        <beer :beer="beer" />
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
