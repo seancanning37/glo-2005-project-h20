@@ -1,50 +1,59 @@
 <template>
   <v-container>
-    <v-container class="pb-0 my-0">
-      <v-row class="pb-0 my-0">
-        <v-col class="pb-0">
-          <p
-            style="position:relative; top: 15%;"
-            class="headline text-left mb-0 pl-3"
-          >
-            Results {{ this.firstBeerId }}-{{ this.lastBeerId }} of
-            {{ this.beers.length }}
-          </p>
-        </v-col>
-        <v-spacer />
-        <v-col cols="3" class="pb-0">
-          <v-select
-            v-model="sortedProperty"
-            :items="properties"
-            outlined
-            v-on:change="sortBeers()"
-          >
-          </v-select>
-        </v-col>
-      </v-row>
-    </v-container>
+    <v-row>
+      <v-col cols="3">
+        <v-container class="text-left">
+          <p>Filters</p>
+        </v-container>
+      </v-col>
+      <v-col>
+        <v-container class="pb-0 my-0">
+          <v-row class="pb-0 my-0">
+            <v-col class="pb-0">
+              <p
+                style="position:relative; top: 15%;"
+                class="headline text-left mb-0 pl-3"
+              >
+                Results {{ this.firstBeerId }}-{{ this.lastBeerId }} of
+                {{ this.beers.length }}
+              </p>
+            </v-col>
+            <v-spacer />
+            <v-col cols="3" class="pb-0">
+              <v-select
+                v-model="sortedProperty"
+                :items="properties"
+                outlined
+                v-on:change="sortBeers()"
+              >
+              </v-select>
+            </v-col>
+          </v-row>
+        </v-container>
 
-    <beer-list class="pt-0" :beerList="shownBeers" />
+        <beer-list class="pt-0" :beerList="shownBeers" />
+      </v-col>
 
-    <v-container class="pt-0">
-      <v-row class="pt-0">
-        <v-spacer />
-        <v-col class="text-right pr-6 pt-0">
-          <a
-            :class="
-              isCurrentPage(n)
-                ? 'current-page black--text font-weight-bold text-center'
-                : 'link black--text text-center'
-            "
-            v-for="n in Math.ceil(this.beers.length / 12)"
-            :key="n"
-            @click="updateBeers(n)"
-          >
-            {{ n }}
-          </a>
-        </v-col>
-      </v-row>
-    </v-container>
+      <v-container class="pt-0">
+        <v-row class="pt-0">
+          <v-spacer />
+          <v-col class="text-right pr-6 pt-0">
+            <a
+              :class="
+                isCurrentPage(n)
+                  ? 'current-page black--text font-weight-bold text-center'
+                  : 'link black--text text-center'
+              "
+              v-for="n in Math.ceil(this.beers.length / 12)"
+              :key="n"
+              @click="updateBeers(n)"
+            >
+              {{ n }}
+            </a>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-row>
   </v-container>
 </template>
 
@@ -55,7 +64,7 @@ import BeerList from "../components/beer/BeerList.vue";
 export default {
   name: "BeersHomePage",
   components: {
-    BeerList
+    BeerList,
   },
   data: () => ({
     beers: [],
@@ -132,8 +141,8 @@ export default {
       }
 
       this.updateBeers(this.currentPage);
-    }
-  }
+    },
+  },
 };
 </script>
 

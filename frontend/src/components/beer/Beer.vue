@@ -1,11 +1,11 @@
 <template>
-  <v-card height="350" width="550">
+  <v-card height="275" width="400">
     <v-row>
       <v-col cols="3">
         <v-img
           :src="beer.pictureURL"
-          height="300"
-          width="100"
+          height="200"
+          width="75"
           class="ml-10 mt-3"
         ></v-img>
       </v-col>
@@ -14,20 +14,20 @@
         <v-card-title class="mb-0 pb-0">
           <a :href="'/beers/' + beer.id" class="link black--text ">
             <p
-              :class="
-                needsSmallerFont() ? 'headline' : 'display-1' + ' mb-0 mx-6'
-              "
+              :class="needsSmallerFont() ? 'title' : 'headline' + ' mb-0 mx-6'"
             >
               {{ beer.name }}
             </p>
           </a>
-          <v-container class="pt-2 my-0">
-            <p class="text-right">{{ beer.volume }} ml • {{ beer.abv }} %</p>
+          <v-container class="pt-0 my-0">
+            <p class="text-right subtitle-1">
+              {{ beer.volume }} ml • {{ beer.abv }} %
+            </p>
           </v-container>
         </v-card-title>
 
         <v-card-text>
-          <p class="subtitle-1 mx-6 text-left">{{ beer.description }}</p>
+          <p class="subtitle-2 mx-6 text-left">{{ beer.description }}</p>
         </v-card-text>
 
         <v-card-actions
@@ -53,8 +53,8 @@ export default {
     },
     needsSmallerFont() {
       return this.beer.name.length > 18;
-    }
-  }
+    },
+  },
 };
 </script>
 
