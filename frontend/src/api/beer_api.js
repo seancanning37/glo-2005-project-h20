@@ -29,3 +29,10 @@ export const getType = id => {
     console.log(error);
   });
 };
+
+export const getBrandBeers = (brand_id) => {
+  const path = `${API_URL}/brands/${brand_id}/beers`;
+  return axios.get(path).catch((error) => {
+    console.log(error);
+  });
+};
