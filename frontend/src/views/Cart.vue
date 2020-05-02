@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <cart-header />
-    <cart-item v-for="cartItem in Object(cart)" :key="cartItem.key"/>
+    <cart-item v-for="(quantity, beer_id) in cart" :key="beer_id" :quantity="quantity" :beer_id="beer_id"/>
   </v-container>
 </template>
 
