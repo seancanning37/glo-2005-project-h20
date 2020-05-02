@@ -10,6 +10,7 @@ import Login from "../views/Login";
 import Customer from "../views/Customer";
 import CustomerSettings from "../views/CustomerSettings";
 import CustomerOrderHistory from "../views/CustomerOrderHistory";
+import CustomerDetailedOrder from "../views/CustomerDetailedOrder";
 
 Vue.use(VueRouter);
 
@@ -65,7 +66,7 @@ const routes = [
     component: CustomerOrderHistory,
   },
   {
-    path: "customer/:customer_id/:order_id",
+    path: "/customers/:customer_id/:order_id",
     name: "CustomerDetailedOrder",
     component: CustomerDetailedOrder,
   }

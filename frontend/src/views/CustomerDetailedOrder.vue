@@ -1,10 +1,10 @@
 <template>
-    <DetailedOrder :order="this.order"/>
+    <DetailedOrder :order="order" :key="order.order_id"/>
 </template>
 
 <script>
     import axios from "axios";
-    import DetailedOrder from "../components/order/DetailedOrder";
+    import DetailedOrder from "../components/order/DetailedOrder.vue";
 
     export default {
         name: "CustomerDetailedOrder",
@@ -36,8 +36,8 @@
             };
         },
         created: async function() {
-            this.customer = await this.getCustomerInfos();
-            this.order = await this.getOrder();
+            await this.getCustomerInfos();
+            await this.getOrder();
         },
         methods: {
             getCustomerInfos: function() {

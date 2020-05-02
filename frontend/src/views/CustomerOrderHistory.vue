@@ -8,7 +8,7 @@
 
 <script>
     import axios from "axios";
-    import Order from "../components/order/Order";
+    import Order from "../components/order/Order.vue";
 
     export default {
         name: "CustomerOrderHistory",
@@ -33,8 +33,8 @@
             };
         },
         created: async function() {
-            this.customer = await this.getCustomerInfos();
-            this.orders = await this.getDetailedOrders();
+            await this.getCustomerInfos();
+            await this.getDetailedOrders();
         },
         methods: {
             getCustomerInfos: function() {
@@ -51,7 +51,7 @@
                     });
             },
             getDetailedOrders: function() {
-                const path = `http://localhost:5000/orders/customer/${this.customer.id}`;
+                const path = `http://localhost:5000/orders/customer/${this.$route.params.customer_id}`;
                 axios
                     .get(path)
                     .then(response => {

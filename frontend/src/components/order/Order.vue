@@ -1,22 +1,7 @@
 <template>
     <v-container>
         <v-card-text>
-            {{ order.order_id }}
-        </v-card-text>
-        <v-card-text>
-            {{ order.customer_id }}
-        </v-card-text>
-        <v-card-text>
-            {{ order.order_date }}
-        </v-card-text>
-        <v-card-text>
-            {{ order.status }}
-        </v-card-text>
-        <v-card-text>
-            {{ order.total_price }}
-        </v-card-text>
-        <v-card-text>
-            {{ order.comment }}
+            {{ order.order_id }} {{ order.customer_id }} {{ order.order_date }} {{ order.status }} {{ order.total_price }} {{ order.comment }}
         </v-card-text>
     </v-container>
 </template>
