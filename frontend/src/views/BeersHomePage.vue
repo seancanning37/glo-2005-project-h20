@@ -1,10 +1,30 @@
 <template>
   <v-container>
-    <p class="headline text-left mb-0 pl-3">
-      Results {{ this.firstBeerId }}-{{ this.lastBeerId }} of
-      {{ this.beers.length }}
-    </p>
-    <beer-list :beerList="shownBeers" />
+    <v-container class="pb-0 my-0">
+      <v-row class="pb-0 my-0">
+        <v-col class="pb-0">
+          <p
+            style="position:relative; top: 15%;"
+            class="headline text-left mb-0 pl-3"
+          >
+            Results {{ this.firstBeerId }}-{{ this.lastBeerId }} of
+            {{ this.beers.length }}
+          </p>
+        </v-col>
+        <v-spacer />
+        <v-col cols="3" class="pb-0">
+          <v-select
+            v-model="sortedProperty"
+            :items="properties"
+            outlined
+            v-on:change="sortBeers()"
+          >
+          </v-select>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <beer-list class="pt-0" :beerList="shownBeers" />
 
     <v-container class="pt-0">
       <v-row class="pt-0">
@@ -43,9 +63,19 @@ export default {
     firstBeerId: 0,
     lastBeerId: 12,
     currentPage: 0,
+    properties: [
+      "Name (A-Z)",
+      "Name (Z-A)",
+      "Price (low to high)",
+      "Price (high to low)",
+      "Alcohol %",
+      "Volume",
+    ],
+    sortedProperty: "Name (A-Z)",
   }),
   async created() {
     this.beers = await this.getAllBeers();
+    this.sortBeers();
     this.updateBeers(1);
   },
   methods: {
@@ -65,6 +95,42 @@ export default {
     },
     isCurrentPage: function(n) {
       return n === this.currentPage;
+    },
+    dynamicSort: function(property) {
+      var sortOrder = 1;
+      if (property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+      }
+      return function(a, b) {
+        var result =
+          a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0;
+        return result * sortOrder;
+      };
+    },
+    sortBeers: function() {
+      switch (this.sortedProperty) {
+        case "Name (A-Z)":
+          this.beers.sort(this.dynamicSort("name"));
+          break;
+        case "Name (Z-A)":
+          this.beers.sort(this.dynamicSort("-name"));
+          break;
+        case "Price (low to high)":
+          this.beers.sort(this.dynamicSort("price"));
+          break;
+        case "Price (high to low)":
+          this.beers.sort(this.dynamicSort("-price"));
+          break;
+        case "Volume":
+          this.beers.sort(this.dynamicSort("volume"));
+          break;
+        case "Alcohol %":
+          this.beers.sort(this.dynamicSort("abv"));
+          break;
+      }
+
+      this.updateBeers(this.currentPage);
     },
   },
 };
