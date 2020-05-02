@@ -90,7 +90,7 @@ export default {
   name: "BeersHomePage",
   components: {
     BeerList,
-    NestedList,
+    NestedList
   },
   data: () => ({
     beers: [],
@@ -106,7 +106,7 @@ export default {
       "Price (low to high)",
       "Price (high to low)",
       "Alcohol %",
-      "Volume",
+      "Volume"
     ],
     sortedProperty: "Name (A-Z)",
     filterProperty: "",
@@ -124,13 +124,13 @@ export default {
       11: "Pilsner",
       12: "Golden",
       13: "Fruit",
-      14: "Honey",
+      14: "Honey"
     },
     typeIdMap: {
       1: "Ale",
       2: "Lager",
       3: "Malt",
-      4: "Stout",
+      4: "Stout"
     },
     types: ["Ale", "Lager", "Malt", "Stout"],
     styles: [
@@ -147,8 +147,8 @@ export default {
       "Pilsner",
       "Golden",
       "Fruit",
-      "Honey",
-    ],
+      "Honey"
+    ]
   }),
   async created() {
     this.beers = await this.getAllBeers();
@@ -246,8 +246,8 @@ export default {
         }
       }
       this.filteredBeers = filteredBeers;
-    },
-  },
+    }
+  }
 };
 </script>
 

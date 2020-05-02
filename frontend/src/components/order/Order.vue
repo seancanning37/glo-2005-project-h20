@@ -10,12 +10,11 @@
 </template>
 
 <script>
-    export default {
-        name: "Order",
-        props: ["order"],
-        methods: {
-        },
-    };
+export default {
+  name: "Order",
+  props: ["order"],
+  methods: {}
+};
 </script>
 
 <style></style>
