@@ -16,6 +16,7 @@ class OrderRepository:
         cmd = f"SELECT * FROM Orders WHERE customer_id = '{customer_id}';"
         cur = self.conn.cursor()
         cur.execute(cmd)
+        self.conn.commit()
         orders = cur.fetchall()
         return orders
 
@@ -23,6 +24,7 @@ class OrderRepository:
         cmd = f"SELECT * FROM OrderItems WHERE order_id = '{order_id}';"
         cur = self.conn.cursor()
         cur.execute(cmd)
+        self.conn.commit()
         items = cur.fetchall()
         return items
 
@@ -30,19 +32,17 @@ class OrderRepository:
         cmd = f"SELECT * FROM Orders WHERE order_id = '{order_id}';"
         cur = self.conn.cursor()
         cur.execute(cmd)
+        self.conn.commit()
         order = cur.fetchone()
         return order
 
     def buy(self, items, order, customer_id):
         cur = self.conn.cursor()
-
         order_id = uuid.uuid4()
         print(order_id)
         createOrderQuery = f"INSERT INTO Orders (order_id, customer_id, order_date, status, total_price, comment) VALUES ('{order_id}', '{customer_id}', '{order['order_date']}', '{order['status']}', '{order['total_price']}', '{order['comment']}');"
         cur.execute(createOrderQuery)
-
         for item in items:
             createOrderItemQuery = f"INSERT INTO OrderItems (order_id, beer_id, quantity) VALUES ('{order_id}', '{item['beer_id']}', '{item['quantity']}');"
             cur.execute(createOrderItemQuery)
-
         self.conn.commit()

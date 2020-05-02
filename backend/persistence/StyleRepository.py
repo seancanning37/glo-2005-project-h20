@@ -12,10 +12,9 @@ class StyleRepository:
             host=HOST, user=USER, password=PASSWORD, db=DATABASE)
 
     def get(self, style_id):
-        conn = pymysql.connect(host=HOST, user=USER,
-                               password=PASSWORD, db=DATABASE)
         cmd = 'SELECT * FROM Styles WHERE style_id=' + str(style_id) + ';'
-        cur = conn.cursor()
+        cur = self.conn.cursor()
         cur.execute(cmd)
+        self.conn.commit()
         styleInfos = cur.fetchone()
         return styleInfos
