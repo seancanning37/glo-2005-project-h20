@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import axios from "axios";
+  import {requestParametersChanges} from "../api/customer.js"
 
 export default {
   name: "CustomerSettings",
@@ -64,23 +64,17 @@ export default {
     };
   },
   methods: {
-    update: function() {
+    update: async function () {
       const path =
-        "http://localhost:5000/customers/" +
-        this.$route.params.customer_id +
-        "/modify";
+              "/customers/" +
+              this.$route.params.customer_id +
+              "/modify";
 
       const modified_parameters = this.getModifiedParameters();
 
-      axios
-        .put(path, modified_parameters)
-        .then(response => {
-          console.log(response.data);
-          this.$router.push({ name: "CustomerPage" });
-        })
-        .catch(error => {
-          console.log(error.response.data);
-        });
+      await requestParametersChanges(path, modified_parameters);
+
+      this.$router.push({name: "CustomerPage"});
     },
     getModifiedParameters: function() {
       let modified_parameters = {};
