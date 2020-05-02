@@ -62,6 +62,7 @@ export default {
     shownBeers: [],
     firstBeerId: 0,
     lastBeerId: 12,
+    itemsPerPage: 12,
     currentPage: 0,
     properties: [
       "Name (A-Z)",
@@ -85,8 +86,8 @@ export default {
     },
     updateBeers: function(n) {
       this.currentPage = n;
-      this.firstBeerId = 12 * (n - 1) + 1;
-      this.lastBeerId = this.firstBeerId + 11;
+      this.firstBeerId = this.itemsPerPage * (n - 1) + 1;
+      this.lastBeerId = this.firstBeerId + this.itemsPerPage - 1;
 
       if (this.lastBeerId > this.beers.length) {
         this.lastBeerId = this.beers.length;
