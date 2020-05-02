@@ -9,7 +9,9 @@
 
       <v-col class="my-0" style="background-color: #f7f7f7;">
         <v-container text-left>
-          <p class="display-1 my-0">{{ brand.name }}</p>
+          <a class="link black--text" :href="'/brands/' + brand.id">
+            <p class="display-1 my-0">{{ brand.name }}</p>
+          </a>
           <p class="display-2">{{ beer.name }}</p>
           <p class="title">{{ beer.description }}</p>
         </v-container>
@@ -72,8 +74,8 @@ export default {
     addBeerToCart: function() {
       let cookie = Cookie.get("beerbender-token");
       console.log(cookie);
-    }
-  }
+    },
+  },
 };
 </script>
 
