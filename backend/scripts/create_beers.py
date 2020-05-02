@@ -33,15 +33,17 @@ beers = []
 
 def create_beers():
     for i in range(200):
+        style_id = getRandomStyleID()
+        type_id = getRandomTypeID()
         beer = {
             "beer_id": i,
             "brand_id": randint(0, getNumberOfBrands()),
-            "beer_name": generateRandomBeerName(),
+            "beer_name": generateRandomBeerName(styles[style_id - 1], types[type_id - 1]),
             "abv": getRandomABV(),
             "ibu": getRandomIBU(),
             "volume": getRandomVolume(),
-            "style_id": getRandomStyleID(),
-            "type_id": getRandomTypeID(),
+            "style_id": style_id,
+            "type_id": type_id,
             "beer_price": getRandomPrice(),
             "disponibility": getRandomDisponibility(),
             "description": getRandomDescription()
@@ -51,17 +53,17 @@ def create_beers():
 
 
 def getNumberOfBrands():
-    with open("backend/json_files/beer_brands.json") as jsonfile:
+    with open("../json_files/beer_brands.json") as jsonfile:
         data = json.load(jsonfile)
     return len(data) - 1
 
 
-def generateRandomBeerName():
-    return choice(styles) + " " + fake.text().split(" ")[0] + " " + choice(types)
+def generateRandomBeerName(style, beerType):
+    return style + " " + fake.text().split(" ")[0] + " " + beerType
 
 
 def getRandomABV():
-    return round(uniform(0.1, 99.9), 1)
+    return round(uniform(0.1, 30), 1)
 
 
 def getRandomIBU():
@@ -69,21 +71,21 @@ def getRandomIBU():
 
 
 def getRandomVolume():
-    return randint(100, 2000)
+    return randint(100, 1000)
 
 
 def getRandomPrice():
-    return round(uniform(0.99, 1000.00), 2)
+    return round(uniform(2.50, 35.0), 2)
 
 
 def getRandomStyleID():
-    with open("backend/json_files/beer_styles.json") as jsonFile:
+    with open("../json_files/beer_styles.json") as jsonFile:
         data = json.load(jsonFile)
     return randint(1, len(data))
 
 
 def getRandomTypeID():
-    with open("backend/json_files/beer_types.json") as jsonFile:
+    with open("../json_files/beer_types.json") as jsonFile:
         data = json.load(jsonFile)
     return randint(1, len(data))
 
@@ -102,4 +104,5 @@ def getRandomDescription():
 
 
 if __name__ == '__main__':
-    print(create_beers())
+    with open("../json_files/beers.json", 'w') as file:
+        json.dump(create_beers(), file)
