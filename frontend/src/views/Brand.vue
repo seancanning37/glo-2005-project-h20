@@ -15,11 +15,11 @@ export default {
   name: "BrandPage",
   components: {
     BrandHeader,
-    BeerList,
+    BeerList
   },
   data: () => ({
     beerList: [],
-    brand: [],
+    brand: []
   }),
   async created() {
     this.beerList = await this.getBrandBeers(this.$route.params.brand_id);
@@ -33,8 +33,8 @@ export default {
     getBrand: async function(brand_id) {
       const brand = await getBrand(brand_id);
       return brand.data;
-    },
-  },
+    }
+  }
 };
 </script>
 

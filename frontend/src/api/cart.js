@@ -22,3 +22,18 @@ export const getCartItems = () => {
   const cart = cookie["cart"];
   return cart;
 };
+
+export const checkout = () => {
+  let orderToCheckout = {};
+  orderToCheckout.cart = getCartItems();
+  orderToCheckout.order = {
+    order_date: "",
+    status: "",
+    total_price: "",
+    comment: ""
+  };
+  orderToCheckout.customer_id = JSON.parse(Cookies.get("beerbender-token"))[
+    "customer_id"
+  ];
+  console.log(orderToCheckout);
+};

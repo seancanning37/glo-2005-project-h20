@@ -20,8 +20,8 @@ export default {
       pages: [
         { text: "Home", path: "/", icon: "mdi-home" },
         { text: "Beers", path: "/beers", icon: "mdi-home" },
-        { text: "Brands", path: "/brands", icon: "mdi-home"},
-        { text: "Shopping Cart", path: "/cart", icon: "mdi-cart"}
+        { text: "Brands", path: "/brands", icon: "mdi-home" },
+        { text: "Shopping Cart", path: "/cart", icon: "mdi-cart" }
       ]
     };
   }

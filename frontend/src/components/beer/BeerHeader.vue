@@ -65,10 +65,9 @@
 </template>
 
 <script>
-
 export default {
   name: "BeerHeader",
-  props: ["beer", "brand", "type"],
+  props: ["beer", "brand", "type"]
 };
 </script>
 

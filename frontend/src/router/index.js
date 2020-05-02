@@ -17,47 +17,47 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: Home
   },
   {
     path: "*",
     name: "NotFound",
-    component: NotFound,
+    component: NotFound
   },
   {
     path: "/beers/:beer_id",
     name: "BeerPage",
-    component: BeerPage,
+    component: BeerPage
   },
   {
     path: "/beers",
     name: "Beers",
-    component: BeersHomePage,
+    component: BeersHomePage
   },
   {
     path: "/brands/:brand_id",
     name: "BrandPage",
-    component: BrandPage,
+    component: BrandPage
   },
   {
     path: "/signup",
     name: "SignUp",
-    component: SignUp,
+    component: SignUp
   },
   {
     path: "/login",
     name: "Login",
-    component: Login,
+    component: Login
   },
   {
     path: "/customers/:customer_id",
     name: "CustomerPage",
-    component: Customer,
+    component: Customer
   },
   {
     path: "/customers/:customer_id/settings",
     name: "CustomerSettings",
-    component: CustomerSettings,
+    component: CustomerSettings
   },
   {
     path: "/cart",
@@ -69,7 +69,7 @@ const routes = [
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 export default router;

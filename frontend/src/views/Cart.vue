@@ -1,12 +1,23 @@
 <template>
   <v-container>
     <cart-header />
-    <cart-item v-for="(quantity, beer_id) in cart" :key="beer_id" :quantity="quantity" :beer_id="beer_id"/>
+    <cart-item
+      v-for="(quantity, beer_id) in cart"
+      :key="beer_id"
+      :quantity="quantity"
+      :beer_id="beer_id"
+    />
+    <v-btn>
+      Continue sho
+    </v-btn>
+    <v-btn>
+      Proceed to Checkout
+    </v-btn>
   </v-container>
 </template>
 
 <script>
-import { getCartItems } from "../api/cart";
+import { checkout, getCartItems } from "../api/cart";
 import CartItem from "../components/cart/CartItem";
 import CartHeader from "../components/cart/CartHeader";
 
@@ -28,6 +39,9 @@ export default {
   methods: {
     getShoppingCartItems: function() {
       return getCartItems();
+    },
+    proceedToCheckout: function() {
+      checkout();
     }
   }
 };

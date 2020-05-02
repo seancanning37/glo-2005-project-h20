@@ -1,6 +1,11 @@
 <template class="salut">
   <v-container>
-    <beer-header :beer="beer" :brand="brand" :type="type" v-on:addBeerToCart="addBeerToCart"/>
+    <beer-header
+      :beer="beer"
+      :brand="brand"
+      :type="type"
+      v-on:addBeerToCart="addBeerToCart"
+    />
 
     <hr />
 
@@ -23,7 +28,7 @@ export default {
   name: "BeerPage",
   components: {
     BeerHeader,
-    BeerInfo,
+    BeerInfo
   },
   data: () => ({
     beer: {
@@ -35,20 +40,20 @@ export default {
       volume: 0,
       price: 0.0,
       description: "",
-      pictureURL: "",
+      pictureURL: ""
     },
     brand: {
       name: "brand",
       city: "city",
-      country: "country",
+      country: "country"
     },
     type: {
-      name: "type",
+      name: "type"
     },
     beerStyle: {
-      name: "style",
+      name: "style"
     },
-    quantity: 0,
+    quantity: 0
   }),
   async created() {
     await this.getBeer();

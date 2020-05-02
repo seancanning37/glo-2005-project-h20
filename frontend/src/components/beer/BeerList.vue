@@ -15,8 +15,8 @@ export default {
   name: "BeerList",
   props: ["beerList"],
   components: {
-    Beer,
-  },
+    Beer
+  }
 };
 </script>
 
