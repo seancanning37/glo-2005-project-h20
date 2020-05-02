@@ -1,8 +1,8 @@
 <template>
   <v-container>
+    <brand-header :brand="brand" />
     <hr />
     <beer-list :beerList="beerList" :brand="brand" />
-    <brand-header :brand="brand" />
   </v-container>
 </template>
 
