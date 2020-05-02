@@ -95,7 +95,7 @@ def getRandomDisponibility():
 
 
 def getRandomDescription():
-    randomSize = randint(50, 150)
+    randomSize = randint(50, 100)
     myList = [word for word in fake.text()[0:randomSize].split(" ")]
     for i, word in enumerate(myList):
         if "\n" in word:
