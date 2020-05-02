@@ -28,7 +28,6 @@ def getOrderItems(order_id):
 
 @orders.route("orders/buy", methods=['POST'])
 def buy():
-    print("Ben wtf")
     items = request.json['items']
     order = request.json['order']
     customer_id = request.json['customer_id']
