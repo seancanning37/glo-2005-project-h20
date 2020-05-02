@@ -2,37 +2,56 @@ import axios from "axios";
 
 const API_URL = "http://localhost:5000";
 
-export const getBeer = id => {
+export const getAllBeers = async () => {
+  const path = `${API_URL}/beers`;
+  try {
+    return axios.get(path);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getBeer = async (id) => {
   const path = `${API_URL}/beers/${id}`;
-  return axios.get(path).catch(error => {
+  try {
+    return axios.get(path);
+  } catch (error) {
     console.log(error);
-  });
+  }
 };
 
-export const getBrand = id => {
+export const getBrand = async (id) => {
   const path = `${API_URL}/brands/${id}`;
-  return axios.get(path).catch(error => {
+  try {
+    return axios.get(path);
+  } catch (error) {
     console.log(error);
-  });
+  }
 };
 
-export const getStyle = id => {
+export const getStyle = async (id) => {
   const path = `${API_URL}/styles/${id}`;
-  return axios.get(path).catch(error => {
+  try {
+    return axios.get(path);
+  } catch (error) {
     console.log(error);
-  });
+  }
 };
 
-export const getType = id => {
+export const getType = async (id) => {
   const path = `${API_URL}/types/${id}`;
-  return axios.get(path).catch(error => {
+  try {
+    return axios.get(path);
+  } catch (error) {
     console.log(error);
-  });
+  }
 };
 
-export const getBrandBeers = (brand_id) => {
+export const getBrandBeers = async (brand_id) => {
   const path = `${API_URL}/brands/${brand_id}/beers`;
-  return axios.get(path).catch((error) => {
+  try {
+    return axios.get(path);
+  } catch (error) {
     console.log(error);
-  });
+  }
 };

@@ -13,7 +13,13 @@
       <v-col>
         <v-card-title class="mb-4">
           <a :href="'/beers/' + beer.id" class="link black--text ">
-            <p class="display-1 mb-0 mx-6">{{ beer.name }}</p>
+            <p
+              :class="
+                needsSmallerFont() ? 'headline' : 'display-1' + ' mb-0 mx-6'
+              "
+            >
+              {{ beer.name }}
+            </p>
           </a>
           <v-container class="pt-2 my-0">
             <p class="text-right">{{ beer.volume }} ml • {{ beer.abv }} %</p>
@@ -44,6 +50,9 @@ export default {
   methods: {
     addToCart: function() {
       console.log("Add to cart");
+    },
+    needsSmallerFont() {
+      return this.beer.name.length > 18;
     },
   },
 };
