@@ -44,7 +44,6 @@ const getOrderToCheckout = () => {
   orderToCheckout.customer_id = JSON.parse(Cookies.get("beerbender-token"))[
     "customer_id"
   ];
-  console.log(orderToCheckout.order.order_date);
   return orderToCheckout;
 };
 
