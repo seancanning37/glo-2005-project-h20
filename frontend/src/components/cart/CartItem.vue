@@ -1,11 +1,13 @@
 <template>
-    <v-container>
-    </v-container>
+    <v-card>
+
+    </v-card>
 </template>
 
 <script>
     export default {
-        name: "CartItem"
+        name: "CartItem",
+        props: ["cartItem"]
     }
 </script>
 

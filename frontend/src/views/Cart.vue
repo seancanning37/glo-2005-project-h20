@@ -1,26 +1,30 @@
 <template>
   <v-container>
-    <v-card v-for="cartKey in Object.keys(cart)" :key="cartKey">
-      <v-card-title>
-        {{ cartKey + ": " + cart[cartKey] }}
-      </v-card-title>
-    </v-card>
+    <cart-header />
+    <cart-item v-for="cartItem in Object(cart)" :key="cartItem.key"/>
   </v-container>
 </template>
 
 <script>
 import { getCartItems } from "../api/cart";
+import CartItem from "../components/cart/CartItem";
+import CartHeader from "../components/cart/CartHeader";
 
 export default {
   name: "Cart",
+  components: {
+    "cart-header": CartHeader,
+    "cart-item": CartItem
+  },
   data: function() {
     return {
-      cart: {}
+      cart: {},
+      customerInfos: {}
     };
   },
   async created() {
     this.cart = await this.getShoppingCartItems();
-
+    console.log(this.cart)
   },
   methods: {
     getShoppingCartItems: function() {
