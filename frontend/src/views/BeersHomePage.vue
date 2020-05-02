@@ -4,20 +4,28 @@
       <v-col cols="3">
         <v-container class="text-left pt-12">
           <v-list class="pt-12">
+            <hr />
             <nested-list
               title="Type"
               :items="types"
+              :currentProperty="filterProperty"
               v-on:item-clicked="filterBeers"
             />
 
+            <hr />
             <nested-list
               title="Style"
               :items="styles"
+              :currentProperty="filterProperty"
               v-on:item-clicked="filterBeers"
             />
+
+            <hr />
             <v-list-item link @click="filterBeers('See all', '')">
               <v-list-item-title>See all</v-list-item-title>
             </v-list-item>
+
+            <hr />
           </v-list>
         </v-container>
       </v-col>
@@ -101,6 +109,7 @@ export default {
       "Volume",
     ],
     sortedProperty: "Name (A-Z)",
+    filterProperty: "",
     styleIdMap: {
       1: "Amber",
       2: "Blonde",
@@ -205,6 +214,7 @@ export default {
       this.updateBeers(this.currentPage);
     },
     filterBeers: function(property, filterName) {
+      this.filterProperty = filterName;
       switch (property) {
         case "Type":
           this.filterType(filterName);

@@ -7,8 +7,9 @@
     <v-list-item
       v-for="(item, i) in items"
       :key="i"
-      link
+      :class="currentProperty === item ? 'color: blue lighten-4' : ''"
       @click="itemClicked(title, item)"
+      link
     >
       <v-list-item-content>
         <v-list-item-title>
@@ -22,7 +23,7 @@
 <script>
 export default {
   name: "NestedList",
-  props: ["title", "items"],
+  props: ["title", "items", "currentProperty"],
   methods: {
     itemClicked: function(property, name) {
       this.$emit("item-clicked", property, name);
