@@ -11,7 +11,7 @@
       </v-col>
 
       <v-col>
-        <v-card-title class="mb-4">
+        <v-card-title class="mb-0 pb-0">
           <a :href="'/beers/' + beer.id" class="link black--text ">
             <p
               :class="
