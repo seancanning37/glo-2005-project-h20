@@ -12,7 +12,6 @@ import CustomerSettings from "../views/CustomerSettings";
 import Cart from "../views/Cart";
 import CustomerOrderHistory from "../views/CustomerOrderHistory";
 import CustomerDetailedOrder from "../views/CustomerDetailedOrder";
->>>>>> master
 
 Vue.use(VueRouter);
 
@@ -62,7 +61,7 @@ const routes = [
     name: "CustomerSettings",
     component: CustomerSettings
   },
-  {    
+  {
     path: "/cart",
     name: "Cart",
     component: Cart
