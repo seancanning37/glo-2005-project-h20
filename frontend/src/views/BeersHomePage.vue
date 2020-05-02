@@ -2,8 +2,23 @@
   <v-container>
     <v-row>
       <v-col cols="3">
-        <v-container class="text-left">
-          <p>Filters</p>
+        <v-container class="text-left pt-12">
+          <v-list class="pt-12">
+            <nested-list
+              title="Type"
+              :items="types"
+              v-on:item-clicked="filterBeers"
+            />
+
+            <nested-list
+              title="Style"
+              :items="styles"
+              v-on:item-clicked="filterBeers"
+            />
+            <v-list-item link @click="filterBeers('See all', '')">
+              <v-list-item-title>See all</v-list-item-title>
+            </v-list-item>
+          </v-list>
         </v-container>
       </v-col>
       <v-col>
@@ -15,7 +30,7 @@
                 class="headline text-left mb-0 pl-3"
               >
                 Results {{ this.firstBeerId }}-{{ this.lastBeerId }} of
-                {{ this.beers.length }}
+                {{ this.filteredBeers.length }}
               </p>
             </v-col>
             <v-spacer />
@@ -25,6 +40,7 @@
                 :items="properties"
                 outlined
                 v-on:change="sortBeers()"
+                dense
               >
               </v-select>
             </v-col>
@@ -44,7 +60,7 @@
                   ? 'current-page black--text font-weight-bold text-center'
                   : 'link black--text text-center'
               "
-              v-for="n in Math.ceil(this.beers.length / 12)"
+              v-for="n in Math.ceil(this.filteredBeers.length / 12)"
               :key="n"
               @click="updateBeers(n)"
             >
@@ -60,14 +76,17 @@
 <script>
 import { getAllBeers } from "../api/beer_api.js";
 import BeerList from "../components/beer/BeerList.vue";
+import NestedList from "../components/NestedList";
 
 export default {
   name: "BeersHomePage",
   components: {
     BeerList,
+    NestedList,
   },
   data: () => ({
     beers: [],
+    filteredBeers: [],
     shownBeers: [],
     firstBeerId: 0,
     lastBeerId: 12,
@@ -82,9 +101,49 @@ export default {
       "Volume",
     ],
     sortedProperty: "Name (A-Z)",
+    styleIdMap: {
+      1: "Amber",
+      2: "Blonde",
+      3: "Brown",
+      4: "Cream",
+      5: "Dark",
+      6: "Pale",
+      7: "Strong",
+      8: "Wheat",
+      9: "Red",
+      10: "Lime",
+      11: "Pilsner",
+      12: "Golden",
+      13: "Fruit",
+      14: "Honey",
+    },
+    typeIdMap: {
+      1: "Ale",
+      2: "Lager",
+      3: "Malt",
+      4: "Stout",
+    },
+    types: ["Ale", "Lager", "Malt", "Stout"],
+    styles: [
+      "Amber",
+      "Blonde",
+      "Brown",
+      "Cream",
+      "Dark",
+      "Pale",
+      "Strong",
+      "Wheat",
+      "Red",
+      "Lime",
+      "Pilsner",
+      "Golden",
+      "Fruit",
+      "Honey",
+    ],
   }),
   async created() {
     this.beers = await this.getAllBeers();
+    this.filteredBeers = this.beers;
     this.sortBeers();
     this.updateBeers(1);
   },
@@ -98,10 +157,13 @@ export default {
       this.firstBeerId = this.itemsPerPage * (n - 1) + 1;
       this.lastBeerId = this.firstBeerId + this.itemsPerPage - 1;
 
-      if (this.lastBeerId > this.beers.length) {
-        this.lastBeerId = this.beers.length;
+      if (this.lastBeerId > this.filteredBeers.length) {
+        this.lastBeerId = this.filteredBeers.length;
       }
-      this.shownBeers = this.beers.slice(this.firstBeerId - 1, this.lastBeerId);
+      this.shownBeers = this.filteredBeers.slice(
+        this.firstBeerId - 1,
+        this.lastBeerId
+      );
     },
     isCurrentPage: function(n) {
       return n === this.currentPage;
@@ -121,26 +183,59 @@ export default {
     sortBeers: function() {
       switch (this.sortedProperty) {
         case "Name (A-Z)":
-          this.beers.sort(this.dynamicSort("name"));
+          this.filteredBeers.sort(this.dynamicSort("name"));
           break;
         case "Name (Z-A)":
-          this.beers.sort(this.dynamicSort("-name"));
+          this.filteredBeers.sort(this.dynamicSort("-name"));
           break;
         case "Price (low to high)":
-          this.beers.sort(this.dynamicSort("price"));
+          this.filteredBeers.sort(this.dynamicSort("price"));
           break;
         case "Price (high to low)":
-          this.beers.sort(this.dynamicSort("-price"));
+          this.filteredBeers.sort(this.dynamicSort("-price"));
           break;
         case "Volume":
-          this.beers.sort(this.dynamicSort("volume"));
+          this.filteredBeers.sort(this.dynamicSort("volume"));
           break;
         case "Alcohol %":
-          this.beers.sort(this.dynamicSort("abv"));
+          this.filteredBeers.sort(this.dynamicSort("abv"));
           break;
       }
 
       this.updateBeers(this.currentPage);
+    },
+    filterBeers: function(property, filterName) {
+      switch (property) {
+        case "Type":
+          this.filterType(filterName);
+          break;
+        case "Style":
+          this.filterStyle(filterName);
+          break;
+        case "See all":
+          this.filteredBeers = this.beers;
+          break;
+      }
+
+      this.updateBeers(this.currentPage);
+    },
+    filterType: function(filterName) {
+      const filteredBeers = [];
+      for (const beer of this.beers) {
+        if (this.typeIdMap[beer.type_id] === filterName) {
+          filteredBeers.push(beer);
+        }
+      }
+      this.filteredBeers = filteredBeers;
+    },
+    filterStyle: function(filterName) {
+      const filteredBeers = [];
+      for (const beer of this.beers) {
+        if (this.styleIdMap[beer.style_id] === filterName) {
+          filteredBeers.push(beer);
+        }
+      }
+      this.filteredBeers = filteredBeers;
     },
   },
 };
