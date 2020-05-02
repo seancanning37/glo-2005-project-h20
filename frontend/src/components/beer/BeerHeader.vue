@@ -65,17 +65,16 @@
 </template>
 
 <script>
-import Cookie from "js-cookie";
+import {addBeerToCart} from "../../api/cart";
 
 export default {
   name: "BeerHeader",
   props: ["beer", "brand", "type"],
   methods: {
-    addBeerToCart: function() {
-      let cookie = Cookie.get("beerbender-token");
-      console.log(cookie);
-    },
-  },
+    addBeerToCart: async function() {
+      await addBeerToCart(this.beer.id, this.quantity);
+    }
+  }
 };
 </script>
 
