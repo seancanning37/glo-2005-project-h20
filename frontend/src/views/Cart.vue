@@ -2,15 +2,11 @@
   <v-container>
     <cart-header />
     <cart-item
-      v-for="(quantity, beer_id) in cart"
-      :key="beer_id"
-      :quantity="quantity"
-      :beer_id="beer_id"
+      v-for="item in cart"
+      :key="item.beer_id"
+      :cartItem="item"
     />
-    <v-btn>
-      Continue sho
-    </v-btn>
-    <v-btn>
+    <v-btn v-on:click="proceedToCheckout">
       Proceed to Checkout
     </v-btn>
   </v-container>
