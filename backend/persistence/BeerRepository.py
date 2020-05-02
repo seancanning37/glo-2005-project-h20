@@ -15,6 +15,7 @@ class BeerRepository:
         cmd = 'SELECT * FROM Beers INNER JOIN BeerPictures ON Beers.style_id = BeerPictures.style_id WHERE beer_id=' + str(beer_id);
         cur = self.conn.cursor()
         cur.execute(cmd)
+        self.conn.commit()
         beerInfos = cur.fetchone()
         return beerInfos
 
@@ -23,6 +24,7 @@ class BeerRepository:
             str(type_id) + ';'
         cur = self.conn.cursor()
         cur.execute(cmd)
+        self.conn.commit()
         pictureUrl = cur.fetchone()
         return pictureUrl
 
@@ -30,6 +32,7 @@ class BeerRepository:
         cmd = 'SELECT * FROM Beers INNER JOIN BeerPictures ON Beers.style_id = BeerPictures.style_id;'
         cur = self.conn.cursor()
         cur.execute(cmd)
+        self.conn.commit()
         return cur.fetchall()
 
 

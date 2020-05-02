@@ -65,16 +65,16 @@ const routes = [
     path: "/cart",
     name: "Cart",
     component: Cart
-    },
+  },
   {
     path: "/customers/:customer_id/order_history",
     name: "CustomerOrderHistory",
-    component: CustomerOrderHistory,
+    component: CustomerOrderHistory
   },
   {
     path: "/customers/:customer_id/:order_id",
     name: "CustomerDetailedOrder",
-    component: CustomerDetailedOrder,
+    component: CustomerDetailedOrder
   }
 ];
 

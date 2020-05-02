@@ -40,7 +40,8 @@ export default {
       volume: 0,
       price: 0.0,
       description: "",
-      pictureURL: ""
+      pictureURL: "",
+      disponibility: 0
     },
     brand: {
       name: "brand",
@@ -78,8 +79,8 @@ export default {
       const type = await getType(this.beer.type_id);
       this.type = type.data;
     },
-    addBeerToCart: async function() {
-      await addBeerToCart(this.beer.id, this.quantity);
+    addBeerToCart: async function(quantity) {
+      await addBeerToCart(this.beer.id, quantity);
     }
   }
 };

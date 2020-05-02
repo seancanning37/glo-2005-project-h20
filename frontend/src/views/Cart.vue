@@ -1,11 +1,7 @@
 <template>
   <v-container>
     <cart-header />
-    <cart-item
-      v-for="item in cart"
-      :key="item.beer_id"
-      :cartItem="item"
-    />
+    <cart-item v-for="item in cart" :key="item.beer_id" :cartItem="item" />
     <v-btn v-on:click="proceedToCheckout">
       Proceed to Checkout
     </v-btn>

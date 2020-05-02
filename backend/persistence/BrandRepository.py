@@ -17,6 +17,7 @@ class BrandRepository:
         cmd = 'SELECT * FROM Brands WHERE brand_id=' + str(brand_id) + ';'
         cur = conn.cursor()
         cur.execute(cmd)
+        self.conn.commit()
         brandInfos = cur.fetchone()
         return brandInfos
 
@@ -25,4 +26,5 @@ class BrandRepository:
             str(brand_id) + ';'
         cur = self.conn.cursor()
         cur.execute(cmd)
+        self.conn.commit()
         return cur.fetchall()

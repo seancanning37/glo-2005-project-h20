@@ -54,7 +54,12 @@
         </v-container>
 
         <v-container text-left>
-          <v-btn v-on:click="$emit('addBeerToCart')">
+          <v-select
+            type="number"
+            :items="getQuantities(beer.disponibility)"
+            v-model="quantity"
+          />
+          <v-btn v-on:click="$emit('addBeerToCart', quantity)">
             Add to cart
           </v-btn>
         </v-container>
@@ -67,7 +72,21 @@
 <script>
 export default {
   name: "BeerHeader",
-  props: ["beer", "brand", "type"]
+  props: ["beer", "brand", "type"],
+  data: function() {
+    return {
+      quantity: 0
+    };
+  },
+  methods: {
+    getQuantities: function(disponibility) {
+      let numberList = [];
+      for (let i = 1; i <= disponibility; i++) {
+        numberList.push(i);
+      }
+      return numberList;
+    }
+  }
 };
 </script>
 
