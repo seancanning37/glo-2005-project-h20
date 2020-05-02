@@ -24,7 +24,6 @@ export default {
   },
   async created() {
     this.cart = await this.getShoppingCartItems();
-    console.log(this.cart)
   },
   methods: {
     getShoppingCartItems: function() {

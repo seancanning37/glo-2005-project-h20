@@ -1,6 +1,6 @@
 <template class="salut">
   <v-container>
-    <beer-header :beer="beer" :brand="brand" :type="type" />
+    <beer-header :beer="beer" :brand="brand" :type="type" v-on:addBeerToCart="addBeerToCart"/>
 
     <hr />
 

@@ -31,7 +31,6 @@
 
 <script>
 import Navigation from "./components/Navigation";
-import { getCartItems } from "./api/cart";
 
 export default {
   name: "app",
@@ -45,7 +44,7 @@ export default {
   },
   methods: {
     goToCart: function() {
-      getCartItems();
+      this.$router.push("/cart");
     }
   }
 };

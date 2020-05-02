@@ -54,7 +54,7 @@
         </v-container>
 
         <v-container text-left>
-          <v-btn v-on:click="addBeerToCart">
+          <v-btn v-on:click="$emit('addBeerToCart')">
             Add to cart
           </v-btn>
         </v-container>
@@ -65,16 +65,10 @@
 </template>
 
 <script>
-import {addBeerToCart} from "../../api/cart";
 
 export default {
   name: "BeerHeader",
   props: ["beer", "brand", "type"],
-  methods: {
-    addBeerToCart: async function() {
-      await addBeerToCart(this.beer.id, this.quantity);
-    }
-  }
 };
 </script>
 

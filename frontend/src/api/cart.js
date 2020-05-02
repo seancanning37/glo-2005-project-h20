@@ -19,5 +19,6 @@ export const addBeerToCart = (beer_id, quantity) => {
 
 export const getCartItems = () => {
   const cookie = JSON.parse(Cookies.get("beerbender-token"));
-  return cookie["cart"];
+  const cart = cookie["cart"];
+  return cart;
 };
