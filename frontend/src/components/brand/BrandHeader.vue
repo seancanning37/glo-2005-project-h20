@@ -1,5 +1,8 @@
 <template>
-  <p>brand header</p>
+  <v-container>
+    <p>{{ brand.name }}</p>
+    <p>{{ brand.city }}, {{ brand.country }}</p>
+  </v-container>
 </template>
 
 <script>

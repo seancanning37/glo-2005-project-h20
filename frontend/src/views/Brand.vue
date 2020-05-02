@@ -1,9 +1,8 @@
 <template>
   <v-container>
-    <p class="display-2">Brand</p>
-    <brand-header />
     <hr />
     <beer-list :beerList="beerList" :brand="brand" />
+    <brand-header :brand="brand" />
   </v-container>
 </template>
 
@@ -13,7 +12,7 @@ import BeerList from "../components/beer/BeerList.vue";
 import { getBrand, getBrandBeers } from "../api/beer_api.js";
 
 export default {
-  name: "Brand",
+  name: "BrandPage",
   components: {
     BrandHeader,
     BeerList,

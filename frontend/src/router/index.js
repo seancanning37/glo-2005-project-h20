@@ -2,9 +2,9 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home";
 import NotFound from "../views/NotFound";
-import Beer from "../views/Beer";
+import BeerPage from "../views/Beer";
 import BeersHomePage from "../views/BeersHomePage";
-import Brand from "../views/Brand";
+import BrandPage from "../views/Brand";
 import SignUp from "../views/SignUp";
 import Login from "../views/Login";
 import Customer from "../views/Customer";
@@ -26,7 +26,7 @@ const routes = [
   {
     path: "/beers/:beer_id",
     name: "BeerPage",
-    component: Beer,
+    component: BeerPage,
   },
   {
     path: "/beers",
@@ -36,7 +36,7 @@ const routes = [
   {
     path: "/brands/:brand_id",
     name: "BrandPage",
-    component: Brand,
+    component: BrandPage,
   },
   {
     path: "/signup",
