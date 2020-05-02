@@ -11,7 +11,7 @@ export const getAllBeers = async () => {
   }
 };
 
-export const getBeer = async (id) => {
+export const getBeer = async id => {
   const path = `${API_URL}/beers/${id}`;
   try {
     return axios.get(path);
@@ -20,7 +20,7 @@ export const getBeer = async (id) => {
   }
 };
 
-export const getBrand = async (id) => {
+export const getBrand = async id => {
   const path = `${API_URL}/brands/${id}`;
   try {
     return axios.get(path);
@@ -29,7 +29,7 @@ export const getBrand = async (id) => {
   }
 };
 
-export const getStyle = async (id) => {
+export const getStyle = async id => {
   const path = `${API_URL}/styles/${id}`;
   try {
     return axios.get(path);
@@ -38,7 +38,7 @@ export const getStyle = async (id) => {
   }
 };
 
-export const getType = async (id) => {
+export const getType = async id => {
   const path = `${API_URL}/types/${id}`;
   try {
     return axios.get(path);
@@ -47,7 +47,7 @@ export const getType = async (id) => {
   }
 };
 
-export const getBrandBeers = async (brand_id) => {
+export const getBrandBeers = async brand_id => {
   const path = `${API_URL}/brands/${brand_id}/beers`;
   try {
     return axios.get(path);

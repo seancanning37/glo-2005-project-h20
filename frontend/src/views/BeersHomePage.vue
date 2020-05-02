@@ -55,7 +55,7 @@ import BeerList from "../components/beer/BeerList.vue";
 export default {
   name: "BeersHomePage",
   components: {
-    BeerList,
+    BeerList
   },
   data: () => ({
     beers: [],
@@ -132,8 +132,8 @@ export default {
       }
 
       this.updateBeers(this.currentPage);
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -1,6 +1,11 @@
 <template class="salut">
   <v-container>
-    <beer-header :beer="beer" :brand="brand" :type="type" />
+    <beer-header
+      :beer="beer"
+      :brand="brand"
+      :type="type"
+      v-on:addBeerToCart="addBeerToCart"
+    />
 
     <hr />
 
@@ -17,12 +22,13 @@
 import BeerHeader from "../components/beer/BeerHeader.vue";
 import BeerInfo from "../components/beer/BeerInfo.vue";
 import { getBeer, getBrand, getStyle, getType } from "../api/beer_api.js";
+import { addBeerToCart } from "../api/cart";
 
 export default {
   name: "BeerPage",
   components: {
     BeerHeader,
-    BeerInfo,
+    BeerInfo
   },
   data: () => ({
     beer: {
@@ -34,20 +40,20 @@ export default {
       volume: 0,
       price: 0.0,
       description: "",
-      pictureURL: "",
+      pictureURL: ""
     },
     brand: {
       name: "brand",
       city: "city",
-      country: "country",
+      country: "country"
     },
     type: {
-      name: "type",
+      name: "type"
     },
     beerStyle: {
-      name: "style",
+      name: "style"
     },
-    quantity: 0,
+    quantity: 0
   }),
   async created() {
     await this.getBeer();
@@ -72,7 +78,10 @@ export default {
       const type = await getType(this.beer.type_id);
       this.type = type.data;
     },
-  },
+    addBeerToCart: async function() {
+      await addBeerToCart(this.beer.id, this.quantity);
+    }
+  }
 };
 </script>
 

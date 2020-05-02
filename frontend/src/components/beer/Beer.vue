@@ -53,8 +53,8 @@ export default {
     },
     needsSmallerFont() {
       return this.beer.name.length > 18;
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -5,7 +5,11 @@ export const addBeerToCart = (beer_id, quantity) => {
   let cookieCart = cookie["cart"];
   const cookieToken = cookie["token"];
   const cookieCustomerId = cookie["customer_id"];
-  cookieCart[beer_id] = quantity;
+  const itemToAdd = {
+    beer_id: beer_id,
+    quantity: quantity
+  };
+  cookieCart.push(itemToAdd);
   const cartCookie = {
     token: cookieToken,
     customer_id: cookieCustomerId,
@@ -15,4 +19,26 @@ export const addBeerToCart = (beer_id, quantity) => {
   const minutes = 180;
   date.setTime(date.getTime() + minutes * 60 * 1000);
   Cookies.set("beerbender-token", cartCookie, { expires: date });
+  console.log(cartCookie);
+};
+
+export const getCartItems = () => {
+  const cookie = JSON.parse(Cookies.get("beerbender-token"));
+  const cart = cookie["cart"];
+  return cart;
+};
+
+export const checkout = () => {
+  let orderToCheckout = {};
+  orderToCheckout.items = getCartItems();
+  orderToCheckout.order = {
+    order_date: "",
+    status: "",
+    total_price: "",
+    comment: ""
+  };
+  orderToCheckout.customer_id = JSON.parse(Cookies.get("beerbender-token"))[
+    "customer_id"
+  ];
+  console.log(orderToCheckout);
 };

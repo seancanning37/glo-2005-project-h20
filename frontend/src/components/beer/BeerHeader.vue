@@ -54,7 +54,7 @@
         </v-container>
 
         <v-container text-left>
-          <v-btn v-on:click="addBeerToCart">
+          <v-btn v-on:click="$emit('addBeerToCart')">
             Add to cart
           </v-btn>
         </v-container>
@@ -65,17 +65,9 @@
 </template>
 
 <script>
-import Cookie from "js-cookie";
-
 export default {
   name: "BeerHeader",
-  props: ["beer", "brand", "type"],
-  methods: {
-    addBeerToCart: function() {
-      let cookie = Cookie.get("beerbender-token");
-      console.log(cookie);
-    },
-  },
+  props: ["beer", "brand", "type"]
 };
 </script>
 

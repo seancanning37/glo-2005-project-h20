@@ -9,8 +9,10 @@ import SignUp from "../views/SignUp";
 import Login from "../views/Login";
 import Customer from "../views/Customer";
 import CustomerSettings from "../views/CustomerSettings";
+import Cart from "../views/Cart";
 import CustomerOrderHistory from "../views/CustomerOrderHistory";
 import CustomerDetailedOrder from "../views/CustomerDetailedOrder";
+>>>>>> master
 
 Vue.use(VueRouter);
 
@@ -18,48 +20,53 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: Home
   },
   {
     path: "*",
     name: "NotFound",
-    component: NotFound,
+    component: NotFound
   },
   {
     path: "/beers/:beer_id",
     name: "BeerPage",
-    component: BeerPage,
+    component: BeerPage
   },
   {
     path: "/beers",
     name: "Beers",
-    component: BeersHomePage,
+    component: BeersHomePage
   },
   {
     path: "/brands/:brand_id",
     name: "BrandPage",
-    component: BrandPage,
+    component: BrandPage
   },
   {
     path: "/signup",
     name: "SignUp",
-    component: SignUp,
+    component: SignUp
   },
   {
     path: "/login",
     name: "Login",
-    component: Login,
+    component: Login
   },
   {
     path: "/customers/:customer_id",
     name: "CustomerPage",
-    component: Customer,
+    component: Customer
   },
   {
     path: "/customers/:customer_id/settings",
     name: "CustomerSettings",
-    component: CustomerSettings,
+    component: CustomerSettings
   },
+  {    
+    path: "/cart",
+    name: "Cart",
+    component: Cart
+    },
   {
     path: "/customers/:customer_id/order_history",
     name: "CustomerOrderHistory",
@@ -75,7 +82,7 @@ const routes = [
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 export default router;
