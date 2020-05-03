@@ -16,7 +16,7 @@ export const addBeerToCart = async (beer_id, quantity) => {
     }
   }
   if (index !== -1) {
-    cookieCart[index].quantity = quantity;
+    cookieCart[index].quantity += quantity;
   } else {
     const itemToAdd = {
       beer_id: beer_id,
