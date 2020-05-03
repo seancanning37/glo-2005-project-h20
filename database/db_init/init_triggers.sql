@@ -6,8 +6,9 @@ BEGIN
 	SET b.disponibility = b.disponibility - NEW.quantity 
 	WHERE b.beer_id = NEW.beer_id;
 END;//
-CREATE TRIGGER create_rewards_card AFTER INSERT ON customers
+
+CREATE TRIGGER create_rewards_card AFTER INSERT ON Customers
 FOR EACH ROW 
 BEGIN
-	insert into rewardcard(customer_id, money_earned) values(new.id, 0.00);
+	insert into RewardCard(customer_id, money_earned) values(new.id, 0.00);
 END;//
