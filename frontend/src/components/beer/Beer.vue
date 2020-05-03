@@ -52,7 +52,7 @@ export default {
       console.log("Add to cart");
     },
     needsSmallerFont() {
-      return this.beer.name.length > 18;
+      return this.beer.name.length > 17;
     },
   },
 };
