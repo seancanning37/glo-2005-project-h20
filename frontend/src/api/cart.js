@@ -7,11 +7,22 @@ export const addBeerToCart = (beer_id, quantity) => {
   let cookieCart = cookie["cart"];
   const cookieToken = cookie["token"];
   const cookieCustomerId = cookie["customer_id"];
-  const itemToAdd = {
-    beer_id: beer_id,
-    quantity: quantity
-  };
-  cookieCart.push(itemToAdd);
+  // eslint-disable-next-line no-unused-vars
+  let index = -1;
+  for (let i = 0; i < cookieCart.length; i++) {
+    if (cookieCart[i].beer_id === beer_id) {
+      index = i;
+    }
+  }
+  if (index !== -1) {
+    cookieCart[index].quantity = quantity;
+  } else {
+    const itemToAdd = {
+      beer_id: beer_id,
+      quantity: quantity
+    };
+    cookieCart.push(itemToAdd);
+  }
   const cartCookie = {
     token: cookieToken,
     customer_id: cookieCustomerId,
@@ -63,7 +74,7 @@ export const checkout = () => {
       let date = new Date();
       const minutes = 180;
       date.setTime(date.getTime() + minutes * 60 * 1000);
-      Cookies.set("beerbender-token", JSON.stringify(token), {expires: date});
+      Cookies.set("beerbender-token", JSON.stringify(token), { expires: date });
       Router.push("/");
-    })
+    });
 };
