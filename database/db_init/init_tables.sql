@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS RewardCard
     FOREIGN KEY (customer_id) REFERENCES Customers (id)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
-)
+);
     
 
 CREATE INDEX customerID ON Orders (customer_id);
