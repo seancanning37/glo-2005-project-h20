@@ -41,7 +41,15 @@
                 {{ this.filteredBeers.length }}
               </p>
             </v-col>
-            <v-spacer />
+            <v-col class="mr-12 pb-4">
+              <v-text-field
+                placeholder="Filter"
+                v-model="searchFilter"
+                v-on:input="filterUpdated()"
+                outlined
+                dense
+              />
+            </v-col>
             <v-col cols="3" class="pb-0">
               <v-select
                 v-model="sortedProperty"
@@ -90,7 +98,7 @@ export default {
   name: "BeersHomePage",
   components: {
     BeerList,
-    NestedList
+    NestedList,
   },
   data: () => ({
     beers: [],
@@ -106,10 +114,12 @@ export default {
       "Price (low to high)",
       "Price (high to low)",
       "Alcohol %",
-      "Volume"
+      "Volume",
     ],
     sortedProperty: "Name (A-Z)",
     filterProperty: "",
+    searchFilter: "",
+    lastFilterWasName: false,
     styleIdMap: {
       1: "Amber",
       2: "Blonde",
@@ -124,13 +134,13 @@ export default {
       11: "Pilsner",
       12: "Golden",
       13: "Fruit",
-      14: "Honey"
+      14: "Honey",
     },
     typeIdMap: {
       1: "Ale",
       2: "Lager",
       3: "Malt",
-      4: "Stout"
+      4: "Stout",
     },
     types: ["Ale", "Lager", "Malt", "Stout"],
     styles: [
@@ -147,8 +157,8 @@ export default {
       "Pilsner",
       "Golden",
       "Fruit",
-      "Honey"
-    ]
+      "Honey",
+    ],
   }),
   async created() {
     this.beers = await this.getAllBeers();
@@ -227,27 +237,60 @@ export default {
           break;
       }
 
+      this.filterName(this.searchFilter);
       this.updateBeers(this.currentPage);
     },
     filterType: function(filterName) {
       const filteredBeers = [];
-      for (const beer of this.beers) {
+      const unfilteredBeers = this.lastFilterWasName
+        ? this.filteredBeers
+        : this.beers;
+      for (const beer of unfilteredBeers) {
         if (this.typeIdMap[beer.type_id] === filterName) {
           filteredBeers.push(beer);
         }
       }
       this.filteredBeers = filteredBeers;
+      this.lastFilterWasName = false;
     },
     filterStyle: function(filterName) {
       const filteredBeers = [];
-      for (const beer of this.beers) {
+      const unfilteredBeers = this.lastFilterWasName
+        ? this.filteredBeers
+        : this.beers;
+      for (const beer of unfilteredBeers) {
         if (this.styleIdMap[beer.style_id] === filterName) {
           filteredBeers.push(beer);
         }
       }
       this.filteredBeers = filteredBeers;
-    }
-  }
+      this.lastFilterWasName = false;
+    },
+    filterName: function(name) {
+      const filteredBeers = [];
+      const unfilteredBeers = this.lastFilterWasName
+        ? this.beers
+        : this.filteredBeers;
+
+      if (name === "") {
+        this.filteredBeers = unfilteredBeers;
+        return;
+      }
+
+      const re = new RegExp(name);
+      for (const beer of unfilteredBeers) {
+        if (re.test(beer.name.toLowerCase())) {
+          filteredBeers.push(beer);
+        }
+      }
+      this.filteredBeers = filteredBeers;
+      this.lastFilterWasName = true;
+    },
+    filterUpdated: function() {
+      this.filterName(this.searchFilter);
+      this.updateBeers(this.currentPage);
+    },
+  },
 };
 </script>
 
