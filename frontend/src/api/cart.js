@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import axios from "axios";
 import Router from "../router";
-import {getBeer} from "./beer_api";
+import { getBeer } from "./beer_api";
 
 export const addBeerToCart = async (beer_id, quantity) => {
   let cookie = JSON.parse(Cookies.get("beerbender-token"));
@@ -80,7 +80,7 @@ export const checkout = async () => {
     });
 };
 
-export const calculateTotal = async (cartItems) => {
+export const calculateTotal = async cartItems => {
   let total = 0.0;
   for (let i = 0; i < cartItems.length; i++) {
     const beer = (await getBeer(cartItems[i].beer_id)).data;
