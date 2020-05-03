@@ -1,17 +1,29 @@
 import Cookies from "js-cookie";
 import axios from "axios";
 import Router from "../router";
+import { getBeer } from "./beer_api";
 
-export const addBeerToCart = (beer_id, quantity) => {
+export const addBeerToCart = async (beer_id, quantity) => {
   let cookie = JSON.parse(Cookies.get("beerbender-token"));
   let cookieCart = cookie["cart"];
   const cookieToken = cookie["token"];
   const cookieCustomerId = cookie["customer_id"];
-  const itemToAdd = {
-    beer_id: beer_id,
-    quantity: quantity
-  };
-  cookieCart.push(itemToAdd);
+  // eslint-disable-next-line no-unused-vars
+  let index = -1;
+  for (let i = 0; i < cookieCart.length; i++) {
+    if (cookieCart[i].beer_id === beer_id) {
+      index = i;
+    }
+  }
+  if (index !== -1) {
+    cookieCart[index].quantity += quantity;
+  } else {
+    const itemToAdd = {
+      beer_id: beer_id,
+      quantity: quantity
+    };
+    cookieCart.push(itemToAdd);
+  }
   const cartCookie = {
     token: cookieToken,
     customer_id: cookieCustomerId,
@@ -21,7 +33,6 @@ export const addBeerToCart = (beer_id, quantity) => {
   const minutes = 180;
   date.setTime(date.getTime() + minutes * 60 * 1000);
   Cookies.set("beerbender-token", cartCookie, { expires: date });
-  console.log(cartCookie);
 };
 
 export const getCartItems = () => {
@@ -30,15 +41,15 @@ export const getCartItems = () => {
   return cart;
 };
 
-const getOrderToCheckout = () => {
+const getOrderToCheckout = async () => {
   let orderToCheckout = {};
   orderToCheckout.items = getCartItems();
   const date = new Date();
   orderToCheckout.order = {
     order_date:
-      date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay(),
+      date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(),
     status: "",
-    total_price: 3,
+    total_price: await calculateTotal(orderToCheckout.items),
     comment: ""
   };
   orderToCheckout.customer_id = JSON.parse(Cookies.get("beerbender-token"))[
@@ -47,8 +58,9 @@ const getOrderToCheckout = () => {
   return orderToCheckout;
 };
 
-export const checkout = () => {
-  const orderToCheckout = getOrderToCheckout();
+export const checkout = async () => {
+  const orderToCheckout = await getOrderToCheckout();
+  console.log(orderToCheckout.items);
   axios
     .post("http://localhost:5000/orders/buy", orderToCheckout)
     .then(function() {
@@ -63,7 +75,16 @@ export const checkout = () => {
       let date = new Date();
       const minutes = 180;
       date.setTime(date.getTime() + minutes * 60 * 1000);
-      Cookies.set("beerbender-token", JSON.stringify(token), {expires: date});
+      Cookies.set("beerbender-token", JSON.stringify(token), { expires: date });
       Router.push("/");
-    })
+    });
+};
+
+export const calculateTotal = async cartItems => {
+  let total = 0.0;
+  for (let i = 0; i < cartItems.length; i++) {
+    const beer = (await getBeer(cartItems[i].beer_id)).data;
+    total += beer.price * cartItems[i].quantity;
+  }
+  return total;
 };
