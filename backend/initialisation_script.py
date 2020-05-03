@@ -11,8 +11,7 @@ initScriptFilenames = [
     '../database/db_init/init_tables.sql',
     '../database/db_init/init_types.sql',
     '../database/db_init/init_styles.sql',
-    '../database/db_init/init_beerPictures.sql',
-    '../database/db_init/init_triggers.sql'
+    '../database/db_init/init_beerPictures.sql'
 ]
 
 
@@ -26,6 +25,7 @@ def runAllInitScript():
         executeSqlScriptFromFile(filename)
     populateBrands()
     populateBeers()
+    createTriggers()
 
 
 def executeSqlScriptFromFile(filename):
@@ -66,6 +66,19 @@ def executeCommands(sqlCommands):
 def loadJsonFromFilePath(filepath):
     with open(filepath, "r") as jsonFile:
         return json.load(jsonFile)
+
+
+def createTriggers():
+    with open("../database/db_init/init_triggers.sql", 'r') as sqlFile:
+        commands = sqlFile.read().split("//")
+
+    commandsWithDelimiters = []
+    for command in commands[:-1]:
+        commandsWithDelimiters.append("DELIMITER //")
+        commandsWithDelimiters.append(command + "//")
+        commandsWithDelimiters.append("DELIMITER ;")
+
+    executeCommands(commands)
 
 
 def populateBrands():
