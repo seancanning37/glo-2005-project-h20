@@ -11,7 +11,8 @@ initScriptFilenames = [
     '../database/db_init/init_tables.sql',
     '../database/db_init/init_types.sql',
     '../database/db_init/init_styles.sql',
-    '../database/db_init/init_beerPictures.sql'
+    '../database/db_init/init_beerPictures.sql',
+    '../database/db_init/init_triggers.sql'
 ]
 
 
