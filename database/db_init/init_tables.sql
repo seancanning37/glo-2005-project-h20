@@ -100,6 +100,17 @@ CREATE TABLE IF NOT EXISTS OrderItems
 		ON DELETE CASCADE
 );
 
+DELIMITER //
+CREATE TRIGGER decrementBeer
+AFTER INSERT ON OrderItems
+FOR EACH ROW
+BEGIN
+	UPDATE BEERS B
+	SET B.disponibility = B.disponibility - NEW.quantity 
+	where B.beer_id = NEW.beer_id;
+END;//
+DELIMITER ;
+
 CREATE TABLE IF NOT EXISTS Passwords
 (
     customer_id INTEGER NOT NULL UNIQUE,
