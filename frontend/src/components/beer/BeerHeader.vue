@@ -42,26 +42,23 @@
 
         <hr />
 
-        <v-container>
-          <v-row>
-            <v-col col="1">
-              <v-icon>mdi-check</v-icon>
-            </v-col>
-            <v-col cols="3">
-              <p>{{ beer.disponibility }} avalaible online</p>
-            </v-col>
-          </v-row>
-        </v-container>
-
-        <v-container text-left>
-          <v-select
-            type="number"
-            :items="getQuantities(beer.disponibility)"
-            v-model="quantity"
-          />
-          <v-btn v-on:click="$emit('addBeerToCart', quantity)">
-            Add to cart
-          </v-btn>
+        <v-container class="d-flex align-center pt-0" text-right>
+          <v-container class="d-flex align-center">
+            <v-icon class="pr-2" color="success">mdi-check</v-icon>
+            {{ beer.disponibility + " available online"}}
+          </v-container>
+          <v-spacer />
+          <v-container class="d-flex align-center" style="width: 250px;">
+            <v-select
+              type="number"
+              :items="getQuantities(beer.disponibility)"
+              v-model="quantity"
+              class="mr-5"
+            />
+            <v-btn v-on:click="$emit('addBeerToCart', quantity)">
+              Add to cart
+            </v-btn>
+          </v-container>
         </v-container>
       </v-col>
     </v-row>
@@ -75,7 +72,7 @@ export default {
   props: ["beer", "brand", "type"],
   data: function() {
     return {
-      quantity: 0
+      quantity: 1
     };
   },
   methods: {
