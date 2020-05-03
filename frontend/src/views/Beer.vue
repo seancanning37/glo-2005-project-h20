@@ -15,6 +15,9 @@
       :type="type"
       :beerStyle="beerStyle"
     />
+     <v-snackbar v-model="snackbar" :color="color" :timeout="timeout">
+          {{ message }}
+     </v-snackbar>
   </v-container>
 </template>
 
@@ -54,7 +57,11 @@ export default {
     beerStyle: {
       name: "style"
     },
-    quantity: 0
+    quantity: 0,
+    snackbar: false,
+    message: "Item added",
+    timeout: 6000,
+    color: "success"
   }),
   async created() {
     await this.getBeer();
@@ -81,6 +88,7 @@ export default {
     },
     addBeerToCart: async function(quantity) {
       await addBeerToCart(this.beer.id, quantity);
+      this.snackbar = true;
     }
   }
 };

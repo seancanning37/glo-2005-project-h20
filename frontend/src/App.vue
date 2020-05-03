@@ -11,6 +11,11 @@
           Beerbender
         </v-toolbar-title>
         <v-spacer />
+        <v-btn v-on:click="goToCustomerProfile" class="mr-2">
+          <v-icon>
+            mdi-account
+          </v-icon>
+        </v-btn>
         <v-btn v-on:click="goToCart">
           <v-icon>
             mdi-cart
@@ -22,15 +27,20 @@
           class="d-flex justify-center align-baseline fill-height"
           fluid
         >
-          <router-view />
+          <router-view v-on:success-signup="successSignUp" />
+
         </v-container>
       </v-content>
+      <v-snackbar class="text-center" top="top" right="right"  v-model="snackbar" :color="color" :timeout="timeout">
+        {{ message }}</v-snackbar
+      >
     </v-app>
   </div>
 </template>
 
 <script>
 import Navigation from "./components/Navigation";
+import { getCurrentCustomerId } from "./api/customer";
 
 export default {
   name: "app",
@@ -39,12 +49,26 @@ export default {
   },
   data: function() {
     return {
-      drawer: null
+      drawer: null,
+      timeout: 6000,
+      snackbar: false,
+      color: "success",
+      message: "Account created"
     };
   },
   methods: {
     goToCart: function() {
       this.$router.push("/cart");
+    },
+    goToCustomerProfile: function() {
+      const getCurrentCustomerId = this.getCurrentCustomerId();
+      this.$router.push("/customers/" + getCurrentCustomerId);
+    },
+    getCurrentCustomerId: function() {
+      return getCurrentCustomerId();
+    },
+    successSignUp: function() {
+      this.snackbar = true;
     }
   }
 };

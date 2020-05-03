@@ -68,9 +68,8 @@
 </template>
 
 <script>
-import axios from "axios";
+import {signup} from "../api/signup";
 
-import Router from "../router/index";
 export default {
   name: "SignUpForm",
   data: function() {
@@ -118,21 +117,14 @@ export default {
       return true;
     },
     signUpFunction: async function() {
-      const path = "http://localhost:5000/signup";
-      axios
-        .post(path, {
-          email: this.email,
-          name: this.name,
-          username: this.username,
-          password: this.password
-        })
-        .then(response => {
-          console.log(response.data);
-          Router.push("/login");
-        })
-        .catch(error => {
-          console.log(error.response.data);
-        });
+      const response = await signup(this.email, this.name, this.username, this.password);
+      console.log(response);
+      if (response === 201) {
+        this.$emit("success-signup");
+        this.$router.push("/login");
+      } else {
+        this.$router.push("/signup");
+      }
     }
   }
 };

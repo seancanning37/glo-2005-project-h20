@@ -1,6 +1,5 @@
 import Cookies from "js-cookie";
 import axios from "axios";
-import Router from "../router";
 import { getBeer } from "./beer_api";
 
 export const addBeerToCart = async (beer_id, quantity) => {
@@ -60,24 +59,35 @@ const getOrderToCheckout = async () => {
 
 export const checkout = async () => {
   const orderToCheckout = await getOrderToCheckout();
-  console.log(orderToCheckout.items);
-  axios
+  if (orderToCheckout.items.length === 0) {
+    return 400;
+  }
+  orderToCheckout.abc = "ajbs";
+  const response = await axios
     .post("http://localhost:5000/orders/buy", orderToCheckout)
-    .then(function() {
-      const customer_id = JSON.parse(Cookies.get("beerbender-token"))[
-        "customer_id"
-      ];
-      let token = {
-        token: token,
-        customer_id: customer_id,
-        cart: []
-      };
-      let date = new Date();
-      const minutes = 180;
-      date.setTime(date.getTime() + minutes * 60 * 1000);
-      Cookies.set("beerbender-token", JSON.stringify(token), { expires: date });
-      Router.push("/");
+    .catch(error => {
+      console.log(error);
+      return 500;
     });
+  return setCheckoutCookie(response);
+};
+
+export const setCheckoutCookie = response => {
+  console.log(response);
+  const code = response.status;
+  const customer_id = JSON.parse(Cookies.get("beerbender-token"))[
+    "customer_id"
+  ];
+  let token = {
+    token: token,
+    customer_id: customer_id,
+    cart: []
+  };
+  let date = new Date();
+  const minutes = 180;
+  date.setTime(date.getTime() + minutes * 60 * 1000);
+  Cookies.set("beerbender-token", JSON.stringify(token), { expires: date });
+  return code;
 };
 
 export const calculateTotal = async cartItems => {
