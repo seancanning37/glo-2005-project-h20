@@ -102,16 +102,12 @@ CREATE TABLE IF NOT EXISTS OrderItems
 
 DELIMITER //
 CREATE TRIGGER decrementBeer
-BEFORE INSERT ON OrderItems
+AFTER INSERT ON OrderItems
 FOR EACH ROW
 BEGIN
-	IF (SELECT COUNT(*) FROM BEERS B WHERE B.disponibility = 0 and B.beer_id = NEW.beer_id) = 1)
-	THEN
-		SIGNAL SQLSTATE '45000'
-		SET MESSAGE_TEXT = 'Bière non disponible.';
-	ELSE
-		UPDATE BEERS B SET B.disponibility = B.disponibility -1 where B.beer_id = NEW.beer_id;
-	END IF;
+	UPDATE BEERS B
+	SET B.disponibility = B.disponibility - NEW.quantity 
+	where B.beer_id = NEW.beer_id;
 END;//
 DELIMITER ;
 
