@@ -28,7 +28,7 @@ export default {
   name: "BeerPage",
   components: {
     BeerHeader,
-    BeerInfo
+    BeerInfo,
   },
   data: () => ({
     beer: {
@@ -41,20 +41,20 @@ export default {
       price: 0.0,
       description: "",
       pictureURL: "",
-      disponibility: 0
+      disponibility: 0,
     },
     brand: {
       name: "brand",
       city: "city",
-      country: "country"
+      country: "country",
     },
     type: {
-      name: "type"
+      name: "type",
     },
     beerStyle: {
-      name: "style"
+      name: "style",
     },
-    quantity: 0
+    quantity: 0,
   }),
   async created() {
     await this.getBeer();
@@ -81,8 +81,8 @@ export default {
     },
     addBeerToCart: async function(quantity) {
       await addBeerToCart(this.beer.id, quantity);
-    }
-  }
+    },
+  },
 };
 </script>
 

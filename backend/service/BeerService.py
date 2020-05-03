@@ -26,8 +26,6 @@ class BeerService:
 
     def get(self, beer_id):
         beer = createBeerFromCursorInfos(self.beerRepository.get(beer_id))
-        beer.pictureURL = self.beerRepository.getBeerURLFromStyleId(
-            beer.type_id)[0]
         return beer
 
     def getAll(self):
