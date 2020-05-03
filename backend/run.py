@@ -44,4 +44,4 @@ if __name__ == "__main__":
     createDatabaseScript('../database/db_init/create_database.sql')
     runAllInitScript()
     registerRoutes()
-    app.run(debug='true')
+    app.run(debug=True)

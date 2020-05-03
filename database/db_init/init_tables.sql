@@ -27,6 +27,15 @@ CREATE TABLE IF NOT EXISTS Orders
 		ON DELETE CASCADE
 		ON UPDATE CASCADE
 );
+CREATE TABLE IF NOT EXISTS RewardCard
+(
+	customer_id INTEGER NOT NULL,
+    money_earned DECIMAL(10, 2),
+    FOREIGN KEY (customer_id) REFERENCES Customers (id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+);
+    
 
 CREATE INDEX customerID ON Orders (customer_id);
 
