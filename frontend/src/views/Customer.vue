@@ -5,6 +5,7 @@
 <script>
 import CustomerHeader from "../components/CustomerHeader";
 import axios from "axios";
+import { isConnected } from "../api/login";
 
 export default {
   name: "Customer",
@@ -28,7 +29,11 @@ export default {
     };
   },
   created: async function() {
-    this.customer = await this.getCustomerInfos();
+    if (isConnected()) {
+      this.customer = await this.getCustomerInfos();
+    } else {
+      this.$router.push({ name: "Login" });
+    }
   },
   methods: {
     getCustomerInfos: function() {

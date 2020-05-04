@@ -57,11 +57,13 @@ export const getTokenInfo = async function() {
 export const getCookie = function() {
   const cookie = Cookies.get("beerbender-token");
   if (cookie !== null && cookie !== undefined) {
+    console.log(cookie);
     return JSON.parse(cookie);
   }
   return null;
 };
 
 export const isConnected = function() {
-  return getCookie() !== null;
+  const cookie = getCookie();
+  return cookie !== null;
 };

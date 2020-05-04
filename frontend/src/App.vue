@@ -41,6 +41,7 @@
 <script>
 import Navigation from "./components/Navigation";
 import { getCurrentCustomerId } from "./api/customer";
+import {isConnected} from "./api/login";
 
 export default {
   name: "app",
@@ -61,8 +62,12 @@ export default {
       this.$router.push("/cart");
     },
     goToCustomerProfile: function() {
-      const getCurrentCustomerId = this.getCurrentCustomerId();
-      this.$router.push("/customers/" + getCurrentCustomerId);
+      if (isConnected()) {
+        const getCurrentCustomerId = this.getCurrentCustomerId();
+        this.$router.push("/customers/" + getCurrentCustomerId);
+      } else {
+        this.$router.push({name: "Login"})
+      }
     },
     getCurrentCustomerId: function() {
       return getCurrentCustomerId();
