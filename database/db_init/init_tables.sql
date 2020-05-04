@@ -37,8 +37,6 @@ CREATE TABLE IF NOT EXISTS RewardCard
 );
     
 
-CREATE INDEX customerID ON Orders (customer_id);
-
 CREATE TABLE IF NOT EXISTS Brands
 (
 	brand_id INTEGER NOT NULL UNIQUE KEY,
@@ -88,14 +86,6 @@ CREATE TABLE IF NOT EXISTS Beers
 	FOREIGN KEY (type_id) REFERENCES Types (type_id)
 );
 
-CREATE INDEX beerStyle ON Beers (style_id) USING HASH;
-
-CREATE INDEX beerType ON Beers (type_id) USING HASH;
-
-CREATE INDEX BeerPrice ON Beers (beer_price) USING BTREE;
-
-CREATE INDEX beerBrand ON Beers (brand_id) USING HASH;
-
 CREATE TABLE IF NOT EXISTS OrderItems
 (
 	item_id INTEGER NOT NULL AUTO_INCREMENT,
@@ -116,3 +106,20 @@ CREATE TABLE IF NOT EXISTS Passwords
     FOREIGN KEY (customer_id) REFERENCES Customers (id)
 );
 
+CREATE INDEX beerStyle ON Beers (style_id) USING HASH;
+
+CREATE INDEX beerType ON Beers (type_id) USING HASH;
+
+CREATE INDEX BeerPrice ON Beers (beer_price) USING BTREE;
+
+CREATE INDEX beerBrand ON Beers (brand_id) USING HASH;
+
+CREATE INDEX customerID ON Orders (order_id) USING HASH;
+
+CREATE INDEX customerID ON Customers (id) USING HASH;
+
+CREATE INDEX customer_id ON RewardCard (customer_id) USING HASH;
+
+CREATE INDEX order_id ON OrderItems (order_id) USING HASH;
+
+CREATE INDEX customer_id ON Passwords (customer_id) USING HASH;
