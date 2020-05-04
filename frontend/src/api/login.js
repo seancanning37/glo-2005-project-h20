@@ -23,14 +23,26 @@ export const login = function(email, password) {
 };
 
 export const getToken = function() {
-  return Cookies.get("beerbender-token");
+  return JSON.parse(Cookies.get("beerbender-token"))["token"];
 };
 
 export const logout = async function() {
   const response = await axios
-    .post("http://localhost:5000/logout")
+    .post("http://localhost:5000/logout", { token: getToken() })
     .catch(error => {
       console.log(error);
     });
   return response.status;
+};
+
+export const getTokenInfo = async function() {
+  const token = getToken();
+  return await axios
+    .get("http://localhost:5000/tokenInfo", {
+      headers: { token: token }
+    })
+    .catch(error => {
+      console.log("sdfjlksdjkfb");
+      console.log(error);
+    });
 };

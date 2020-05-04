@@ -14,16 +14,21 @@ def login():
         token = uuid4()
         session[str(token)] = {"token": token, "customer_id" : customerService.getCustomerIdFromEmail(email), "cart" : []}
         response = jsonify(session[str(token)])
-        print("session dans le login: ", session)
         return response, 201
     response = jsonify({'Error': 'Email or password invalid'})
     return response, 400
 
+
 @login_blueprint.route("logout", methods=['POST'])
 def logout():
-    print("session dans le logout: ", session)
+    token = request.json["token"]
+    session.pop(token)
     return session
+
 
 @login_blueprint.route("tokenInfo", methods=['GET'])
 def getTokenInfo():
-    return
+    token = request.headers["token"]
+    customerId = session[token]["customer_id"]
+    tokenInfo = {"token": token, "customer_id": customerId, "email": customerService.getCustomerFromId(customerId).email}
+    return tokenInfo, 200
