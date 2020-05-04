@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS Customers
 	phone VARCHAR(100),
 	email VARCHAR(100) NOT NULL UNIQUE,
 	username VARCHAR(100) UNIQUE,
-	password VARCHAR(100) NOT NULL,
 	address_line_1 VARCHAR(100),
 	address_line_2 VARCHAR(100),
 	city VARCHAR(100),

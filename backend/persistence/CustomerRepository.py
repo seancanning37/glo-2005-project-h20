@@ -30,14 +30,32 @@ class CustomerRepository:
 
     def addCustomer(self, name, email, username, password):
         try:
-            cmd = "INSERT INTO Customers (name, email, username, password) VALUES (%s, %s, %s, %s);"
-            customerInformations = (name, email, username, password)
-            cur = self.conn.cursor()
-            cur.execute(cmd, customerInformations)
-            self.conn.commit()
+            self.insertCustomer(name, email, username)
+            customer_id = self.getCustomerId(name, email)
+            self.insertPassword(customer_id, password)
             return SUCCESS_CODE
         except pymysql.IntegrityError as error:
             return ERROR_CODE
+
+    def getCustomerId(self, name, email):
+        cmd = f"SELECT C.id FROM Customers C WHERE C.name = '{name}' and C.email = '{email}';"
+        cur = self.conn.cursor()
+        cur.execute(cmd)
+        return cur.fetchone()
+
+    def insertCustomer(self, name, email, username):
+        cmd = "INSERT INTO Customers (name, email, username) VALUES (%s, %s, %s);"
+        customerInformations = (name, email, username)
+        cur = self.conn.cursor()
+        cur.execute(cmd, customerInformations)
+        self.conn.commit()
+
+    def insertPassword(self, customer_id, password):
+        cmd = "INSERT INTO Passwords (customer_id, password) VALUES (%s, %s)"
+        passwordInformations = (customer_id, password)
+        cur = self.conn.cursor()
+        cur.execute(cmd, passwordInformations)
+        self.conn.commit()
 
     def areLoginInformationsValid(self, email, password):
         cmd = f"SELECT * FROM Customers C WHERE C.email = '{email}' AND C.password = '{password}';"
