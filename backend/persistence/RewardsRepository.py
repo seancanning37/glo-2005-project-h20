@@ -15,9 +15,9 @@ class RewardsRepository:
             host=HOST, user=USER, password=PASSWORD, db=DATABASE)
 
     def get(self, customer_id):
-        cmd = f"SELECT C.money_earned FROM RewardCard C WHERE C.customer_id = '{customer_id}';"
+        cmd = f"SELECT * FROM RewardCard C WHERE C.customer_id = '{customer_id}';"
         cur = self.conn.cursor()
         cur.execute(cmd)
-        money_earned = cur.fetchone()
+        customerid_moneyearned = cur.fetchone()
         self.conn.commit()
-        return money_earned
+        return customerid_moneyearned
