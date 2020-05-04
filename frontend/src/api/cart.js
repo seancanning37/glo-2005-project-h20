@@ -38,7 +38,13 @@ export const addBeerToCart = async (beer_id, quantity, beer_name) => {
 };
 
 export const getRewards = () => {
-  const path = `${API_URL}/`;
+  const customer_id = JSON.parse(Cookies.get("beerbender-token"))["customer_id"];
+  const path = `${API_URL}/rewards/${customer_id}`;
+  try {
+    return axios.get(path);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getCartItems = () => {
