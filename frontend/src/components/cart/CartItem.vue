@@ -1,7 +1,7 @@
 <template>
   <v-card class="mb-5">
     <v-card-title class="justify-center">
-      {{ "Beer id: " + cartItem.beer_id }}
+      {{cartItem.name }}
     </v-card-title>
     <v-card-subtitle>
       {{ "Quantity: " + cartItem.quantity }}

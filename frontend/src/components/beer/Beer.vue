@@ -51,7 +51,7 @@ export default {
   props: ["beer"],
   methods: {
     addToCart: function() {
-      addBeerToCart(this.beer.id, 1)
+      addBeerToCart(this.beer.id, 1, this.beer.name)
     },
     needsSmallerFont() {
       return this.beer.name.length > 17;

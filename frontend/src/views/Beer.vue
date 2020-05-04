@@ -87,7 +87,7 @@ export default {
       this.type = type.data;
     },
     addBeerToCart: async function(quantity) {
-      await addBeerToCart(this.beer.id, quantity);
+      await addBeerToCart(this.beer.id, quantity, this.beer.name);
       this.snackbar = true;
     }
   }

@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { getBeer } from "./beer_api";
 
-export const addBeerToCart = async (beer_id, quantity) => {
+export const addBeerToCart = async (beer_id, quantity, beer_name) => {
   let cookie = JSON.parse(Cookies.get("beerbender-token"));
   let cookieCart = cookie["cart"];
   const cookieToken = cookie["token"];
@@ -19,7 +19,8 @@ export const addBeerToCart = async (beer_id, quantity) => {
   } else {
     const itemToAdd = {
       beer_id: beer_id,
-      quantity: quantity
+      quantity: quantity,
+      name: beer_name
     };
     cookieCart.push(itemToAdd);
   }
