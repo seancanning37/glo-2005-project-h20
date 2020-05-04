@@ -1,5 +1,10 @@
 <template>
   <v-container>
+    <v-card-title>
+      <p class="black--text" style="font-size: 30px;">
+        Your Orders
+      </p>
+    </v-card-title>
     <v-container v-for="order in orders" :key="order.order_id">
       <Order :order="order" />
     </v-container>
