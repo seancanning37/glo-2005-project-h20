@@ -37,9 +37,9 @@
 </template>
 
 <script>
-import axios from "axios";
 import Order from "./Order.vue";
 import {getBeer} from "../../api/beer_api";
+import {getOrderItems} from "../../api/orders";
 
 export default {
   name: "DetailedOrder",
@@ -60,16 +60,9 @@ export default {
       if (this.order.order_id === "") {
         return;
       }
-      const path = `http://localhost:5000/orders/${this.order.order_id}/items`;
-      axios
-        .get(path)
-        .then(response => {
-          this.order_items = response.data;
-          this.getBeers();
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      const response = await getOrderItems(this.order.order_id);
+      this.order_items = response.data;
+      await this.getBeers();
     },
     getBeers: async function() {
       if (this.order.order_id === "") {

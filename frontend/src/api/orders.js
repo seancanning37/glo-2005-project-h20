@@ -2,22 +2,32 @@ import axios from "axios";
 
 const API_URL = "http://localhost:5000";
 
-export const getOrderItems = async (order_id) => {
-    if (this.order.order_id === "") {
-        return;
-    }
-    const path = `${API_URL}/${order_id}/items`;
+export const getOrderItems = async order_id => {
+    const path = `${API_URL}/orders/${order_id}/items`;
     try {
         return axios
-            .get(path)
-            .then(response => {
-                this.order_items = response.data;
-                this.getBeers();
-            })
-            .catch(error => {
-                console.log(error);
-            });
+            .get(path);
     } catch (error) {
         console.log(error);
     }
 };
+
+export const getOrder = async order_id => {
+    const path = `${API_URL}/orders/${order_id}`;
+    try {
+        return axios
+            .get(path);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getDetailedOrders = async customer_id => {
+    const path = `${API_URL}/orders/customer/${customer_id}`;
+    try {
+        return axios
+            .get(path);
+    } catch (error) {
+        console.log(error);
+    }
+}

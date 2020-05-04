@@ -5,6 +5,7 @@
 <script>
 import axios from "axios";
 import DetailedOrder from "../components/order/DetailedOrder.vue";
+import {getOrder} from "../api/orders";
 
 export default {
   name: "CustomerDetailedOrder",
@@ -53,16 +54,9 @@ export default {
           console.log(error);
         });
     },
-    getOrder: function() {
-      const path = `http://localhost:5000/orders/${this.$route.params.order_id}`;
-      axios
-        .get(path)
-        .then(response => {
-          this.order = response.data;
-        })
-        .catch(error => {
-          console.log(error);
-        });
+    getOrder: async function () {
+      const response = await getOrder(this.$route.params.order_id);
+      this.order = response.data;
     }
   }
 };
