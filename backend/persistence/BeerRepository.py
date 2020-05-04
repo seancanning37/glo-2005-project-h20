@@ -12,21 +12,13 @@ class BeerRepository:
             host=HOST, user=USER, password=PASSWORD, db=DATABASE)
 
     def get(self, beer_id):
-        cmd = 'SELECT * FROM Beers INNER JOIN BeerPictures ON Beers.style_id = BeerPictures.style_id WHERE beer_id=' + str(beer_id);
+        cmd = 'SELECT * FROM Beers INNER JOIN BeerPictures ON Beers.style_id = BeerPictures.style_id WHERE beer_id=' + \
+            str(beer_id)
         cur = self.conn.cursor()
         cur.execute(cmd)
         self.conn.commit()
         beerInfos = cur.fetchone()
         return beerInfos
-
-    def getBeerURLFromStyleId(self, type_id):
-        cmd = 'SELECT picture_url FROM BeerPictures WHERE style_id=' + \
-            str(type_id) + ';'
-        cur = self.conn.cursor()
-        cur.execute(cmd)
-        self.conn.commit()
-        pictureUrl = cur.fetchone()
-        return pictureUrl
 
     def getAll(self):
         cmd = 'SELECT * FROM Beers INNER JOIN BeerPictures ON Beers.style_id = BeerPictures.style_id;'
