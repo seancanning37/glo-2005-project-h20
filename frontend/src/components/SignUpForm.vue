@@ -2,28 +2,28 @@
   <v-container class="text-center">
     <v-card>
       <v-card-title class="justify-center">
-        Sign up using email
+        Sign up
       </v-card-title>
       <v-container>
         <v-text-field
           class="py-0"
           v-model="name"
-          label="Name"
-          :error="invalidName"
+          placeholder="Name"
+          :rules="[rules.required]"
         ></v-text-field>
 
         <v-text-field
           class="py-0"
           v-model="email"
-          label="Email"
-          :error="invalidEmail"
+          placeholder="Email"
+          :rules="[rules.required, rules.email]"
         ></v-text-field>
 
         <v-text-field
           class="py-0"
           v-model="username"
-          label="Username"
-          :error="invalidEmail"
+          placeholder="Username"
+          :rules="[rules.required]"
         ></v-text-field>
 
         <v-row class="py-0">
@@ -32,9 +32,9 @@
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :type="showPassword ? 'text' : 'password'"
               v-model="password"
-              label="Password"
+              placeholder="Password"
               @click:append="showPassword = !showPassword"
-              :error="invalidPassword"
+              :rules="[rules.required]"
             ></v-text-field>
           </v-col>
           <v-col class="py-0">
@@ -42,16 +42,19 @@
               :append-icon="showConfirmed ? 'mdi-eye' : 'mdi-eye-off'"
               :type="showConfirmed ? 'text' : 'password'"
               v-model="confirmedPassword"
-              label="Confirm"
+              placeholder="Confirm"
               @click:append="showConfirmed = !showConfirmed"
-              :error="invalidPassword"
+              :rules="[rules.required, rules.confirmed]"
             >
             </v-text-field>
           </v-col>
         </v-row>
 
         <v-container>
-          <v-btn @click="signUpFunction">
+          <v-btn
+            @click="signUpFunction"
+            :disabled="!(isEmailValid() && isNameValid() && isPasswordValid())"
+          >
             Sign up
           </v-btn>
         </v-container>
@@ -68,7 +71,7 @@
 </template>
 
 <script>
-import {signup} from "../api/signup";
+import { signup } from "../api/signup";
 
 export default {
   name: "SignUpForm",
@@ -84,7 +87,13 @@ export default {
       invalidPassword: false,
       showPassword: false,
       showConfirmed: false,
-      emailRegExp: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      emailRegExp: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      rules: {
+        required: (value) => !!value || "Required",
+        email: (value) => this.isEmailValid(value) || "Invalid e-mail",
+        confirmed: (value) =>
+          value == this.password || "Passwords do not match",
+      },
     };
   },
   methods: {
@@ -117,7 +126,12 @@ export default {
       return true;
     },
     signUpFunction: async function() {
-      const response = await signup(this.email, this.name, this.username, this.password);
+      const response = await signup(
+        this.email,
+        this.name,
+        this.username,
+        this.password
+      );
       console.log(response);
       if (response === 201) {
         this.$emit("success-signup");
@@ -125,8 +139,8 @@ export default {
       } else {
         this.$router.push("/signup");
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
