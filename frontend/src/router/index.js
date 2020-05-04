@@ -37,11 +37,6 @@ const routes = [
     component: BeersHomePage
   },
   {
-    path: "/brands/:brand_id",
-    name: "BrandPage",
-    component: BrandPage
-  },
-  {
     path: "/signup",
     name: "SignUp",
     component: SignUp
