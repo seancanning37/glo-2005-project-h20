@@ -47,6 +47,10 @@ export const getRewards = () => {
   }
 };
 
+export const getCustomerId = () => {
+  return JSON.parse(Cookies.get("beerbender-token"))["customer_id"];
+}
+
 export const getCartItems = () => {
   const cookie = JSON.parse(Cookies.get("beerbender-token"));
   const cart = cookie["cart"];

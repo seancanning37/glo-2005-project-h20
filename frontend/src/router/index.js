@@ -4,7 +4,6 @@ import Home from "../views/Home";
 import NotFound from "../views/NotFound";
 import BeerPage from "../views/Beer";
 import BeersHomePage from "../views/BeersHomePage";
-import BrandPage from "../views/Brand";
 import SignUp from "../views/SignUp";
 import Login from "../views/Login";
 import Customer from "../views/Customer";
