@@ -2,6 +2,8 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { getBeer } from "./beer_api";
 
+const API_URL = "http://localhost:5000";
+
 export const addBeerToCart = async (beer_id, quantity, beer_name) => {
   let cookie = JSON.parse(Cookies.get("beerbender-token"));
   let cookieCart = cookie["cart"];
@@ -33,6 +35,16 @@ export const addBeerToCart = async (beer_id, quantity, beer_name) => {
   const minutes = 180;
   date.setTime(date.getTime() + minutes * 60 * 1000);
   Cookies.set("beerbender-token", cartCookie, { expires: date });
+};
+
+export const getRewards = () => {
+  const customer_id = JSON.parse(Cookies.get("beerbender-token"))["customer_id"];
+  const path = `${API_URL}/rewards/${customer_id}`;
+  try {
+    return axios.get(path);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getCartItems = () => {

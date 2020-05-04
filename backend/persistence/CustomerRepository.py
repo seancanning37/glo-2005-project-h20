@@ -91,7 +91,7 @@ class CustomerRepository:
             return ERROR_CODE
 
     def getCustomerHashedPasswordFromId(self, customerId):
-        cmd = f"SELECT C.password FROM CUSTOMERS C WHERE C.id = '{customerId}';"
+        cmd = f"SELECT P.password FROM Passwords P WHERE P.customer_id = '{customerId}';"
         cur = self.conn.cursor()
         cur.execute(cmd)
         self.conn.commit()

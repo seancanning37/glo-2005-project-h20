@@ -57,6 +57,7 @@ export default {
       }
       this.cart = await this.getShoppingCartItems();
       this.snackbar = true;
+      this.$router.push({name: 'Beers'})
     }
   }
 };
