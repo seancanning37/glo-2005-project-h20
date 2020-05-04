@@ -31,14 +31,14 @@ class CustomerRepository:
     def addCustomer(self, name, email, username, password):
         try:
             self.insertCustomer(name, email, username)
-            customer_id = self.getCustomerFromId(name, email)
+            customer_id = self.getCustomerId(name, email)
             self.insertPassword(customer_id, password)
             return SUCCESS_CODE
         except pymysql.IntegrityError as error:
             return ERROR_CODE
 
     def getCustomerId(self, name, email):
-        cmd = f"SELECT C.customer_id FROM Customers C WHERE C.name = {name} and C.email = {email};"
+        cmd = f"SELECT C.id FROM Customers C WHERE C.name = '{name}' and C.email = '{email}';"
         cur = self.conn.cursor()
         cur.execute(cmd)
         return cur.fetchone()
