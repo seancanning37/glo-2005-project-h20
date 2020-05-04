@@ -44,12 +44,14 @@
 </template>
 
 <script>
+import {addBeerToCart} from "../../api/cart";
+
 export default {
   name: "Beer",
   props: ["beer"],
   methods: {
     addToCart: function() {
-      console.log("Add to cart");
+      addBeerToCart(this.beer.id, 1)
     },
     needsSmallerFont() {
       return this.beer.name.length > 17;
