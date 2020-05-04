@@ -27,11 +27,21 @@
           class="d-flex justify-center align-baseline fill-height"
           fluid
         >
-          <router-view v-on:success-signup="successSignUp" />
-
+          <router-view
+            v-on:success-signup="successSignUp"
+            v-on:unauthorized="unauthorized"
+            v-on:cart-connected="cartNotConnected"
+          />
         </v-container>
       </v-content>
-      <v-snackbar class="text-center" top="top" right="right"  v-model="snackbar" :color="color" :timeout="timeout">
+      <v-snackbar
+        class="d-flex text-center font-weight-bold"
+        top="top"
+        right="right"
+        v-model="snackbar"
+        :color="color"
+        :timeout="timeout"
+      >
         {{ message }}</v-snackbar
       >
     </v-app>
@@ -41,7 +51,7 @@
 <script>
 import Navigation from "./components/Navigation";
 import { getCurrentCustomerId } from "./api/customer";
-import {isConnected} from "./api/login";
+import { isConnected } from "./api/login";
 
 export default {
   name: "app",
@@ -54,7 +64,8 @@ export default {
       timeout: 6000,
       snackbar: false,
       color: "success",
-      message: "Account created"
+      message: "Account created",
+      unauthorizedSnackbar: false
     };
   },
   methods: {
@@ -66,13 +77,25 @@ export default {
         const getCurrentCustomerId = this.getCurrentCustomerId();
         this.$router.push("/customers/" + getCurrentCustomerId);
       } else {
-        this.$router.push({name: "Login"})
+        this.$router.push({ name: "Login" });
       }
     },
     getCurrentCustomerId: function() {
       return getCurrentCustomerId();
     },
     successSignUp: function() {
+      this.color = "success";
+      this.message = "Account created";
+      this.snackbar = true;
+    },
+    unauthorized: function() {
+      this.message = "Can't access other people account";
+      this.color = "error";
+      this.snackbar = true;
+    },
+    cartNotConnected: function() {
+      this.message = "Login to access your cart";
+      this.color = "amber";
       this.snackbar = true;
     }
   }

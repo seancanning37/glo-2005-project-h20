@@ -49,6 +49,7 @@ export const getTokenInfo = async function() {
       })
       .catch(error => {
         console.log(error);
+        return null;
       });
   }
   return null;
@@ -57,7 +58,6 @@ export const getTokenInfo = async function() {
 export const getCookie = function() {
   const cookie = Cookies.get("beerbender-token");
   if (cookie !== null && cookie !== undefined) {
-    console.log(cookie);
     return JSON.parse(cookie);
   }
   return null;

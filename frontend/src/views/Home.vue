@@ -20,7 +20,7 @@ export default {
       if (response !== null) {
         console.log(response.data);
       } else {
-        console.log("Coonnne te toi esti");
+       this.$router.push({name: "Login"})
       }
     },
     goToSignUp: function() {
@@ -29,8 +29,8 @@ export default {
     goToLogin: function() {
       this.$router.push({ name: "Login" });
     },
-    goToLogout: function() {
-      const responseStatus = logout();
+    goToLogout: async function() {
+      const responseStatus = await logout();
       console.log(responseStatus);
     },
     getCookie: function() {
