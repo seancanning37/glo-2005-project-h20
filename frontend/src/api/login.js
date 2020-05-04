@@ -25,3 +25,12 @@ export const login = function(email, password) {
 export const getToken = function() {
   return Cookies.get("beerbender-token");
 };
+
+export const logout = async function() {
+  const response = await axios
+    .post("http://localhost:5000/logout")
+    .catch(error => {
+      console.log(error);
+    });
+  return response.status;
+};
