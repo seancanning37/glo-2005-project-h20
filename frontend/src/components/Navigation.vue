@@ -19,8 +19,8 @@ export default {
     return {
       pages: [
         { text: "Home", path: "/", icon: "mdi-home" },
-        { text: "Beers", path: "/beers", icon: "mdi-home" },
-        { text: "Brands", path: "/brands", icon: "mdi-home" },
+        { text: "Beers", path: "/beers", icon: "mdi-bottle-wine" },
+        { text: "Brands", path: "/brands", icon: "mdi-store" },
         { text: "Shopping Cart", path: "/cart", icon: "mdi-cart" }
       ]
     };
