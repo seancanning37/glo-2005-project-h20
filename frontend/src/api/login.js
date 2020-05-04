@@ -23,7 +23,11 @@ export const login = function(email, password) {
 };
 
 export const getToken = function() {
-  return JSON.parse(Cookies.get("beerbender-token"))["token"];
+  const cookie = getCookie();
+  if (cookie !== null) {
+    return cookie["token"];
+  }
+  return null;
 };
 
 export const logout = async function() {
@@ -32,17 +36,32 @@ export const logout = async function() {
     .catch(error => {
       console.log(error);
     });
+  Cookies.remove("beerbender-token");
   return response.status;
 };
 
 export const getTokenInfo = async function() {
   const token = getToken();
-  return await axios
-    .get("http://localhost:5000/tokenInfo", {
-      headers: { token: token }
-    })
-    .catch(error => {
-      console.log("sdfjlksdjkfb");
-      console.log(error);
-    });
+  if (token !== null) {
+    return await axios
+      .get("http://localhost:5000/tokenInfo", {
+        headers: { token: token }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+  return null;
+};
+
+export const getCookie = function() {
+  const cookie = Cookies.get("beerbender-token");
+  if (cookie !== null && cookie !== undefined) {
+    return JSON.parse(cookie);
+  }
+  return null;
+};
+
+export const isConnected = function() {
+  return getCookie() !== null;
 };

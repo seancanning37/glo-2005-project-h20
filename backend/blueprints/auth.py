@@ -28,7 +28,11 @@ def logout():
 
 @login_blueprint.route("tokenInfo", methods=['GET'])
 def getTokenInfo():
-    token = request.headers["token"]
-    customerId = session[token]["customer_id"]
-    tokenInfo = {"token": token, "customer_id": customerId, "email": customerService.getCustomerFromId(customerId).email}
-    return tokenInfo, 200
+    try:
+        token = request.headers["token"]
+        customerId = session[token]["customer_id"]
+        tokenInfo = {"token": token, "customer_id": customerId, "email": customerService.getCustomerFromId(customerId).email}
+        return tokenInfo, 200
+    except KeyError as e:
+        response = jsonify({"Error": "token does not exist"})
+        return response, 400
