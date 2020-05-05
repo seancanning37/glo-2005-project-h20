@@ -7,7 +7,6 @@ import BeersHomePage from "../views/BeersHomePage";
 import SignUp from "../views/SignUp";
 import Login from "../views/Login";
 import Customer from "../views/Customer";
-import CustomerSettings from "../views/CustomerSettings";
 import Cart from "../views/Cart";
 import CustomerOrderHistory from "../views/CustomerOrderHistory";
 import CustomerDetailedOrder from "../views/CustomerDetailedOrder";
@@ -49,11 +48,6 @@ const routes = [
     path: "/customers/:customer_id",
     name: "CustomerPage",
     component: Customer,
-  },
-  {
-    path: "/customers/:customer_id/settings",
-    name: "CustomerSettings",
-    component: CustomerSettings,
   },
   {
     path: "/cart",
