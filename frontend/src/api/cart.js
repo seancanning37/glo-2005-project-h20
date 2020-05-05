@@ -9,7 +9,6 @@ export const addBeerToCart = async (beer_id, quantity, beer_name) => {
   let cookieCart = cookie["cart"];
   const cookieToken = cookie["token"];
   const cookieCustomerId = cookie["customer_id"];
-  // eslint-disable-next-line no-unused-vars
   let index = -1;
   for (let i = 0; i < cookieCart.length; i++) {
     if (cookieCart[i].beer_id === beer_id) {
@@ -47,6 +46,10 @@ export const getRewards = () => {
   }
 };
 
+export const getCustomerId = () => {
+  return JSON.parse(Cookies.get("beerbender-token"))["customer_id"];
+}
+
 export const getCartItems = () => {
   const cookie = JSON.parse(Cookies.get("beerbender-token"));
   const cart = cookie["cart"];
@@ -75,7 +78,6 @@ export const checkout = async () => {
   if (orderToCheckout.items.length === 0) {
     return 400;
   }
-  orderToCheckout.abc = "ajbs";
   const response = await axios
     .post("http://localhost:5000/orders/buy", orderToCheckout)
     .catch(error => {
@@ -91,8 +93,11 @@ export const setCheckoutCookie = response => {
   const customer_id = JSON.parse(Cookies.get("beerbender-token"))[
     "customer_id"
   ];
+  const sessionToken = JSON.parse(Cookies.get("beerbender-token"))[
+      "token"
+      ];
   let token = {
-    token: token,
+    token: sessionToken,
     customer_id: customer_id,
     cart: []
   };
@@ -110,4 +115,40 @@ export const calculateTotal = async cartItems => {
     total += beer.price * cartItems[i].quantity;
   }
   return total;
+};
+
+export const removeItem = async itemId => {
+  let cookie = JSON.parse(Cookies.get("beerbender-token"));
+  const cart = getCartItems();
+  let index = -1;
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].beer_id === itemId) {
+      index = i;
+      break;
+    }
+  }
+  cart.splice(index, 1);
+  cookie.cart = cart;
+  let date = new Date();
+  const minutes = 180;
+  date.setTime(date.getTime() + minutes * 60 * 1000);
+  Cookies.set("beerbender-token", cookie, { expires: date });
+};
+
+export const changeQuantity = async (itemId, quantity) => {
+  let cookie = JSON.parse(Cookies.get("beerbender-token"));
+  const cart = getCartItems();
+  let index = -1;
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].beer_id === itemId) {
+      index = i;
+      break;
+    }
+  }
+  cart[index].quantity = quantity;
+  cookie.cart = cart;
+  let date = new Date();
+  const minutes = 180;
+  date.setTime(date.getTime() + minutes * 60 * 1000);
+  Cookies.set("beerbender-token", cookie, { expires: date });
 };
