@@ -56,16 +56,16 @@ export const getCartItems = () => {
   return cart;
 };
 
-const getOrderToCheckout = async () => {
+const getOrderToCheckout = async (comment) => {
   let orderToCheckout = {};
   orderToCheckout.items = getCartItems();
   const date = new Date();
   orderToCheckout.order = {
     order_date:
       date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(),
-    status: "",
+    status: "pending",
     total_price: await calculateTotal(orderToCheckout.items),
-    comment: ""
+    comment: comment.toString()
   };
   orderToCheckout.customer_id = JSON.parse(Cookies.get("beerbender-token"))[
     "customer_id"
@@ -73,8 +73,8 @@ const getOrderToCheckout = async () => {
   return orderToCheckout;
 };
 
-export const checkout = async () => {
-  const orderToCheckout = await getOrderToCheckout();
+export const checkout = async (comment) => {
+  const orderToCheckout = await getOrderToCheckout(comment);
   if (orderToCheckout.items.length === 0) {
     return 400;
   }

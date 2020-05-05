@@ -26,7 +26,7 @@
 <script>
 export default {
   name: "Brand",
-  props: ["brand"],
+  props: ["brand"]
 };
 </script>
 

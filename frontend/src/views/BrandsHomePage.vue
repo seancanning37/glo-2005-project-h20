@@ -43,7 +43,6 @@
 <script>
 import { getAllBrands } from "../api/brand.js";
 import Brand from "../components/brand/Brand";
-
 export default {
   name: "BrandsHomePage",
   components: { Brand },
@@ -54,7 +53,7 @@ export default {
     firstBrandId: 0,
     lastBrandId: 12,
     itemsPerPage: 12,
-    currentPage: 0,
+    currentPage: 0
   }),
   async created() {
     this.brands = await this.getAllBrands();
@@ -70,7 +69,6 @@ export default {
       this.currentPage = n;
       this.firstBrandId = this.itemsPerPage * (n - 1) + 1;
       this.lastBrandId = this.firstBrandId + this.itemsPerPage - 1;
-
       if (this.lastBrandId > this.filteredBrands.length) {
         this.lastBrandId = this.filteredBrands.length;
       }
@@ -81,8 +79,8 @@ export default {
     },
     isCurrentPage: function(n) {
       return n === this.currentPage;
-    },
-  },
+    }
+  }
 };
 </script>
 
