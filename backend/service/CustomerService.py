@@ -10,7 +10,8 @@ def createCustomerFromCursorInfo(customerInfos):
     customer.phone = customerInfos[2]
     customer.email = customerInfos[3]
     customer.username = customerInfos[4]
-    customer.address = customerInfos[5]
+    customer.address_line_1 = customerInfos[5]
+    customer.address_line_2 = customerInfos[6]
     customer.city = customerInfos[7]
     customer.country = customerInfos[8]
     return customer
@@ -21,7 +22,8 @@ class CustomerService:
         self.customerRepository = CustomerRepository.CustomerRepository()
 
     def getCustomerFromId(self, customerId):
-        customer = createCustomerFromCursorInfo(self.customerRepository.getCustomerFromId(customerId))
+        customer = createCustomerFromCursorInfo(
+            self.customerRepository.getCustomerFromId(customerId))
         return customer
 
     def isEmailAlreadyUsed(self, email):
@@ -33,7 +35,8 @@ class CustomerService:
     def areLoginInformationsValid(self, email, password):
         if (self.customerRepository.isEmailAlreadyUsed(email)):
             customerId = self.getCustomerIdFromEmail(email)
-            hashedPassword = self.customerRepository.getCustomerHashedPasswordFromId(customerId)
+            hashedPassword = self.customerRepository.getCustomerHashedPasswordFromId(
+                customerId)
             return hash.checkPassword(password, hashedPassword)
         return False
 
@@ -50,4 +53,4 @@ class CustomerService:
         return self.customerRepository.getCustomerHashedPasswordFromId(customerId)
 
     def emailExists(self, email):
-        return self.customerRepository.emailExists(email);
+        return self.customerRepository.emailExists(email)
