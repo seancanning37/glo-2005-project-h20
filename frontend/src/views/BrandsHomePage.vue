@@ -15,7 +15,7 @@
                         </v-col>
                     </v-row>
                 </v-container>
-                <v-container v-for="brand in shownBrands" class="pt-0":key="brand.name">
+                <v-container v-for="brand in shownBrands" class="pt-0" :key="brand.name">
                     <Brand :brand="brand"/>
                 </v-container>
             </v-col>
@@ -44,8 +44,8 @@
 </template>
 
 <script>
-    import { getAllBrands } from "../api/beer_api.js";
-    import Brand from "./Brand";
+    import { getAllBrands } from "../api/brand.js";
+    import Brand from "../components/brand/Brand";
 
     export default {
         name: "BrandsHomePage",

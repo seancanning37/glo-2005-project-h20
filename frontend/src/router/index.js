@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home";
 import NotFound from "../views/NotFound";
 import BeerPage from "../views/Beer";
+import BrandPage from "../views/Brand"
 import BeersHomePage from "../views/BeersHomePage";
 import SignUp from "../views/SignUp";
 import Login from "../views/Login";
@@ -11,6 +12,7 @@ import CustomerSettings from "../views/CustomerSettings";
 import Cart from "../views/Cart";
 import CustomerOrderHistory from "../views/CustomerOrderHistory";
 import CustomerDetailedOrder from "../views/CustomerDetailedOrder";
+import BrandsHomePage from "../views/BrandsHomePage";
 
 Vue.use(VueRouter);
 
@@ -34,6 +36,16 @@ const routes = [
     path: "/beers",
     name: "Beers",
     component: BeersHomePage,
+  },
+  {
+    path: "/brands",
+    name: "Brands",
+    component: BrandsHomePage,
+  },
+  {
+    path: "/brands/:brand_id",
+    name: "BrandPage",
+    component: BrandPage
   },
   {
     path: "/signup",
