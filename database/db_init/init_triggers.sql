@@ -16,6 +16,6 @@ END;//
 CREATE TRIGGER add_reward_points AFTER INSERT ON Orders
 FOR EACH ROW 
 BEGIN
-set @temp := (SELECT r.money_earned from rewardcard r where r.customer_id = new.customer_id);
-	UPDATE rewardcard SET money_earned = @temp +(new.total_price * 0.01) WHERE customer_id = new.customer_id;
+set @temp := (SELECT r.money_earned from RewardCard r where r.customer_id = new.customer_id);
+	UPDATE RewardCard SET money_earned = @temp +(new.total_price * 0.01) WHERE customer_id = new.customer_id;
 END;//
