@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <cart-header />
+    <cart-header v-if="isConnected"/>
     <cart-item v-for="item in cart" :key="item.beer_id" :cartItem="item" />
     <v-btn v-on:click="proceedToCheckout">
       Proceed to Checkout
@@ -15,6 +15,7 @@
 import { checkout, getCartItems } from "../api/cart";
 import CartItem from "../components/cart/CartItem";
 import CartHeader from "../components/cart/CartHeader";
+import { isConnected } from "../api/login";
 
 export default {
   name: "Cart",
@@ -29,11 +30,18 @@ export default {
       snackbar: false,
       color: "error",
       timeout: 6000,
-      message: ""
+      message: "",
+      isConnected: false
     };
   },
   async created() {
-    this.cart = await this.getShoppingCartItems();
+    if (isConnected()) {
+      this.cart = await this.getShoppingCartItems();
+      this.isConnected = true;
+    } else {
+      this.$emit("cart-connected");
+      this.$router.push({ name: "Login" });
+    }
   },
   methods: {
     getShoppingCartItems: function() {
@@ -57,7 +65,7 @@ export default {
       }
       this.cart = await this.getShoppingCartItems();
       this.snackbar = true;
-      this.$router.push({name: 'Beers'})
+      this.$router.push({ name: "Beers" });
     }
   }
 };
