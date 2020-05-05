@@ -28,3 +28,10 @@ class BrandRepository:
         cur.execute(cmd)
         self.conn.commit()
         return cur.fetchall()
+
+    def getAllBrands(self):
+        cmd = "SELECT * FROM Brands;"
+        cur = self.conn.cursor()
+        cur.execute(cmd)
+        self.conn.commit()
+        return cur.fetchall()

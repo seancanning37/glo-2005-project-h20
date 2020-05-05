@@ -27,3 +27,6 @@ class BrandService:
         beers = [createBeerFromCursorInfos(
             beer) for beer in repoBeers]
         return beers
+
+    def getAllBrands(self):
+        return [createBrandFromCursorInfos(brand) for brand in self.brandRepository.getAllBrands()]

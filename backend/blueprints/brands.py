@@ -18,3 +18,9 @@ def getAllBeers(brand_id):
     beers = brandService.getAllBeers(brand_id)
     allBeers = jsonify([beer.__dict__ for beer in beers])
     return allBeers
+
+@brands.route("brands", methods=['GET'])
+def getAllBrands():
+    brandservice = BrandService()
+    brands = brandservice.getAllBrands()
+    return jsonify([brand.__dict__ for brand in brands])
