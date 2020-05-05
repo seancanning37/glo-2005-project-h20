@@ -104,11 +104,15 @@
       <v-container class="d-flex" style="width: 500px;">
         <v-btn class="mx-6" @click="edit = true">Edit informations</v-btn>
         <v-btn
-          class="subtitle-1 font-weight-bold"
           :to="this.orderHistoryPath"
           v-text="'Order History'"
         >
           <v-icon left v-text="'mdi-cart'" />
+        </v-btn>
+      </v-container>
+      <v-container>
+        <v-btn v-on:click="logout">
+          Logout
         </v-btn>
       </v-container>
     </v-container>
@@ -116,7 +120,7 @@
 </template>
 
 <script>
-import { getTokenInfo } from "../api/login";
+  import {getTokenInfo, logout} from "../api/login";
 import { requestParametersChanges } from "../api/customer";
 
 export default {
@@ -177,6 +181,10 @@ export default {
         this.parameters[key] = this.customer[key];
       }
     },
+    logout: async function() {
+      await logout();
+      this.$router.push({name: "Login"});
+    }
   },
 };
 </script>
