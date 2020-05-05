@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home";
 import NotFound from "../views/NotFound";
 import BeerPage from "../views/Beer";
 import BrandPage from "../views/Brand"
@@ -19,7 +18,7 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: BeersHomePage,
   },
   {
     path: "*",
