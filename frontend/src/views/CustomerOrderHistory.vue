@@ -14,7 +14,7 @@
 <script>
 import axios from "axios";
 import Order from "../components/order/Order.vue";
-import {getDetailedOrders} from "../api/orders";
+import { getDetailedOrders } from "../api/orders";
 
 export default {
   name: "CustomerOrderHistory",

@@ -13,5 +13,5 @@ export const signup = async (email, name, username, password) => {
     .catch(error => {
       console.log(error.response.data);
     });
-  return response.status
+  return response.status;
 };

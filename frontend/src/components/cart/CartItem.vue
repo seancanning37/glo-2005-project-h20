@@ -3,6 +3,9 @@
     <v-card-title class="justify-center">
       {{ cartItem.name }}
     </v-card-title>
+    <v-card-title class="justify-center">
+      ${{ (beer.price * quantity).toFixed(2) }}
+    </v-card-title>
     <v-container class="d-flex align-center" style="width: 250px;">
       <v-select
         label="Quantity"
@@ -30,7 +33,8 @@ export default {
   data: function() {
     return {
       quantity: 0,
-      beerDisponibility: []
+      beerDisponibility: [],
+      beer: {}
     };
   },
   async created() {
@@ -38,6 +42,7 @@ export default {
     this.beerDisponibility = this.getQuantities(
       (await getBeer(this.cartItem.beer_id)).data.disponibility
     );
+    this.beer = (await getBeer(this.cartItem.beer_id)).data;
   },
   methods: {
     getQuantities: function(disponibility) {
@@ -46,7 +51,7 @@ export default {
         numberList.push(i);
       }
       return numberList;
-    },
+    }
   }
 };
 </script>

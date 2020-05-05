@@ -89,11 +89,10 @@ export default {
       showConfirmed: false,
       emailRegExp: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
       rules: {
-        required: (value) => !!value || "Required",
-        email: (value) => this.isEmailValid(value) || "Invalid e-mail",
-        confirmed: (value) =>
-          value == this.password || "Passwords do not match",
-      },
+        required: value => !!value || "Required",
+        email: value => this.isEmailValid(value) || "Invalid e-mail",
+        confirmed: value => value == this.password || "Passwords do not match"
+      }
     };
   },
   methods: {
@@ -139,8 +138,8 @@ export default {
       } else {
         this.$router.push("/signup");
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

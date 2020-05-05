@@ -37,7 +37,9 @@ export const addBeerToCart = async (beer_id, quantity, beer_name) => {
 };
 
 export const getRewards = () => {
-  const customer_id = JSON.parse(Cookies.get("beerbender-token"))["customer_id"];
+  const customer_id = JSON.parse(Cookies.get("beerbender-token"))[
+    "customer_id"
+  ];
   const path = `${API_URL}/rewards/${customer_id}`;
   try {
     return axios.get(path);
@@ -48,7 +50,7 @@ export const getRewards = () => {
 
 export const getCustomerId = () => {
   return JSON.parse(Cookies.get("beerbender-token"))["customer_id"];
-}
+};
 
 export const getCartItems = () => {
   const cookie = JSON.parse(Cookies.get("beerbender-token"));
@@ -56,7 +58,7 @@ export const getCartItems = () => {
   return cart;
 };
 
-const getOrderToCheckout = async (comment) => {
+const getOrderToCheckout = async comment => {
   let orderToCheckout = {};
   orderToCheckout.items = getCartItems();
   const date = new Date();
@@ -73,7 +75,7 @@ const getOrderToCheckout = async (comment) => {
   return orderToCheckout;
 };
 
-export const checkout = async (comment) => {
+export const checkout = async comment => {
   const orderToCheckout = await getOrderToCheckout(comment);
   if (orderToCheckout.items.length === 0) {
     return 400;
@@ -93,9 +95,7 @@ export const setCheckoutCookie = response => {
   const customer_id = JSON.parse(Cookies.get("beerbender-token"))[
     "customer_id"
   ];
-  const sessionToken = JSON.parse(Cookies.get("beerbender-token"))[
-      "token"
-      ];
+  const sessionToken = JSON.parse(Cookies.get("beerbender-token"))["token"];
   let token = {
     token: sessionToken,
     customer_id: customer_id,
