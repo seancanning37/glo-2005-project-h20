@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <cart-header v-if="isConnected"/>
-    <cart-item v-for="item in cart" :key="item.beer_id" :cartItem="item" />
+    <cart-item v-for="item in cart" :key="item.beer_id" :cartItem="item" v-on:deleteItem="deleteItem" v-on:changeQuantity="changeQuantity" />
     <v-btn v-on:click="proceedToCheckout">
       Proceed to Checkout
     </v-btn>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { checkout, getCartItems } from "../api/cart";
+  import {changeQuantity, checkout, getCartItems, removeItem} from "../api/cart";
 import CartItem from "../components/cart/CartItem";
 import CartHeader from "../components/cart/CartHeader";
 import { isConnected } from "../api/login";
@@ -58,6 +58,7 @@ export default {
       } else if (response === 201) {
         this.color = "success";
         this.message = "Checkout was successfull";
+        this.$router.push({ name: "Beers" });
       } else {
         console.log("response code: " + response);
         this.color = "info";
@@ -65,7 +66,14 @@ export default {
       }
       this.cart = await this.getShoppingCartItems();
       this.snackbar = true;
-      this.$router.push({ name: "Beers" });
+    },
+    deleteItem: async function(beerId) {
+      await removeItem(beerId);
+      this.cart = await this.getShoppingCartItems();
+    },
+    changeQuantity: async function(beerId, quantity) {
+      await changeQuantity(beerId, quantity);
+      this.cart = await this.getShoppingCartItems();
     }
   }
 };
