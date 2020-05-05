@@ -15,9 +15,9 @@
       :type="type"
       :beerStyle="beerStyle"
     />
-     <v-snackbar v-model="snackbar" :color="color" :timeout="timeout">
-          {{ message }}
-     </v-snackbar>
+    <v-snackbar v-model="snackbar" :color="color" :timeout="timeout">
+      {{ message }}
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -31,7 +31,7 @@ export default {
   name: "BeerPage",
   components: {
     BeerHeader,
-    BeerInfo,
+    BeerInfo
   },
   data: () => ({
     beer: {
@@ -44,18 +44,18 @@ export default {
       price: 0.0,
       description: "",
       pictureURL: "",
-      disponibility: 0,
+      disponibility: 0
     },
     brand: {
       name: "brand",
       city: "city",
-      country: "country",
+      country: "country"
     },
     type: {
-      name: "type",
+      name: "type"
     },
     beerStyle: {
-      name: "style",
+      name: "style"
     },
     quantity: 0,
     snackbar: false,

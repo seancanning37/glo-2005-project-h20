@@ -1,5 +1,5 @@
 <template>
-  <sign-up-form v-on:success-signup="$emit('success-signup')"/>
+  <sign-up-form v-on:success-signup="$emit('success-signup')" />
 </template>
 
 <script>

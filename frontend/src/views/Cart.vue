@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <cart-header v-if="isConnected" />
+    <cart-header v-if="isConnected" v-bind:cartTotal="cartTotal" />
     <cart-item
       v-for="item in cart"
       :key="item.beer_id"
@@ -10,7 +10,12 @@
     />
     <v-container class="d-inline-block justify-end">
       <v-container class="d-flex justify-end">
-        <v-text-field v-model="comment" label="Order instructions" class="d-flex" style="width: 300px;">
+        <v-text-field
+          v-model="comment"
+          label="Order instructions"
+          class="d-flex"
+          style="width: 300px;"
+        >
           {{ comment }}
         </v-text-field>
       </v-container>
@@ -29,7 +34,8 @@ import {
   changeQuantity,
   checkout,
   getCartItems,
-  removeItem
+  removeItem,
+  calculateTotal
 } from "../api/cart";
 import CartItem from "../components/cart/CartItem";
 import CartHeader from "../components/cart/CartHeader";
@@ -50,7 +56,8 @@ export default {
       timeout: 6000,
       message: "",
       isConnected: false,
-      comment: ""
+      comment: "",
+      cartTotal: 0
     };
   },
   async created() {
@@ -61,10 +68,14 @@ export default {
       this.$emit("cart-connected");
       this.$router.push({ name: "Login" });
     }
+    await this.getTotalPrice();
   },
   methods: {
     getShoppingCartItems: function() {
       return getCartItems();
+    },
+    getTotalPrice: async function() {
+      this.cartTotal = await calculateTotal(this.cart);
     },
     proceedToCheckout: async function() {
       const response = await checkout(this.comment);
@@ -89,10 +100,12 @@ export default {
     deleteItem: async function(beerId) {
       await removeItem(beerId);
       this.cart = await this.getShoppingCartItems();
+      this.getTotalPrice();
     },
     changeQuantity: async function(beerId, quantity) {
       await changeQuantity(beerId, quantity);
       this.cart = await this.getShoppingCartItems();
+      this.getTotalPrice();
     }
   }
 };

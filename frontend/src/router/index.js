@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import NotFound from "../views/NotFound";
 import BeerPage from "../views/Beer";
-import BrandPage from "../views/Brand"
+import BrandPage from "../views/Brand";
 import BeersHomePage from "../views/BeersHomePage";
 import SignUp from "../views/SignUp";
 import Login from "../views/Login";
@@ -18,27 +18,27 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: BeersHomePage,
+    component: BeersHomePage
   },
   {
     path: "*",
     name: "NotFound",
-    component: NotFound,
+    component: NotFound
   },
   {
     path: "/beers/:beer_id",
     name: "BeerPage",
-    component: BeerPage,
+    component: BeerPage
   },
   {
     path: "/beers",
     name: "Beers",
-    component: BeersHomePage,
+    component: BeersHomePage
   },
   {
     path: "/brands",
     name: "Brands",
-    component: BrandsHomePage,
+    component: BrandsHomePage
   },
   {
     path: "/brands/:brand_id",
@@ -48,39 +48,39 @@ const routes = [
   {
     path: "/signup",
     name: "SignUp",
-    component: SignUp,
+    component: SignUp
   },
   {
     path: "/login",
     name: "Login",
-    component: Login,
+    component: Login
   },
   {
     path: "/customers/:customer_id",
     name: "CustomerPage",
-    component: Customer,
+    component: Customer
   },
   {
     path: "/cart",
     name: "Cart",
-    component: Cart,
+    component: Cart
   },
   {
     path: "/customers/:customer_id/order_history",
     name: "CustomerOrderHistory",
-    component: CustomerOrderHistory,
+    component: CustomerOrderHistory
   },
   {
     path: "/customers/:customer_id/:order_id",
     name: "CustomerDetailedOrder",
-    component: CustomerDetailedOrder,
-  },
+    component: CustomerDetailedOrder
+  }
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes
 });
 
 export default router;

@@ -27,8 +27,8 @@ export default {
   methods: {
     itemClicked: function(property, name) {
       this.$emit("item-clicked", property, name);
-    },
-  },
+    }
+  }
 };
 </script>
 

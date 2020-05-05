@@ -45,7 +45,7 @@
         <v-container class="d-flex align-center pt-0" text-right>
           <v-container class="d-flex align-center">
             <v-icon class="pr-2" color="success">mdi-check</v-icon>
-            {{ beer.disponibility + " available online"}}
+            {{ beer.disponibility + " available online" }}
           </v-container>
           <v-spacer />
           <v-container class="d-flex align-center" style="width: 250px;">
