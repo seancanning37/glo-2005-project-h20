@@ -66,7 +66,7 @@ class CustomerRepository:
         return rows_count > 0
 
     def getCustomerIdFromEmail(self, email):
-        cmd = f"SELECT C.id FROM CUSTOMERS C WHERE C.email = '{email}';"
+        cmd = f"SELECT C.id FROM Customers C WHERE C.email = '{email}';"
         cur = self.conn.cursor()
         cur.execute(cmd)
         self.conn.commit()
@@ -74,7 +74,7 @@ class CustomerRepository:
         return customerId
 
     def getCustomerFromId(self, customerId):
-        cmd = f"SELECT * FROM CUSTOMERS C WHERE C.id = '{customerId}';"
+        cmd = f"SELECT * FROM Customers C WHERE C.id = '{customerId}';"
         cur = self.conn.cursor()
         cur.execute(cmd)
         self.conn.commit()
@@ -83,7 +83,7 @@ class CustomerRepository:
 
     def updateCustomerName(self, customerId, newName):
         try:
-            cmd = f"UPDATE CUSTOMERS C SET C.name = '{newName}' where C.id = '{customerId}';"
+            cmd = f"UPDATE Customers C SET C.name = '{newName}' where C.id = '{customerId}';"
             cur = self.conn.cursor()
             cur.execute(cmd)
             self.conn.commit()
@@ -102,7 +102,7 @@ class CustomerRepository:
     def updateCustomer(self, customerId, parameters):
         try:
             for attribute in parameters:
-                cmd = f"UPDATE CUSTOMERS C SET C.{attribute} = '{parameters[attribute]}' where C.id = '{customerId}';"
+                cmd = f"UPDATE Customers C SET C.{attribute} = '{parameters[attribute]}' where C.id = '{customerId}';"
                 cur = self.conn.cursor()
                 cur.execute(cmd)
                 self.conn.commit()
@@ -110,5 +110,3 @@ class CustomerRepository:
             return ERROR_CODE
         self.conn.commit()
         return SUCCESS_CODE
-
-
