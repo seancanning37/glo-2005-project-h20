@@ -1,10 +1,23 @@
 <template>
   <v-container>
-    <cart-header v-if="isConnected"/>
-    <cart-item v-for="item in cart" :key="item.beer_id" :cartItem="item" v-on:deleteItem="deleteItem" v-on:changeQuantity="changeQuantity" />
-    <v-btn v-on:click="proceedToCheckout">
-      Proceed to Checkout
-    </v-btn>
+    <cart-header v-if="isConnected" />
+    <cart-item
+      v-for="item in cart"
+      :key="item.beer_id"
+      :cartItem="item"
+      v-on:deleteItem="deleteItem"
+      v-on:changeQuantity="changeQuantity"
+    />
+    <v-container class="d-inline-block justify-end">
+      <v-container class="d-flex justify-end">
+        <v-text-field v-model="comment" label="Order instructions" class="d-flex" style="width: 300px;">
+          {{ comment }}
+        </v-text-field>
+      </v-container>
+      <v-btn v-on:click="proceedToCheckout" color="align-self-center">
+        Proceed to Checkout
+      </v-btn>
+    </v-container>
     <v-snackbar v-model="snackbar" :color="color" :timeout="timeout">
       {{ message }}</v-snackbar
     >
@@ -12,7 +25,12 @@
 </template>
 
 <script>
-  import {changeQuantity, checkout, getCartItems, removeItem} from "../api/cart";
+import {
+  changeQuantity,
+  checkout,
+  getCartItems,
+  removeItem
+} from "../api/cart";
 import CartItem from "../components/cart/CartItem";
 import CartHeader from "../components/cart/CartHeader";
 import { isConnected } from "../api/login";
@@ -31,7 +49,8 @@ export default {
       color: "error",
       timeout: 6000,
       message: "",
-      isConnected: false
+      isConnected: false,
+      comment: ""
     };
   },
   async created() {
@@ -48,7 +67,7 @@ export default {
       return getCartItems();
     },
     proceedToCheckout: async function() {
-      const response = await checkout();
+      const response = await checkout(this.comment);
       if (response === 500) {
         this.color = "error";
         this.message = "Oops something went wrong, please try again";
