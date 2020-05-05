@@ -13,17 +13,24 @@
 </template>
 
 <script>
+import {getCustomerId} from "../api/cart";
+
 export default {
   name: "Navigation",
   data: function() {
     return {
-      orderHistoryPath: "/login",
       pages: [
         { text: "Home", path: "/", icon: "mdi-home" },
         { text: "Beers", path: "/beers", icon: "mdi-bottle-wine" },
-        { text: "Shopping Cart", path: "/cart", icon: "mdi-cart" }
-      ],
+        { text: "Shopping Cart", path: "/cart", icon: "mdi-cart" },
+        { text: "Order History", path: this.getOrderHistoryPath(), icon: "mdi-cart"}
+      ]
     };
+  },
+  methods: {
+    getOrderHistoryPath: function () {
+      return `/customers/${getCustomerId()}/order_history`;
+    }
   }
 };
 </script>
