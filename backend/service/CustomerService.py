@@ -10,7 +10,7 @@ def createCustomerFromCursorInfo(customerInfos):
     customer.phone = customerInfos[2]
     customer.email = customerInfos[3]
     customer.username = customerInfos[4]
-    customer.address = customerInfos[6]
+    customer.address = customerInfos[5]
     customer.city = customerInfos[7]
     customer.country = customerInfos[8]
     return customer
