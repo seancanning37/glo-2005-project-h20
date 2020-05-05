@@ -31,9 +31,11 @@ class CustomerService:
         return self.customerRepository.isUsernameAlreadyUsed(username)
 
     def areLoginInformationsValid(self, email, password):
-        customerId = self.getCustomerIdFromEmail(email)
-        hashedPassword = self.customerRepository.getCustomerHashedPasswordFromId(customerId)
-        return hash.checkPassword(password, hashedPassword)
+        if (self.customerRepository.isEmailAlreadyUsed(email)):
+            customerId = self.getCustomerIdFromEmail(email)
+            hashedPassword = self.customerRepository.getCustomerHashedPasswordFromId(customerId)
+            return hash.checkPassword(password, hashedPassword)
+        return False
 
     def addCustomer(self, name, email, username, login):
         self.customerRepository.addCustomer(name, email, username, login)
@@ -46,3 +48,6 @@ class CustomerService:
 
     def getCustomerHashedPasswordFromId(self, customerId):
         return self.customerRepository.getCustomerHashedPasswordFromId(customerId)
+
+    def emailExists(self, email):
+        return self.customerRepository.emailExists(email);

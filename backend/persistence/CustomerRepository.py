@@ -41,6 +41,7 @@ class CustomerRepository:
         cmd = f"SELECT C.id FROM Customers C WHERE C.name = '{name}' and C.email = '{email}';"
         cur = self.conn.cursor()
         cur.execute(cmd)
+        self.conn.commit()
         return cur.fetchone()
 
     def insertCustomer(self, name, email, username):

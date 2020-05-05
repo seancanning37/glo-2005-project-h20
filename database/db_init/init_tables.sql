@@ -102,6 +102,7 @@ CREATE TABLE IF NOT EXISTS Passwords
 (
     customer_id INTEGER NOT NULL UNIQUE,
     password VARCHAR(72),
+    PRIMARY KEY (customer_id),
     FOREIGN KEY (customer_id) REFERENCES Customers (id)
 );
 
@@ -117,8 +118,8 @@ CREATE INDEX customerID ON Orders (order_id) USING HASH;
 
 CREATE INDEX customerID ON Customers (id) USING HASH;
 
-CREATE INDEX customer_id ON RewardCard (customer_id) USING HASH;
+CREATE INDEX customer_id_reward ON RewardCard (customer_id) USING HASH;
 
 CREATE INDEX order_id ON OrderItems (order_id) USING HASH;
 
-CREATE INDEX customer_id ON Passwords (customer_id) USING HASH;
+CREATE INDEX customer_id_password ON Passwords (customer_id) USING HASH;
