@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <v-container>
     <v-row>
       <v-col>
@@ -85,5 +86,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>
